@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DCS Evidence-Based Identity Platform : Security Design</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DCS Evidence-Based Identity Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Building-Evidence-Based-Services-for-a-Unified-Citizen-Experience_68910.html">Building Evidence-Based Services for a Unified Citizen Experience</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Infrastructure-Architecture_133957.html">Infrastructure Architecture</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DCS Evidence-Based Identity Platform : Security Design
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Christian Hughes</span>, last modified on Sept 15, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="SecurityDesign-ZeroTrustArchitecture">Zero Trust Architecture</h2><p>The evidence-based identity platform implements comprehensive zero trust security principles where no user, device, or service is inherently trusted regardless of network location or previous authentication. Every access request undergoes continuous verification with dynamic risk assessment that adapts to changing threat patterns and user behavior.</p><p>Zero trust implementation operates across multiple layers including network microsegmentation, identity verification, device compliance checking, and behavioral analysis. The architecture assumes that threats exist both externally and internally, requiring continuous monitoring and verification rather than perimeter-based security that becomes ineffective once initial access is gained.</p><p /><div class="ap-container" id="ap-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud3891725870290641591">
+
+  <div class="ap-content " id="embedded-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud3891725870290641591"></div>
+  <script nonce="68d79dbbd0103abe35ea29aaae309458" class="ap-iframe-body-script">
+  (function(){
+    var data = {
+    "addon_key":"com.stratusaddons.confluence.plugins.mermaid",
+    "uniqueKey":"com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud3891725870290641591",
+    "key":"mermaid-cloud",
+     "moduleType":"dynamicContentMacros",      "moduleLocation":"content",         "cp":"/wiki",
+            "general":"",
+    "w":"100%",
+    "h":"1px",
+    "url":"https://mermaid.stratus-addons.com/viewer.html?pageId=134025&filename=Zero+Trust+Network+Architecture&revision=1&zoom=fit&toolbar=bottom&repository=&xdm_e=https%3A%2F%2Fmrcnhughes.atlassian.net&xdm_c=channel-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud3891725870290641591&cp=%2Fwiki&xdm_deprecated_addon_key_do_not_use=com.stratusaddons.confluence.plugins.mermaid&lic=active&cv=1000.0.0-f1c99b2191e8&traceId=2ca9b62a3983d6d04d668b08c9cbe942&spanId=18893955742f2448&traceSampled=0&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiNTRmODE5NTM1NDg1NzRjM2I2MTY0YmNkZDA2ZGE2NjlkMzQ0MmQ0MmE4MzRmOWY4MTQxZTBiZDhiN2NiMTVhZiIsImlzcyI6IjIxOGQwY2QyLWUxZmQtMzlkYy04ZDI2LTk2MzZlMTQ4NDc0NSIsImNvbnRleHQiOnt9LCJleHAiOjE3NTg5NjEyODQsImlhdCI6MTc1ODk2MTEwNH0.11U_fDnX29YCCh1Dkb4zYwLxa9akPXOig6umHjbv9Og",
+     "contextJwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiY29udGV4dC1xc2giLCJpc3MiOiIyMThkMGNkMi1lMWZkLTM5ZGMtOGQyNi05NjM2ZTE0ODQ3NDUiLCJjb250ZXh0Ijp7ImxpY2Vuc2UiOnsiYWN0aXZlIjp0cnVlfSwiY29uZmx1ZW5jZSI6eyJlZGl0b3IiOnsidmVyc2lvbiI6InYyIn0sIm1hY3JvIjp7Im91dHB1dFR5cGUiOiJodG1sX2V4cG9ydCIsImhhc2giOiIwNDc0NDcyOS0yYTRmLTRjOTgtYjg0MC01OTUzMDdmZmRiZTEiLCJpZCI6IjA0NzQ0NzI5LTJhNGYtNGM5OC1iODQwLTU5NTMwN2ZmZGJlMSJ9LCJ0cmFjaW5nIjp7InRyYWNlSWQiOiIyY2E5YjYyYTM5ODNkNmQwNGQ2NjhiMDhjOWNiZTk0MiIsInNwYW5JZCI6IjE4ODkzOTU1NzQyZjI0NDgiLCJzYW1wbGVkIjoiMCJ9LCJjb250ZW50Ijp7InR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjQiLCJpZCI6IjEzNDAyNSJ9LCJzcGFjZSI6eyJrZXkiOiJEV1BFVklEIiwiaWQiOiI2ODczOCJ9fSwidXJsIjp7ImRpc3BsYXlVcmwiOiJodHRwczpcL1wvbXJjbmh1Z2hlcy5hdGxhc3NpYW4ubmV0XC93aWtpIn19LCJleHAiOjE3NTg5NjIwMDQsImlhdCI6MTc1ODk2MTEwNH0.g0VuGeI-bkxIkcxtqG7MoaDatb9c9bWGypUmk0Okmz8",    "structuredContext": "{\"license\":{\"active\":true},\"confluence\":{\"editor\":{\"version\":\"v2\"},\"macro\":{\"outputType\":\"html_export\",\"hash\":\"04744729-2a4f-4c98-b840-595307ffdbe1\",\"id\":\"04744729-2a4f-4c98-b840-595307ffdbe1\"},\"tracing\":{\"traceId\":\"2ca9b62a3983d6d04d668b08c9cbe942\",\"spanId\":\"18893955742f2448\",\"sampled\":\"0\"},\"content\":{\"type\":\"page\",\"version\":\"4\",\"id\":\"134025\"},\"space\":{\"key\":\"DWPEVID\",\"id\":\"68738\"}},\"url\":{\"displayUrl\":\"https://mrcnhughes.atlassian.net/wiki\"}}",
+    "contentClassifier":"content",
+    "productCtx":"{\"page.id\":\"134025\",\"macro.hash\":\"04744729-2a4f-4c98-b840-595307ffdbe1\",\"tracing.sampled\":\"0\",\"page.type\":\"page\",\"macro.localId\":\"5bf29760-01dd-4dfb-9027-b1e7ed9e39fc\",\": = | RAW | = :\":\"toolbar=bottom|filename=Zero Trust Network Architecture|zoom=fit|revision=1\",\"space.id\":\"68738\",\"tracing.traceId\":\"2ca9b62a3983d6d04d668b08c9cbe942\",\"tracing.spanId\":\"18893955742f2448\",\"user.isExternalCollaborator\":\"false\",\"space.key\":\"DWPEVID\",\"content.version\":\"4\",\"page.title\":\"Security Design\",\"zoom\":\"fit\",\"macro.body\":\"\",\"macro.truncated\":\"false\",\"content.type\":\"page\",\"output.type\":\"html_export\",\"page.version\":\"4\",\"revision\":\"1\",\"toolbar\":\"bottom\",\"filename\":\"Zero Trust Network Architecture\",\"macro.fragmentLocalId\":\"\",\"content.id\":\"134025\",\"macro.id\":\"04744729-2a4f-4c98-b840-595307ffdbe1\",\"editor.version\":\"v2\"}",
+    "timeZone":"Europe/London",
+    "origin":"https://mermaid.stratus-addons.com",
+    "hostOrigin":"https://mrcnhughes.atlassian.net",
+    "sandbox":"allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-storage-access-by-user-activation",            "apiMigrations": {
+        "gdpr": true
+    }
+}
+;
+    if(window.AP && window.AP.subCreate) {
+      window._AP.appendConnectAddon(data);
+    } else {
+      require(['ac/create'], function(create){
+        create.appendConnectAddon(data);
+      });
+    }
+
+    // For Confluence App Analytics. This code works in conjunction with CFE's ConnectSupport.js.
+    // Here, we add a listener to the initial HTML page that stores events if the ConnectSupport component
+    // has not mounted yet. In CFE, we process the missed event data and disable this initial listener.
+    const __MAX_EVENT_ARRAY_SIZE__ = 20;
+    const connectAppAnalytics = "ecosystem.confluence.connect.analytics";
+    window.connectHost && window.connectHost.onIframeEstablished((eventData) => {
+      if (!window.__CONFLUENCE_CONNECT_SUPPORT_LOADED__) {
+        let events = JSON.parse(window.localStorage.getItem(connectAppAnalytics)) || [];
+        if (events.length >= __MAX_EVENT_ARRAY_SIZE__) {
+          events.shift();
+        }
+        events.push(eventData);
+        window.localStorage.setItem(connectAppAnalytics, JSON.stringify(events));
+      }
+    });
+
+  }());
+</script>
+
+</div>
+<p><strong>Core Zero Trust Principles:</strong></p><ul><li><p><strong>Never Trust, Always Verify</strong>: Every access request requires authentication and authorization regardless of source</p></li><li><p><strong>Least Privilege Access</strong>: Users and services receive minimum necessary permissions with time-limited grants</p></li><li><p><strong>Microsegmentation</strong>: Network isolation prevents lateral movement between system components</p></li><li><p><strong>Continuous Monitoring</strong>: Real-time analysis of user behavior, network traffic, and system activities</p></li></ul><p>The platform's microservices architecture aligns naturally with zero trust principles by providing granular access controls at the service level while maintaining comprehensive audit trails for all inter-service communications through the Istio service mesh implementation.</p><h2 id="SecurityDesign-IdentityandAccessManagement">Identity and Access Management</h2><p>Identity management integrates multiple authentication sources while maintaining centralized policy enforcement and comprehensive audit capabilities. The system supports diverse user types including citizens, caseworkers, external partners, and automated services with appropriate authentication methods and authorization policies for each category.</p><p><strong>Authentication Framework:</strong></p><ul><li><p><strong>Citizens</strong>: Federated authentication through government identity providers and approved digital identity services</p></li><li><p><strong>Government Staff</strong>: Active Directory integration with multi-factor authentication and conditional access</p></li><li><p><strong>External Partners</strong>: OAuth 2.0 client credentials with certificate-based authentication for high-security scenarios</p></li><li><p><strong>Service-to-Service</strong>: mTLS with automated certificate rotation and service identity verification</p></li></ul><p>Keycloak provides centralized identity management with sophisticated authorization policies that combine role-based access control (RBAC) with attribute-based access control (ABAC). Authorization decisions consider user roles, resource attributes, environmental factors, and dynamic risk assessments to determine appropriate access levels.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Example Keycloak authorization policy
+{
+  &quot;name&quot;: &quot;evidence-access-policy&quot;,
+  &quot;description&quot;: &quot;Controls access to citizen evidence based on case assignment and security clearance&quot;,
+  &quot;decisionStrategy&quot;: &quot;UNANIMOUS&quot;,
+  &quot;logic&quot;: &quot;POSITIVE&quot;,
+  &quot;policies&quot;: [
+    {
+      &quot;name&quot;: &quot;case-assignment-policy&quot;,
+      &quot;type&quot;: &quot;js&quot;,
+      &quot;logic&quot;: &quot;POSITIVE&quot;,
+      &quot;code&quot;: &quot;
+        var identity = $evaluation.getContext().getIdentity();
+        var resource = $evaluation.getPermission().getResource();
+        var caseAssignments = identity.getAttributes().getValue(&#39;assigned-cases&#39;);
+        var resourceCaseId = resource.getAttribute(&#39;case-id&#39;);
+        
+        if (caseAssignments.contains(resourceCaseId)) {
+          $evaluation.grant();
+        } else {
+          $evaluation.deny();
+        }&quot;
+    },
+    {
+      &quot;name&quot;: &quot;security-clearance-policy&quot;,
+      &quot;type&quot;: &quot;role&quot;,
+      &quot;logic&quot;: &quot;POSITIVE&quot;,
+      &quot;roles&quot;: [&quot;baseline-clearance&quot;, &quot;enhanced-clearance&quot;, &quot;developed-vetting&quot;]
+    }
+  ]
+}
+</pre>
+</div></div><p>Multi-factor authentication requirements vary based on access sensitivity with biometric authentication for high-privilege operations, hardware tokens for system administration, and adaptive authentication that increases requirements based on risk assessment and behavioral analysis.</p><h2 id="SecurityDesign-DataProtectionandEncryption">Data Protection and Encryption</h2><p>Comprehensive encryption protects citizen data at all stages including data at rest, data in transit, and data in processing. Encryption implementation uses government-approved algorithms with appropriate key management and regular key rotation to maintain protection against evolving cryptographic threats.</p><p><strong>Encryption Implementation:</strong></p><ul><li><p><strong>Data at Rest</strong>: AES-256 encryption for all storage systems with database-level encryption for structured data</p></li><li><p><strong>Data in Transit</strong>: TLS 1.3 for all network communications with perfect forward secrecy</p></li><li><p><strong>Data in Processing</strong>: Application-level encryption for sensitive fields with field-level access controls</p></li><li><p><strong>Key Management</strong>: Hardware Security Modules (HSMs) for key generation, storage, and rotation</p></li></ul><p>Database encryption operates at multiple levels with transparent data encryption (TDE) for entire databases, column-level encryption for particularly sensitive fields, and application-level encryption for data that requires granular access controls. Encryption keys are managed separately from encrypted data with secure key escrow for disaster recovery scenarios.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Example encryption configuration for PostgreSQL
+postgresql_config:
+  shared_preload_libraries: &#39;pg_tde&#39;
+  tde_key_management: &#39;hsm&#39;
+  ssl: &#39;on&#39;
+  ssl_cert_file: &#39;/etc/ssl/certs/postgresql.crt&#39;
+  ssl_key_file: &#39;/etc/ssl/private/postgresql.key&#39;
+  ssl_ca_file: &#39;/etc/ssl/certs/ca-bundle.crt&#39;
+  ssl_min_protocol_version: &#39;TLSv1.3&#39;
+  ssl_ciphers: &#39;ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384&#39;
+  
+database_encryption:
+  master_key_source: &#39;hsm&#39;
+  key_rotation_interval: &#39;90 days&#39;
+  column_encryption:
+    - table: &#39;citizen_pii&#39;
+      columns: [&#39;nino&#39;, &#39;address&#39;, &#39;phone_number&#39;]
+      algorithm: &#39;AES-256-GCM&#39;
+    - table: &#39;evidence_assertions&#39;
+      columns: [&#39;assertion_value&#39;]
+      algorithm: &#39;AES-256-GCM&#39;
+</pre>
+</div></div><p>Field-level encryption enables granular data protection where different users can access different aspects of the same record based on their authorization level and business need. This approach supports the principle of least privilege while enabling operational efficiency for authorized users.</p><h2 id="SecurityDesign-NetworkSecurityandMicrosegmentation">Network Security and Microsegmentation</h2><p>Network security implements defense-in-depth strategies with multiple layers of protection including perimeter security, internal segmentation, and application-level controls. Microsegmentation isolates different platform components to prevent lateral movement while enabling necessary service communication through controlled interfaces.</p><p><strong>Network Architecture:</strong></p><ul><li><p><strong>DMZ Segmentation</strong>: Public-facing services isolated from internal systems with controlled communication paths</p></li><li><p><strong>Service Mesh Security</strong>: Istio provides automatic mTLS for all pod-to-pod communication with traffic encryption</p></li><li><p><strong>Network Policies</strong>: Kubernetes network policies restrict communication to explicitly authorized service pairs</p></li><li><p><strong>WAF Protection</strong>: Web Application Firewall protects against OWASP Top 10 vulnerabilities and application-specific attacks</p></li></ul><p>Calico network policies implement fine-grained traffic control that operates at both Layer 3 and Layer 4, enabling precise control over which services can communicate while maintaining the flexibility needed for evidence-based processing workflows.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Example Calico network policy for evidence ingestion
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: evidence-ingestion-isolation
+  namespace: evidence-processing
+spec:
+  selector: app == &#39;evidence-ingestion&#39;
+  types:
+  - Ingress
+  - Egress
+  ingress:
+  - action: Allow
+    protocol: TCP
+    source:
+      selector: app == &#39;api-gateway&#39;
+    destination:
+      ports:
+      - 8080
+  - action: Allow
+    protocol: TCP
+    source:
+      selector: app == &#39;external-integration&#39;
+    destination:
+      ports:
+      - 8080
+  egress:
+  - action: Allow
+    protocol: TCP
+    destination:
+      selector: app == &#39;triple-store&#39;
+      ports:
+      - 3030
+  - action: Allow
+    protocol: TCP
+    destination:
+      selector: app == &#39;identity-resolution&#39;
+      ports:
+      - 8081
+  - action: Deny
+</pre>
+</div></div><p>Intrusion detection systems monitor network traffic patterns for suspicious activities while behavioral analysis identifies unusual communication patterns that might indicate compromised services or unauthorized access attempts.</p><h2 id="SecurityDesign-ApplicationSecurityControls">Application Security Controls</h2><p>Application security operates through multiple layers including secure coding practices, runtime protection, and comprehensive vulnerability management. Security controls integrate into the development lifecycle with automated testing, security scanning, and runtime monitoring that identifies and responds to threats.</p><p><strong>Application Security Measures:</strong></p><ul><li><p><strong>Secure Development</strong>: OWASP secure coding guidelines with peer review and security champion training</p></li><li><p><strong>Static Analysis</strong>: SAST tools integrated into CI/CD pipelines with automated vulnerability blocking</p></li><li><p><strong>Dynamic Testing</strong>: DAST scanning of deployed applications with penetration testing for complex workflows</p></li><li><p><strong>Runtime Protection</strong>: Application security monitoring with anomaly detection and automated response</p></li></ul><p>Input validation implements comprehensive sanitization and validation for all user inputs, API parameters, and data uploads. Validation operates at multiple layers including client-side validation for user experience, API gateway validation for parameter checking, and service-level validation for business rule enforcement.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">// Example input validation for evidence submission API
+import { body, param, validationResult } from &#39;express-validator&#39;;
+import { sanitize } from &#39;dompurify&#39;;
+
+export const evidenceSubmissionValidation = [
+  // File upload validation
+  body(&#39;documentType&#39;)
+    .isIn([&#39;passport&#39;, &#39;payslip&#39;, &#39;bank_statement&#39;, &#39;employer_letter&#39;])
+    .withMessage(&#39;Invalid document type&#39;),
+  
+  // File size and type validation
+  body(&#39;fileContent&#39;)
+    .custom((value, { req }) =&gt; {
+      const allowedTypes = [&#39;application/pdf&#39;, &#39;image/jpeg&#39;, &#39;image/png&#39;];
+      const maxSize = 10 * 1024 * 1024; // 10MB
+      
+      if (!allowedTypes.includes(req.file?.mimetype)) {
+        throw new Error(&#39;Invalid file type&#39;);
+      }
+      
+      if (req.file?.size &gt; maxSize) {
+        throw new Error(&#39;File too large&#39;);
+      }
+      
+      return true;
+    }),
+  
+  // Citizen DID validation
+  body(&#39;citizenDID&#39;)
+    .matches(/^did:[a-z0-9]+:[A-Za-z0-9._%-]+$/)
+    .withMessage(&#39;Invalid DID format&#39;),
+  
+  // Sanitize text inputs
+  body(&#39;metadata.description&#39;)
+    .optional()
+    .customSanitizer(value =&gt; sanitize(value))
+    .isLength({ max: 500 })
+    .withMessage(&#39;Description too long&#39;),
+  
+  // Validation error handler
+  (req, res, next) =&gt; {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        error: &#39;Validation failed&#39;,
+        details: errors.array()
+      });
+    }
+    next();
+  }
+];
+</pre>
+</div></div><p>API security includes comprehensive rate limiting, request signing verification, and abuse detection that protects against various attack vectors while maintaining service availability for legitimate users.</p><h2 id="SecurityDesign-ComplianceandAuditSecurity">Compliance and Audit Security</h2><p>Security compliance operates through continuous monitoring, automated compliance checking, and comprehensive audit capabilities that support regulatory requirements including data protection regulations, government security standards, and departmental policies.</p><p><strong>Compliance Framework:</strong></p><ul><li><p><strong>Data Protection Compliance</strong>: Privacy by design implementation with data protection impact assessments</p></li><li><p><strong>Government Security</strong>: Compliance with government security classifications and handling requirements</p></li><li><p><strong>SOC 2 Type II</strong>: Controls for security, availability, processing integrity, confidentiality, and privacy</p></li><li><p><strong>ISO 27001</strong>: Information security management system with regular certification audits</p></li></ul><p>Audit logging captures comprehensive security events including authentication attempts, authorization decisions, data access patterns, and administrative actions. Audit logs are tamper-evident with cryptographic integrity protection and secure off-site storage for forensic analysis.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Example security audit log structure
+security_audit_event:
+  timestamp: &quot;2025-09-15T10:30:00.123Z&quot;
+  event_id: &quot;audit_sec_123456&quot;
+  event_type: &quot;data_access&quot;
+  severity: &quot;medium&quot;
+  user_identity:
+    user_id: &quot;caseworker_789&quot;
+    authentication_method: &quot;saml_sso&quot;
+    session_id: &quot;sess_abc123&quot;
+    client_ip: &quot;192.168.1.100&quot;
+    user_agent: &quot;Mozilla/5.0...&quot;
+  resource_access:
+    resource_type: &quot;citizen_evidence&quot;
+    resource_id: &quot;cluster_456&quot;
+    access_type: &quot;read&quot;
+    authorization_policy: &quot;case_assignment_policy&quot;
+    authorization_result: &quot;granted&quot;
+  business_context:
+    case_id: &quot;inv_789&quot;
+    investigation_type: &quot;identity_verification&quot;
+    business_justification: &quot;caseworker_review&quot;
+  technical_context:
+    service_name: &quot;identity-resolution-service&quot;
+    request_id: &quot;req_xyz789&quot;
+    response_code: 200
+    data_classification: &quot;personal_sensitive&quot;
+  integrity_hash: &quot;sha256:abc123def456...&quot;
+</pre>
+</div></div><p>Security monitoring includes real-time threat detection, automated incident response, and integration with Security Operations Center (SOC) capabilities that provide 24/7 monitoring and response for security events.</p><h2 id="SecurityDesign-IncidentResponseandRecovery">Incident Response and Recovery</h2><p>Security incident response follows structured procedures with clear escalation paths, automated containment capabilities, and comprehensive recovery processes that minimize impact while preserving evidence for forensic analysis.</p><p><strong>Incident Response Framework:</strong></p><ul><li><p><strong>Detection</strong>: Automated monitoring with machine learning anomaly detection and threat intelligence integration</p></li><li><p><strong>Containment</strong>: Automated isolation of affected systems with manual override capabilities for complex scenarios</p></li><li><p><strong>Investigation</strong>: Forensic analysis capabilities with evidence preservation and chain of custody maintenance</p></li><li><p><strong>Recovery</strong>: Validated recovery procedures with integrity verification and gradual service restoration</p></li></ul><p>Disaster recovery for security incidents includes secure backup restoration, cryptographic key recovery, and service restoration with enhanced monitoring during recovery periods. Recovery procedures account for different incident types with appropriate response strategies for various threat scenarios.</p><p>Business continuity planning ensures that security incidents don't completely disrupt citizen services through redundant systems, graceful degradation capabilities, and manual fallback procedures for critical operations when automated systems are compromised.</p><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/134025/983367">Zero Trust Network Architecture</a> (text/plain)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Sept 27, 2025 09:18</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

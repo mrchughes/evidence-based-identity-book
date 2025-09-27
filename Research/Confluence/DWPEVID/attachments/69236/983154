@@ -1,0 +1,74 @@
+graph TB
+    subgraph "Identity Resolution Service"
+        API[FastAPI Router<br/>REST Endpoints<br/>GraphQL Support]
+        
+        subgraph "Identity Matching Engine"
+            AttributeMatcher[Attribute Matcher<br/>Fuzzy string matching<br/>Address normalization<br/>Date comparison]
+            MLClusterer[ML Clusterer<br/>scikit-learn models<br/>Feature extraction<br/>Similarity scoring]
+            GraphAnalyzer[Graph Analyzer<br/>NetworkX<br/>Relationship detection<br/>Community detection]
+        end
+        
+        subgraph "DID Management"
+            DIDCorrelator[DID Correlator<br/>Cross-DID matching<br/>Privacy preservation<br/>Consent validation]
+            DIDResolver[DID Resolver<br/>DID document lookup<br/>Key verification<br/>Metadata extraction]
+        end
+        
+        subgraph "Confidence Assessment"
+            ConfidenceCalculator[Confidence Calculator<br/>Evidence weighting<br/>Temporal decay<br/>Source credibility]
+            ClusterValidator[Cluster Validator<br/>Internal consistency<br/>Contradiction detection<br/>Quality metrics]
+        end
+        
+        subgraph "Cluster Operations"
+            ClusterManager[Cluster Manager<br/>Merge operations<br/>Split operations<br/>History tracking]
+            VersionControl[Version Control<br/>Cluster evolution<br/>Rollback capability<br/>Change tracking]
+        end
+        
+        subgraph "Data and Cache Layer"
+            RedisCache[(Redis Cache<br/>Hot cluster data)]
+            TripleStore[(Triple Store<br/>Identity clusters)]
+            MLModels[(ML Models<br/>Trained classifiers)]
+        end
+        
+        subgraph "External Services"
+            EvidenceAPI[Evidence Ingestion API]
+            SemanticAPI[Semantic Translation API]
+            AuditAPI[Audit Service API]
+        end
+    end
+    
+    %% External inputs
+    CitizenPortal[Citizen Portal] --> API
+    EvidenceIngestion[Evidence Ingestion] --> API
+    AwardCalculation[Award Calculation] --> API
+    
+    %% Internal flow - Identity Matching
+    API --> AttributeMatcher
+    API --> DIDCorrelator
+    
+    AttributeMatcher --> MLClusterer
+    MLClusterer --> GraphAnalyzer
+    GraphAnalyzer --> ConfidenceCalculator
+    
+    %% DID Processing
+    DIDCorrelator --> DIDResolver
+    DIDResolver --> ConfidenceCalculator
+    
+    %% Confidence and Validation
+    ConfidenceCalculator --> ClusterValidator
+    ClusterValidator --> ClusterManager
+    ClusterManager --> VersionControl
+    
+    %% Data access
+    AttributeMatcher --> RedisCache
+    MLClusterer --> MLModels
+    ConfidenceCalculator --> TripleStore
+    ClusterManager --> TripleStore
+    VersionControl --> TripleStore
+    
+    %% External API calls
+    ConfidenceCalculator --> EvidenceAPI
+    ClusterValidator --> SemanticAPI
+    VersionControl --> AuditAPI
+    
+    %% Cache updates
+    VersionControl --> RedisCache

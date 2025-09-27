@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DCS Evidence-Based Identity Platform : Deployment Model</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DCS Evidence-Based Identity Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Building-Evidence-Based-Services-for-a-Unified-Citizen-Experience_68910.html">Building Evidence-Based Services for a Unified Citizen Experience</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Infrastructure-Architecture_133957.html">Infrastructure Architecture</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DCS Evidence-Based Identity Platform : Deployment Model
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Christian Hughes</span>, last modified on Sept 15, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="DeploymentModel-Multi-EnvironmentArchitecture">Multi-Environment Architecture</h2><p>The evidence-based identity platform deploys across multiple environments that support development velocity while maintaining the security, reliability, and compliance standards required for government operations. Each environment serves specific purposes with appropriate data protection, performance characteristics, and access controls that match their operational requirements.</p><p>The deployment model implements infrastructure as code principles using Kubernetes orchestration, enabling consistent deployment patterns across environments while supporting environment-specific configurations for performance, security, and compliance requirements. This approach ensures that infrastructure changes are version-controlled, auditable, and repeatable across all deployment targets.</p><p><strong>Environment Hierarchy:</strong></p><ul><li><p><strong>Development</strong>: Rapid iteration with synthetic data for feature development and unit testing</p></li><li><p><strong>Integration</strong>: Service integration testing with sanitized production-like data volumes</p></li><li><p><strong>Pre-Production</strong>: Performance testing and security validation with full production configuration</p></li><li><p><strong>Production</strong>: Live citizen services with high availability, disaster recovery, and compliance monitoring</p></li></ul><p>Each environment maintains appropriate isolation through network segmentation, identity management, and data classification policies that prevent unauthorized access while enabling necessary integration testing and performance validation.</p><h2 id="DeploymentModel-KubernetesClusterArchitecture">Kubernetes Cluster Architecture</h2><p>The platform deploys on Kubernetes clusters configured for government cloud environments with security hardening, compliance monitoring, and operational resilience appropriate for citizen-facing services. Cluster architecture supports both horizontal scaling for high-volume processing and vertical scaling for compute-intensive operations like semantic reasoning.</p><p><strong>Cluster Configuration:</strong></p><ul><li><p><strong>Control Plane</strong>: High availability with etcd clustering across multiple availability zones</p></li><li><p><strong>Worker Nodes</strong>: Mixed instance types optimized for different workload characteristics</p></li><li><p><strong>Network Policy</strong>: Microsegmentation with Calico for pod-to-pod communication control</p></li><li><p><strong>Storage Classes</strong>: Multiple storage tiers for different performance and durability requirements</p></li></ul><p>Namespace organization provides logical separation between different platform components while enabling controlled inter-service communication through network policies and service mesh configuration. Each microservice deploys in dedicated namespaces with appropriate resource quotas and security policies.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Example namespace configuration with security policies
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: evidence-ingestion
+  labels:
+    security-tier: &quot;high&quot;
+    data-classification: &quot;personal&quot;
+    compliance-scope: &quot;data-protection-processing&quot;
+spec:
+  finalizers:
+  - kubernetes
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: evidence-ingestion-policy
+  namespace: evidence-ingestion
+spec:
+  podSelector:
+    matchLabels:
+      app: evidence-ingestion
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: api-gateway
+    ports:
+    - protocol: TCP
+      port: 8080
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: triple-store
+    ports:
+    - protocol: TCP
+      port: 3030
+</pre>
+</div></div><h2 id="DeploymentModel-ContainerStrategyandImageManagement">Container Strategy and Image Management</h2><p>Container images follow security best practices with minimal base images, regular security scanning, and comprehensive vulnerability management. Image building uses multi-stage builds that separate build dependencies from runtime requirements, reducing attack surface while maintaining functionality.</p><p><strong>Container Security Measures:</strong></p><ul><li><p><strong>Distroless Base Images</strong>: Minimal runtime images without package managers or shells</p></li><li><p><strong>Security Scanning</strong>: Automated vulnerability scanning in CI/CD pipelines with blocking policies</p></li><li><p><strong>Image Signing</strong>: Cryptographic signatures for image authenticity verification</p></li><li><p><strong>Runtime Security</strong>: AppArmor/SELinux profiles with read-only root filesystems</p></li></ul><p>Image versioning follows semantic versioning with immutable tags that enable reliable rollback capabilities. Container registries implement role-based access control with separate repositories for different security classifications and deployment environments.</p><p><strong>Image Management Workflow:</strong></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Example Dockerfile for Evidence Ingestion Service
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+
+FROM gcr.io/distroless/nodejs18-debian11
+WORKDIR /app
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
+EXPOSE 8080
+USER 1001
+CMD [&quot;dist/server.js&quot;]
+</pre>
+</div></div><p>Registry security includes image scanning integration, access logging, and retention policies that balance storage costs with rollback requirements. Automated cleanup removes vulnerable images while preserving verified versions needed for operational rollback scenarios.</p><h2 id="DeploymentModel-ServiceMeshandCommunication">Service Mesh and Communication</h2><p>Istio service mesh provides secure service-to-service communication with comprehensive observability, traffic management, and security policies. The mesh implements zero-trust networking where all communications are authenticated and encrypted regardless of network location.</p><p><strong>Service Mesh Capabilities:</strong></p><ul><li><p><strong>mTLS</strong>: Automatic mutual TLS for all pod-to-pod communication</p></li><li><p><strong>Traffic Management</strong>: Load balancing, circuit breaking, and retry policies</p></li><li><p><strong>Security Policies</strong>: Authorization policies based on service identity and request attributes</p></li><li><p><strong>Observability</strong>: Distributed tracing, metrics collection, and access logging</p></li></ul><p>Traffic routing supports advanced deployment patterns including blue-green deployments, canary releases, and A/B testing for policy changes or system updates. Traffic splitting enables gradual rollout of new versions while monitoring performance and error rates.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Example Istio traffic routing for canary deployment
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: identity-resolution-routing
+spec:
+  hosts:
+  - identity-resolution-service
+  http:
+  - match:
+    - headers:
+        canary-deployment:
+          exact: &quot;true&quot;
+    route:
+    - destination:
+        host: identity-resolution-service
+        subset: v2
+      weight: 100
+  - route:
+    - destination:
+        host: identity-resolution-service
+        subset: v1
+      weight: 90
+    - destination:
+        host: identity-resolution-service
+        subset: v2
+      weight: 10
+</pre>
+</div></div><h2 id="DeploymentModel-DataPersistenceandStorage">Data Persistence and Storage</h2><p>Storage architecture implements multiple storage classes optimized for different data types and access patterns. High-performance storage supports real-time triple store operations while cost-effective storage handles document archives and audit logs with appropriate retrieval characteristics.</p><p><strong>Storage Classifications:</strong></p><ul><li><p><strong>High IOPS SSD</strong>: Triple store and cache storage requiring sub-millisecond latency</p></li><li><p><strong>General Purpose SSD</strong>: Application databases and operational data storage</p></li><li><p><strong>Cold Storage</strong>: Document archives and historical audit logs with infrequent access</p></li><li><p><strong>Backup Storage</strong>: Encrypted backup storage with geographic distribution</p></li></ul><p>Persistent volume management includes automated backup, snapshot scheduling, and disaster recovery replication across multiple availability zones. Storage encryption uses hardware security modules for key management with automatic key rotation and secure key escrow.</p><p><strong>Storage Configuration Example:</strong></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: triple-store-storage
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: io2
+  iopsPerGB: &quot;50&quot;
+  encrypted: &quot;true&quot;
+  kmsKeyId: &quot;arn:aws:kms:region:account:key/key-id&quot;
+allowVolumeExpansion: true
+reclaimPolicy: Retain
+volumeBindingMode: WaitForFirstConsumer
+</pre>
+</div></div><h2 id="DeploymentModel-LoadBalancingandTrafficManagement">Load Balancing and Traffic Management</h2><p>Application load balancing implements intelligent traffic distribution that accounts for service health, response times, and resource utilization. Load balancers integrate with Kubernetes service discovery and Istio traffic management for automated failover and performance optimization.</p><p><strong>Load Balancing Strategy:</strong></p><ul><li><p><strong>Layer 7 Routing</strong>: Content-based routing for different evidence types and API versions</p></li><li><p><strong>Health Checks</strong>: Comprehensive health monitoring with graceful degradation</p></li><li><p><strong>Geographic Distribution</strong>: Traffic routing based on citizen location and service availability</p></li><li><p><strong>Rate Limiting</strong>: Per-user and per-organization rate limiting with quota management</p></li></ul><p>External load balancers provide public internet access with DDoS protection, geographic failover, and compliance with government security requirements. Internal load balancers handle service-to-service communication with performance optimization and security policy enforcement.</p><p>Traffic management includes automated scaling policies that respond to load patterns, evidence processing volumes, and seasonal application surges. Scaling policies account for different service characteristics with CPU-based scaling for compute-intensive services and memory-based scaling for cache-heavy operations.</p><h2 id="DeploymentModel-MonitoringandObservabilityInfrastructure">Monitoring and Observability Infrastructure</h2><p>Comprehensive monitoring infrastructure provides real-time visibility into application performance, infrastructure health, and business metrics. Monitoring architecture supports both operational alerting and strategic performance analysis through integrated metrics, logging, and tracing systems.</p><p><strong>Monitoring Stack:</strong></p><ul><li><p><strong>Prometheus</strong>: Metrics collection with custom business metrics and SLA monitoring</p></li><li><p><strong>Grafana</strong>: Visualization dashboards for operational and executive reporting</p></li><li><p><strong>Jaeger</strong>: Distributed tracing for complex workflow analysis and performance optimization</p></li><li><p><strong>ELK Stack</strong>: Centralized logging with security event correlation and audit compliance</p></li></ul><p>Alerting policies implement tiered escalation based on business impact, with different response procedures for service degradation versus complete outages. Alert correlation prevents notification storms while ensuring critical issues receive appropriate attention.</p><p><strong>Monitoring Configuration:</strong></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Example ServiceMonitor for Evidence Ingestion metrics
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: evidence-ingestion-metrics
+spec:
+  selector:
+    matchLabels:
+      app: evidence-ingestion
+  endpoints:
+  - port: metrics
+    interval: 30s
+    path: /metrics
+    scheme: https
+    tlsConfig:
+      insecureSkipVerify: false
+</pre>
+</div></div><p>Business metrics include evidence processing rates, confidence score distributions, citizen satisfaction indicators, and compliance metrics that support both operational management and strategic planning. Custom metrics integrate with government performance frameworks and public service delivery indicators.</p><h2 id="DeploymentModel-DeploymentAutomationandCI/CD">Deployment Automation and CI/CD</h2><p>Deployment automation implements GitOps principles with infrastructure and application changes managed through version-controlled repositories. CI/CD pipelines include comprehensive testing, security scanning, and approval workflows appropriate for government service deployment.</p><p><strong>Pipeline Stages:</strong></p><ul><li><p><strong>Source Control</strong>: Git-based workflow with branch protection and peer review</p></li><li><p><strong>Build and Test</strong>: Automated testing including unit, integration, and security tests</p></li><li><p><strong>Security Scanning</strong>: SAST, DAST, and dependency vulnerability scanning</p></li><li><p><strong>Deployment</strong>: Automated deployment with manual approval gates for production</p></li><li><p><strong>Monitoring</strong>: Post-deployment monitoring with automated rollback triggers</p></li></ul><p>Pipeline security includes signed commits, protected branches, and audit logging for all deployment activities. Deployment artifacts are cryptographically signed and verified during deployment to prevent unauthorized code execution.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Example GitLab CI/CD pipeline configuration
+stages:
+  - test
+  - security-scan
+  - build
+  - deploy-staging
+  - security-test
+  - deploy-production
+
+variables:
+  DOCKER_REGISTRY: &quot;registry.gov.uk/dcs&quot;
+  KUBE_NAMESPACE: &quot;evidence-platform&quot;
+
+security-scan:
+  stage: security-scan
+  script:
+    - docker run --rm -v $PWD:/app clair-scanner:latest /app
+    - npm audit --audit-level high
+    - sonarqube-scanner
+  artifacts:
+    reports:
+      sast: sast-report.json
+      dependency_scanning: dependency-scan.json
+</pre>
+</div></div><p>Deployment strategies support multiple patterns including rolling updates for routine changes, blue-green deployments for major releases, and canary deployments for high-risk changes. Rollback procedures enable rapid recovery from deployment issues with minimal service impact.</p><p />
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Sept 27, 2025 09:18</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

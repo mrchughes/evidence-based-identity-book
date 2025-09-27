@@ -1,0 +1,77 @@
+graph TB
+    subgraph "Semantic Translation Service"
+        API[Spring Boot API<br/>GraphQL Interface<br/>Batch Processing]
+        
+        subgraph "Ontology Management"
+            OntologyLoader[Ontology Loader<br/>OWL file processing<br/>Version management<br/>Validation checking]
+            MappingEngine[Mapping Engine<br/>Cross-vocabulary rules<br/>Transformation logic<br/>Confidence weighting]
+            ConsistencyChecker[Consistency Checker<br/>Logical validation<br/>Conflict detection<br/>Error reporting]
+        end
+        
+        subgraph "Reasoning Engine"
+            InferenceEngine[Inference Engine<br/>HermiT reasoner<br/>Rule application<br/>Derivation tracking]
+            ReasoningCache[Reasoning Cache<br/>Result caching<br/>Dependency tracking<br/>Invalidation logic]
+            ProofGenerator[Proof Generator<br/>Derivation chains<br/>Explanation generation<br/>Audit trails]
+        end
+        
+        subgraph "Translation Pipeline"
+            ContextAnalyzer[Context Analyzer<br/>Source vocabulary<br/>Target vocabulary<br/>Mapping selection]
+            ValueConverter[Value Converter<br/>Unit conversion<br/>Format transformation<br/>Precision handling]
+            ConfidenceAdjuster[Confidence Adjuster<br/>Translation uncertainty<br/>Quality metrics<br/>Error propagation]
+        end
+        
+        subgraph "Validation & Quality"
+            TranslationValidator[Translation Validator<br/>SHACL shapes<br/>Business rules<br/>Quality scoring]
+            OutputVerifier[Output Verifier<br/>Semantic consistency<br/>Completeness checking<br/>Error detection]
+        end
+        
+        subgraph "Storage & Cache"
+            OntologyStore[(Triple Store<br/>Ontology partition)]
+            TranslationCache[(Redis<br/>Translation results)]
+            MappingStore[(PostgreSQL<br/>Mapping definitions)]
+        end
+        
+        subgraph "External APIs"
+            EvidenceAPI[Evidence Ingestion API]
+            IdentityAPI[Identity Resolution API]
+            AwardAPI[Award Calculation API]
+            AuditAPI[Audit Service API]
+        end
+    end
+    
+    %% External requests
+    CrossProductQueries[Cross-Product Queries] --> API
+    PartnerIntegration[Partner Integration] --> API
+    PolicySystems[Policy Systems] --> API
+    
+    %% Translation flow
+    API --> ContextAnalyzer
+    ContextAnalyzer --> MappingEngine
+    MappingEngine --> ValueConverter
+    ValueConverter --> ConfidenceAdjuster
+    ConfidenceAdjuster --> TranslationValidator
+    TranslationValidator --> OutputVerifier
+    
+    %% Reasoning integration
+    MappingEngine --> InferenceEngine
+    InferenceEngine --> ReasoningCache
+    InferenceEngine --> ProofGenerator
+    
+    %% Quality assurance
+    OntologyLoader --> ConsistencyChecker
+    ConsistencyChecker --> TranslationValidator
+    
+    %% Data access
+    ContextAnalyzer --> OntologyStore
+    MappingEngine --> MappingStore
+    ValueConverter --> TranslationCache
+    InferenceEngine --> OntologyStore
+    
+    %% External system integration
+    ContextAnalyzer --> EvidenceAPI
+    OutputVerifier --> IdentityAPI
+    API --> AwardAPI
+    ProofGenerator --> AuditAPI
+    
+    %% Cache management
+    OutputVerifier --> TranslationCache

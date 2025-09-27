@@ -1,0 +1,33 @@
+graph LR
+    subgraph Source_Context_BasicSupport["Source Context BasicSupport"]
+        BS_INCOME[Monthly Employment Income\n£2500\nVerified by Revenue Authority]
+        BS_ADDRESS[Primary Residence\n123 Oak Street Manchester\nVerified by Council Tax]
+        BS_FAMILY[Household Composition\n2 Adults 1 Child\nSelf declared plus Birth Certificate]
+    end
+    
+    subgraph Semantic_Translation_Engine["Semantic Translation Engine"]
+        ONTOLOGY[Ontology Mappings\nFormal Rules for\nConcept Translation]
+        RULES[Translation Rules\nMonthly converted to Annual times 12\nPrimary Residence becomes Child Address\nHousehold mapped to Family Unit]
+        CONFIDENCE[Confidence Preservation\nTrack uncertainty through\ntranslation process]
+    end
+    
+    subgraph Target_Context_FamilyAssist["Target Context FamilyAssist"]
+        FA_INCOME[Annual Family Income\n30000\nConfidence 0.83 minus 0.02 for translation]
+        FA_ADDRESS[Child Residence Address\n123 Oak Street Manchester\nConfidence 0.85 preserved]
+        FA_FAMILY[Family Unit Composition\nEligible Child Present\nConfidence 0.90 birth cert verification]
+    end
+    
+    BS_INCOME --> ONTOLOGY
+    BS_ADDRESS --> ONTOLOGY
+    BS_FAMILY --> ONTOLOGY
+    
+    ONTOLOGY --> RULES
+    RULES --> CONFIDENCE
+    CONFIDENCE --> FA_INCOME
+    CONFIDENCE --> FA_ADDRESS
+    CONFIDENCE --> FA_FAMILY
+    
+    classDef source fill:#e3f2fd,stroke:#1565c0,stroke-width:1px;
+    classDef translation fill:#fff3e0,stroke:#ef6c00,stroke-width:1px;
+    classDef target fill:#e8f5e9,stroke:#2e7d32,stroke-width:1px;
+    

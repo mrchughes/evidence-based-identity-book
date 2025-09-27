@@ -1,0 +1,71 @@
+graph TB
+    subgraph "External Integration Layer"
+        EIG[External Integration Gateway]
+        RevAuth[Revenue Authority]
+        LocalAuth[Local Authorities]
+        HealthSys[Healthcare Systems]
+    end
+    
+    subgraph "Application Services Layer"
+        EIS[Evidence Ingestion Service]
+        IRS[Identity Resolution Service]
+        STS[Semantic Translation Service]
+        ACS[Award Calculation Service]
+        IQS[Investigation Queue Service]
+        NS[Notification Service]
+    end
+    
+    subgraph "Data Layer"
+        TS[Triple Store]
+        PG[(PostgreSQL)]
+        Redis[(Redis Cache)]
+        ES[Elasticsearch]
+    end
+    
+    subgraph "Cross-Cutting Services"
+        AuditS[Audit & Compliance]
+        AuthS[Authentication Service]
+        MonS[Monitoring Service]
+    end
+    
+    %% External Connections
+    RevAuth --> EIG
+    LocalAuth --> EIG
+    HealthSys --> EIG
+    EIG --> EIS
+    
+    %% Core Service Dependencies
+    EIS --> IRS
+    IRS --> STS
+    STS --> ACS
+    ACS --> IQS
+    IQS --> NS
+    
+    %% Data Dependencies
+    EIS --> TS
+    IRS --> TS
+    STS --> TS
+    ACS --> PG
+    IQS --> PG
+    EIS --> Redis
+    IRS --> Redis
+    
+    %% Cross-cutting Dependencies
+    EIS --> AuditS
+    IRS --> AuditS
+    STS --> AuditS
+    ACS --> AuditS
+    IQS --> AuditS
+    
+    AuditS --> ES
+    
+    %% Styling
+    classDef external fill:#e1f5fe
+    classDef application fill:#f3e5f5
+    classDef data fill:#e8f5e8
+    classDef crosscut fill:#fff3e0
+    
+    class RevAuth,LocalAuth,HealthSys,EIG external
+    class EIS,IRS,STS,ACS,IQS,NS application
+    class TS,PG,Redis,ES data
+    class AuditS,AuthS,MonS crosscut

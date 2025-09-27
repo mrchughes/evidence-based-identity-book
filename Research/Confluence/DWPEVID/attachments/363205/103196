@@ -1,0 +1,61 @@
+flowchart TD
+    A[Citizen Accesses Portal] --> B{Existing Account?}
+    B -->|Yes| C[Sign In]
+    B -->|No| D[Create Account]
+    D --> D1[Collect Basic Information]
+    D1 --> D2[Verify Email Address]
+    D2 --> D3[Setup Password & MFA]
+    D3 --> C
+    C --> C1[Authentication Check]
+    C1 -->|Success| E[Dashboard Overview]
+    C1 -->|Failure| F[Authentication Error]
+    F --> C
+    E --> G{Select Action}
+    G -->|Apply for Benefit| H[New Application Flow]
+    G -->|Check Status| I[View Applications]
+    G -->|Update Details| J[Manage Profile]
+    G -->|View Messages| K[Message Center]
+    H --> H1[Select Benefit Type]
+    H1 --> H2[Identity Resolution Check]
+    H2 -->|Existing Identity Found| H3[Pre-populate with Verified Evidence]
+    H2 -->|New Identity| H4[Complete Full Application]
+    H3 --> H5[Review Pre-populated Information]
+    H5 --> H6[Provide Missing Evidence Only]
+    H6 --> H7[Submit Application]
+    H4 --> H8[Provide All Required Evidence]
+    H8 --> H7
+    H7 --> H9[Evidence Processing]
+    H9 --> H10{Confidence Check}
+    H10 -->|High Confidence| H11[Automatic Processing]
+    H10 -->|Low Confidence| H12[Request Additional Evidence]
+    H11 --> H13[Award Calculation]
+    H13 --> H14[Decision Notification]
+    H12 --> H15[Additional Evidence Request]
+    H15 --> H16[Citizen Provides Evidence]
+    H16 --> H9
+    I --> I1[List All Applications]
+    I1 --> I2[Select Application]
+    I2 --> I3[View Detailed Status]
+    I3 --> I4{Action Required?}
+    I4 -->|Yes| I5[Complete Required Action]
+    I4 -->|No| I6[View Progress Updates]
+    J --> J1[View Personal Information]
+    J1 --> J2{Update Required?}
+    J2 -->|Yes| J3[Edit Information]
+    J2 -->|No| J4[Review Preferences]
+    J3 --> J5[Submit Changes]
+    J5 --> J6[Evidence Validation]
+    J6 --> J7[Update Confirmation]
+    K --> K1[View Message Inbox]
+    K1 --> K2[Select Message]
+    K2 --> K3{Message Type}
+    K3 -->|Evidence Request| K4[Upload Required Documents]
+    K3 -->|Decision Notice| K5[Review Decision Details]
+    K3 -->|General Update| K6[Mark as Read]
+    K4 --> K7[Document Upload Process]
+    K7 --> K8[Evidence Processing]
+    H14 --> L[Return to Dashboard]
+    I6 --> L
+    J7 --> L
+    K6 --> L
+    K8 --> L

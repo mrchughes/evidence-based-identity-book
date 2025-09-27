@@ -1,0 +1,71 @@
+graph TB
+    subgraph "Central Evidence Hub (DCS Platform)"
+        EH[Evidence Processing<br/>& Correlation Engine]
+        SM[Semantic Mapping<br/>Service]
+        TC[Trust & Consent<br/>Management]
+    end
+    
+    subgraph "Government Departments"
+        DCS[Department for<br/>Citizen Services<br/>• BasicSupport<br/>• FamilyAssist<br/>• AgeCare]
+        
+        NHS[National Health Service<br/>• Medical Records<br/>• Disability Assessments<br/>• Mental Health Support]
+        
+        RA[Revenue Authority<br/>• Employment Data<br/>• Tax Records<br/>• Business Information]
+        
+        DOE[Department of Education<br/>• School Records<br/>• Training Certificates<br/>• Student Support]
+    end
+    
+    subgraph "Local Authorities"
+        LA1[Housing Services<br/>• Council Tax<br/>• Housing Benefit<br/>• Social Care]
+        
+        LA2[Children Services<br/>• Safeguarding<br/>• Family Support<br/>• Education Welfare]
+    end
+    
+    subgraph "External Partners"
+        BANK[Financial Institutions<br/>• Income Verification<br/>• Affordability Checks<br/>• Payment Services]
+        
+        EMPLOYER[Employers<br/>• Employment Status<br/>• Salary Information<br/>• Pension Contributions]
+        
+        UTILITY[Utility Companies<br/>• Address Verification<br/>• Vulnerability Registers<br/>• Payment History]
+    end
+    
+    subgraph "Citizens"
+        CITIZEN[Citizen Control<br/>• Evidence Portfolio<br/>• Consent Management<br/>• Data Rights]
+    end
+    
+    %% Evidence Flows
+    DCS <-->|Verified Evidence| EH
+    NHS <-->|Health Evidence| EH
+    RA <-->|Financial Evidence| EH
+    DOE <-->|Education Evidence| EH
+    
+    LA1 <-->|Local Services Evidence| EH
+    LA2 <-->|Children Services Evidence| EH
+    
+    BANK <-->|Financial Verification| EH
+    EMPLOYER <-->|Employment Verification| EH
+    UTILITY <-->|Address/Vulnerability Data| EH
+    
+    %% Citizen Control
+    CITIZEN -->|Consent & Control| TC
+    TC -->|Privacy Enforcement| EH
+    EH -->|Unified Evidence View| CITIZEN
+    
+    %% Semantic Translation
+    EH --> SM
+    SM -->|Policy-Specific Translation| DCS
+    SM -->|Health-Specific Translation| NHS
+    SM -->|Tax-Specific Translation| RA
+    SM -->|Education-Specific Translation| DOE
+    
+    classDef central fill:#e3f2fd
+    classDef govt fill:#e8f5e8
+    classDef local fill:#fff3e0
+    classDef external fill:#f3e5f5
+    classDef citizen fill:#ffecb3
+    
+    class EH,SM,TC central
+    class DCS,NHS,RA,DOE govt
+    class LA1,LA2 local
+    class BANK,EMPLOYER,UTILITY external
+    class CITIZEN citizen

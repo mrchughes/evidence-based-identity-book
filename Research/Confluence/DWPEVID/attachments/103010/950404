@@ -1,0 +1,33 @@
+sequenceDiagram
+    participant HMRC
+    participant ExternalGateway
+    participant EvidenceIngestion
+    participant IdentityResolution
+    participant SemanticTranslation
+    participant AwardCalculation
+    participant Notification
+
+    Note over HMRC: Daily RTI batch processing
+    HMRC->>ExternalGateway: POST /external/bulk/evidence (10,000 employment records)
+    ExternalGateway->>ExternalGateway: Validate mTLS certificate, rate limit
+    ExternalGateway->>EvidenceIngestion: POST /evidence/bulk
+    
+    loop For each employment record
+        EvidenceIngestion->>EvidenceIngestion: Extract NINO, employer, salary assertions
+        EvidenceIngestion->>IdentityResolution: Correlate NINO to identity clusters
+        IdentityResolution-->>EvidenceIngestion: Matched/unmatched results
+        
+        alt Matched to existing UC recipient
+            EvidenceIngestion->>SemanticTranslation: POST /semantic/translate (annual to monthly)
+            SemanticTranslation-->>AwardCalculation: Updated income evidence
+            AwardCalculation->>AwardCalculation: Recalculate award if significant change
+            
+            opt Award change > £20/week
+                AwardCalculation->>Notification: POST /notifications/send (award change)
+            end
+        else No match to DWP recipients
+            EvidenceIngestion->>EvidenceIngestion: Store for future correlation
+        end
+    end
+    
+    ExternalGateway->>HMRC: Batch processing complete, 8,543 matched, 234 award changes

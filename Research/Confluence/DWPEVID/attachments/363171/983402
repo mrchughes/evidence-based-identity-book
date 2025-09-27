@@ -1,0 +1,53 @@
+graph TB
+    subgraph "Multiple Evidence Sources"
+        SRC1[Revenue Authority<br/>NINO: AB123456C<br/>Name: John A Smith<br/>Employer: TechCorp]
+        
+        SRC2[Council Tax<br/>Address: 123 Oak St<br/>Name: J Smith<br/>Property Ref: CT789]
+        
+        SRC3[Bank Statement<br/>Account Holder: John Smith<br/>Address: 123 Oak Street<br/>Employer Deposits: TechCorp]
+        
+        SRC4[DCS Application<br/>Name: John Andrew Smith<br/>DOB: 1985-06-12<br/>Address: 123 Oak Street]
+    end
+    
+    subgraph "Correlation Analysis"
+        FUZZY[Fuzzy Matching<br/>Name Variations<br/>• John A Smith<br/>• J Smith<br/>• John Smith<br/>• John Andrew Smith]
+        
+        EXACT[Exact Matching<br/>Structured Data<br/>• Address: 123 Oak St/Street<br/>• Employer: TechCorp<br/>• Date patterns]
+        
+        TEMPORAL[Temporal Analysis<br/>Evidence Timeline<br/>Consistency Checking]
+    end
+    
+    subgraph "Identity Clustering"
+        CLUSTER[Identity Cluster: cluster_789<br/>Represents: John Andrew Smith<br/>DOB: 1985-06-12<br/>Confidence: 0.87]
+        
+        SUBJECTS[Associated Subjects:<br/>• nino_AB123456C<br/>• council_tax_CT789<br/>• bank_account_456<br/>• dcs_application_123]
+    end
+    
+    SRC1 --> FUZZY
+    SRC2 --> FUZZY
+    SRC3 --> FUZZY
+    SRC4 --> FUZZY
+    
+    SRC1 --> EXACT
+    SRC2 --> EXACT
+    SRC3 --> EXACT
+    SRC4 --> EXACT
+    
+    SRC1 --> TEMPORAL
+    SRC2 --> TEMPORAL
+    SRC3 --> TEMPORAL
+    SRC4 --> TEMPORAL
+    
+    FUZZY --> CLUSTER
+    EXACT --> CLUSTER
+    TEMPORAL --> CLUSTER
+    
+    CLUSTER --> SUBJECTS
+    
+    classDef source fill:#e8f5e8
+    classDef analysis fill:#e3f2fd
+    classDef result fill:#fff3e0
+    
+    class SRC1,SRC2,SRC3,SRC4 source
+    class FUZZY,EXACT,TEMPORAL analysis
+    class CLUSTER,SUBJECTS result

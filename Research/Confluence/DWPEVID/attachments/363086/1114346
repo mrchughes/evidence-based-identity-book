@@ -1,0 +1,43 @@
+graph TB
+    subgraph Traditional_Record_Based_Approach
+        TR1[Citizen Data\nFixed Master Records]
+        TR2[System A\nStores Person Record]
+        TR3[System B\nDuplicate Person Record]
+        TR4[System C\nDifferent Person Record]
+        TR5[Conflicts & Inconsistencies\nManual Resolution Required]
+        
+        TR1 --> TR2
+        TR1 --> TR3
+        TR1 --> TR4
+        TR2 -.->|Inconsistent Data| TR5
+        TR3 -.->|Data Conflicts| TR5
+        TR4 -.->|Update Delays| TR5
+    end
+    
+    subgraph Evidence_Based_Approach
+        EB1[Evidence Assertions\nX said Y about Z]
+        EB2[Identity Clustering\nProbabilistic Correlation]
+        EB3[Confidence Scoring\nEvidence Quality Assessment]
+        EB4[Semantic Translation\nContext-Aware Interpretation]
+        EB5[Unified Citizen View\nWith Uncertainty Management]
+        
+        EB1 --> EB2
+        EB2 --> EB3
+        EB3 --> EB4
+        EB4 --> EB5
+    end
+    
+    subgraph Key_Differences
+        D1[Records assume certainty\nEvidence acknowledges uncertainty]
+        D2[Records become outdated\nEvidence accumulates over time]
+        D3[Records create silos\nEvidence enables sharing]
+        D4[Records hide contradictions\nEvidence makes conflicts visible]
+    end
+    
+    classDef traditional fill:#ffebee,stroke:#b71c1c,stroke-width:1px;
+    classDef evidence fill:#e8f5e9,stroke:#1b5e20,stroke-width:1px;
+    classDef difference fill:#e3f2fd,stroke:#0d47a1,stroke-width:1px;
+    
+    class TR1,TR2,TR3,TR4,TR5 traditional
+    class EB1,EB2,EB3,EB4,EB5 evidence
+    class D1,D2,D3,D4 difference

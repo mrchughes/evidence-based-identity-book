@@ -1,0 +1,47 @@
+graph TD
+    subgraph "Evidence Collection"
+        E1[Passport Verification<br/>Confidence: 0.95]
+        E2[Employment Letter<br/>Confidence: 0.75]
+        E3[Bank Statement<br/>Confidence: 0.85]
+        E4[Self Declaration<br/>Confidence: 0.30]
+    end
+    
+    subgraph "Confidence Aggregation"
+        CA[Weighted Confidence<br/>Calculation Algorithm]
+        
+        CA --> OC{Overall Confidence<br/>Assessment}
+    end
+    
+    subgraph "Decision Pathways"
+        OC -->|≥ 0.85<br/>High Confidence| AUTO[Automatic Processing<br/>• Award Calculation<br/>• Payment Authorization<br/>• Citizen Notification]
+        
+        OC -->|0.60 - 0.84<br/>Medium Confidence| ENHANCED[Enhanced Review<br/>• Additional Evidence Request<br/>• Cross-Reference Checking<br/>• Supervisor Review]
+        
+        OC -->|< 0.60<br/>Low Confidence| MANUAL[Manual Investigation<br/>• Identity Verification<br/>• Evidence Authentication<br/>• Fraud Assessment]
+    end
+    
+    subgraph "Continuous Learning"
+        FEEDBACK[Decision Outcome<br/>Feedback Loop]
+        TUNING[Threshold Adjustment<br/>& Algorithm Improvement]
+        
+        AUTO --> FEEDBACK
+        ENHANCED --> FEEDBACK
+        MANUAL --> FEEDBACK
+        FEEDBACK --> TUNING
+        TUNING --> CA
+    end
+    
+    E1 --> CA
+    E2 --> CA
+    E3 --> CA
+    E4 --> CA
+    
+    classDef evidence fill:#e8f5e8
+    classDef processing fill:#e3f2fd
+    classDef decision fill:#fff3e0
+    classDef learning fill:#f3e5f5
+    
+    class E1,E2,E3,E4 evidence
+    class CA,OC processing
+    class AUTO,ENHANCED,MANUAL decision
+    class FEEDBACK,TUNING learning

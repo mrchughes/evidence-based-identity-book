@@ -1,0 +1,36 @@
+sequenceDiagram
+    participant HMRC
+    participant LocalAuthority as Local Authority
+    participant ExternalGateway
+    participant EvidenceIngestion
+    participant IdentityResolution
+    participant ConflictDetection as Conflict Detection Service
+    participant InvestigationQueue
+    participant Caseworker
+    participant AwardCalculation
+
+    HMRC->>ExternalGateway: POST /external/evidence/submit (Sarah Johnson employed at TechCorp)
+    ExternalGateway->>EvidenceIngestion: POST /evidence/assertion
+    EvidenceIngestion->>IdentityResolution: Correlate to existing identity cluster
+    IdentityResolution-->>EvidenceIngestion: Matched to Sarah Johnson UC claim
+    
+    Note over LocalAuthority: 2 hours later
+    LocalAuthority->>ExternalGateway: POST /external/evidence/submit (Sarah Johnson unemployed, housing benefit claim)
+    ExternalGateway->>EvidenceIngestion: POST /evidence/assertion
+    EvidenceIngestion->>IdentityResolution: Correlate to same identity cluster
+    
+    EvidenceIngestion->>ConflictDetection: POST /conflicts/detect (employment status contradiction)
+    ConflictDetection->>ConflictDetection: Analyze conflicting assertions from trusted sources
+    ConflictDetection-->>EvidenceIngestion: High confidence conflict detected
+    
+    ConflictDetection->>InvestigationQueue: POST /investigations/create (evidence conflict priority: high)
+    InvestigationQueue->>Caseworker: Urgent investigation assigned
+    
+    Caseworker->>IdentityResolution: GET /identity/cluster/{id} (review all employment evidence)
+    Caseworker->>ConflictDetection: GET /conflicts/{id} (review conflict analysis)
+    Caseworker->>ExternalGateway: Request clarification from both HMRC and Local Authority
+    
+    Note over Caseworker: Investigation reveals employment started after housing benefit claim
+    Caseworker->>ConflictDetection: PUT /conflicts/{id}/resolve (temporal sequence clarifies conflict)
+    ConflictDetection->>EvidenceIngestion: Update assertion timestamps and confidence
+    EvidenceIngestion->>AwardCalculation: POST /awards/recalculate (both claims valid for different periods)

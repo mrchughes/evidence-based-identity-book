@@ -1,0 +1,57 @@
+graph TB
+    subgraph "Evidence Source Layer"
+        ES1[Revenue Authority<br/>Employment & Tax Data]
+        ES2[Local Authorities<br/>Housing & Council Tax]
+        ES3[Healthcare Systems<br/>Medical & Disability]
+        ES4[Citizens<br/>Documents & Declarations]
+    end
+    
+    subgraph "Evidence Processing Layer"
+        EP1[Evidence Ingestion<br/>Document Processing<br/>Assertion Extraction]
+        EP2[Identity Resolution<br/>Cross-Reference Correlation<br/>Confidence Assessment]
+    end
+    
+    subgraph "Semantic Federation Layer"
+        SF1[Shared Ontology<br/>Common Concepts<br/>• Person • Address • Income]
+        
+        SF2[Product Ontologies<br/>Specialized Vocabularies<br/>• BasicSupport Rules<br/>• FamilyAssist Criteria<br/>• AgeCare Requirements]
+        
+        SF3[Translation Services<br/>Context-Aware Mapping<br/>Confidence Preservation]
+    end
+    
+    subgraph "Product Service Layer"
+        PS1[BasicSupport Service<br/>Unemployment & Low Income<br/>Support Calculations]
+        
+        PS2[FamilyAssist Service<br/>Child & Family Support<br/>Age-Based Allocations]
+        
+        PS3[AgeCare Service<br/>Elderly & Pension Support<br/>Means-Tested Benefits]
+    end
+    
+    ES1 --> EP1
+    ES2 --> EP1
+    ES3 --> EP1
+    ES4 --> EP1
+    
+    EP1 --> EP2
+    EP2 --> SF1
+    
+    SF1 --> SF2
+    SF2 --> SF3
+    
+    SF3 --> PS1
+    SF3 --> PS2
+    SF3 --> PS3
+    
+    PS1 -.->|Evidence Reuse| SF3
+    PS2 -.->|Evidence Reuse| SF3
+    PS3 -.->|Evidence Reuse| SF3
+    
+    classDef source fill:#e8f5e8
+    classDef processing fill:#e3f2fd
+    classDef semantic fill:#fff3e0
+    classDef product fill:#f3e5f5
+    
+    class ES1,ES2,ES3,ES4 source
+    class EP1,EP2 processing
+    class SF1,SF2,SF3 semantic
+    class PS1,PS2,PS3 product

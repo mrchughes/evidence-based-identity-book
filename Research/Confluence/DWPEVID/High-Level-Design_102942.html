@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DCS Evidence-Based Identity Platform : High-Level Design</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DCS Evidence-Based Identity Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Building-Evidence-Based-Services-for-a-Unified-Citizen-Experience_68910.html">Building Evidence-Based Services for a Unified Citizen Experience</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Solution-Architecture_363052.html">Solution Architecture</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DCS Evidence-Based Identity Platform : High-Level Design
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Christian Hughes</span>, last modified on Sept 15, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="High-LevelDesign-SystemArchitectureOverview">System Architecture Overview</h2><p>The evidence-based identity platform implements a layered architecture that separates citizen and caseworker-facing interfaces from the complex backend processing that manages uncertainty, evidence correlation, and cross-product coordination. This separation enables familiar user experiences while providing sophisticated evidence management capabilities that transform how DCS processes and shares information.</p><p>The architecture follows event-driven microservices patterns with comprehensive audit logging, enabling independent scaling of different capabilities while maintaining strict data consistency and accountability requirements. The platform's distributed nature ensures operational resilience while supporting the high-volume, high-reliability processing that government benefit operations require.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">┌───────────────────────────────────────────────────────────────┐
+│                    PRESENTATION LAYER                           │
+├─────────────────────────────────────────────────────────────────┤
+│  Citizen Portal  │  Caseworker UI  │  External Partner APIs     │
+│  - Apply/Update  │  - Investigate  │  - Evidence Submission     │
+│  - View Status   │  - Review Cases │  - Status Queries          │
+│  - Appeal        │  - Make Awards  │  - Bulk Operations         │
+└─────────────────────────────────────────────────────────────────┘
+                                │
+┌───────────────────────────────────────────────────────────────┐
+│                  APPLICATION SERVICES LAYER                     │
+├─────────────────────────────────────────────────────────────────┤
+│ Identity Resolution │ Evidence Processor │ Award Calculator     │
+│ - Probabilistic     │ - Triple Extraction│ - Policy Engine      │
+│ - Clustering        │ - Confidence Score │ - Entitlement Rules  │
+│ - DID Correlation   │ - Provenance Track │ - Change Detection   │
+├─────────────────────────────────────────────────────────────────┤
+│ Investigation Queue │ Notification Engine│ Audit &amp; Compliance   │
+│ - Risk Scoring      │ - Change Alerts    │ - Full Provenance    │
+│ - Case Assignment   │ - Citizen Comms    │ - Decision Trails    │
+└─────────────────────────────────────────────────────────────────┘
+                                │
+┌───────────────────────────────────────────────────────────────┐
+│                         DATA LAYER                              │
+├─────────────────────────────────────────────────────────────────┤
+│           Triple Store (RDF Graph Database)                     │
+│  - All assertions, evidence, clusters, DIDs as triples          │
+│  - Semantic ontologies (OWL) for cross-product translation      │
+│  - SHACL shapes for validation                                  │
+│  - Full provenance and confidence metadata                      │
+└─────────────────────────────────────────────────────────────────┘
+</pre>
+</div></div><h2 id="High-LevelDesign-CoreDataArchitecture">Core Data Architecture</h2><p>The triple store serves as the foundational data layer, implemented using Apache Jena Fuseki with TDB2 for persistence and HermiT for OWL reasoning. All evidence, identity clusters, confidence scores, and semantic mappings exist as RDF triples, enabling sophisticated query capabilities and automated reasoning that support evidence correlation and conflict detection.</p><p>The triple store cluster operates with a master-replica configuration for high availability, with write operations directed to the master node and read operations load-balanced across replica nodes. This configuration supports the high query volume required for real-time award calculations while ensuring data consistency for evidence updates and identity resolution operations.</p><p>Operational data stores provide performance optimization and workflow management capabilities that complement the triple store's semantic reasoning functions. PostgreSQL maintains calculated award amounts, payment schedules, and case management data that require transactional consistency and high-performance access. Redis provides caching for frequently accessed identity clusters and derived attributes, significantly improving response times for common queries.</p><p>MongoDB supports the investigation queue service's complex workflow management requirements, providing flexible document storage for case assignments, investigation progress tracking, and outcome recording. Elasticsearch enables comprehensive audit log search and compliance reporting capabilities, with automated indexing of all system events and decision trails.</p><p>The data architecture ensures that the triple store remains the authoritative source for all evidence-related information, while operational stores serve as performance caches and workflow engines. This approach maintains semantic integrity while delivering the performance characteristics required for government-scale operations.</p><h2 id="High-LevelDesign-EvidenceConfidenceFlow">Evidence Confidence Flow</h2><div class="ap-container" id="ap-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud5206809973729678073">
+
+  <div class="ap-content " id="embedded-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud5206809973729678073"></div>
+  <script nonce="68d79dbbd0103abe35ea29aaae309458" class="ap-iframe-body-script">
+  (function(){
+    var data = {
+    "addon_key":"com.stratusaddons.confluence.plugins.mermaid",
+    "uniqueKey":"com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud5206809973729678073",
+    "key":"mermaid-cloud",
+     "moduleType":"dynamicContentMacros",      "moduleLocation":"content",         "cp":"/wiki",
+            "general":"",
+    "w":"100%",
+    "h":"1px",
+    "url":"https://mermaid.stratus-addons.com/viewer.html?pageId=102942&filename=Evidence+Confidence+Flow&revision=1&zoom=fit&toolbar=bottom&repository=&xdm_e=https%3A%2F%2Fmrcnhughes.atlassian.net&xdm_c=channel-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud5206809973729678073&cp=%2Fwiki&xdm_deprecated_addon_key_do_not_use=com.stratusaddons.confluence.plugins.mermaid&lic=active&cv=1000.0.0-f1c99b2191e8&traceId=d2f24a79082c6e7c13f08e03d54a8095&spanId=66d23d90e06d7f5f&traceSampled=0&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiM2Y0ZjFkMWE2ODE4ZjEzZjA1N2Y0NTI3NzdmNWEwN2JmNjkzNjIyMWFiMWE4MjQ0OWUwYzYzMmJjNmM5NTViYSIsImlzcyI6IjIxOGQwY2QyLWUxZmQtMzlkYy04ZDI2LTk2MzZlMTQ4NDc0NSIsImNvbnRleHQiOnt9LCJleHAiOjE3NTg5NjEyNjksImlhdCI6MTc1ODk2MTA4OX0.jDIMIMQDjUzI9OLyvtjAlSUAw3jRpqjvzHhORcUqntc",
+     "contextJwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiY29udGV4dC1xc2giLCJpc3MiOiIyMThkMGNkMi1lMWZkLTM5ZGMtOGQyNi05NjM2ZTE0ODQ3NDUiLCJjb250ZXh0Ijp7ImxpY2Vuc2UiOnsiYWN0aXZlIjp0cnVlfSwiY29uZmx1ZW5jZSI6eyJlZGl0b3IiOnsidmVyc2lvbiI6InYyIn0sIm1hY3JvIjp7Im91dHB1dFR5cGUiOiJodG1sX2V4cG9ydCIsImhhc2giOiJkNWVjNmY1Ny1hMzVhLTQxZDAtYjM0Yi03ZWViMjZmYjJlYjAiLCJpZCI6ImQ1ZWM2ZjU3LWEzNWEtNDFkMC1iMzRiLTdlZWIyNmZiMmViMCJ9LCJ0cmFjaW5nIjp7InRyYWNlSWQiOiJkMmYyNGE3OTA4MmM2ZTdjMTNmMDhlMDNkNTRhODA5NSIsInNwYW5JZCI6IjY2ZDIzZDkwZTA2ZDdmNWYiLCJzYW1wbGVkIjoiMCJ9LCJjb250ZW50Ijp7InR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjUiLCJpZCI6IjEwMjk0MiJ9LCJzcGFjZSI6eyJrZXkiOiJEV1BFVklEIiwiaWQiOiI2ODczOCJ9fSwidXJsIjp7ImRpc3BsYXlVcmwiOiJodHRwczpcL1wvbXJjbmh1Z2hlcy5hdGxhc3NpYW4ubmV0XC93aWtpIn19LCJleHAiOjE3NTg5NjE5ODksImlhdCI6MTc1ODk2MTA4OX0.RTrEe1khIBXWSoMjtBFSOQlVYpYtUpV2RpbE5sFxb0w",    "structuredContext": "{\"license\":{\"active\":true},\"confluence\":{\"editor\":{\"version\":\"v2\"},\"macro\":{\"outputType\":\"html_export\",\"hash\":\"d5ec6f57-a35a-41d0-b34b-7eeb26fb2eb0\",\"id\":\"d5ec6f57-a35a-41d0-b34b-7eeb26fb2eb0\"},\"tracing\":{\"traceId\":\"d2f24a79082c6e7c13f08e03d54a8095\",\"spanId\":\"66d23d90e06d7f5f\",\"sampled\":\"0\"},\"content\":{\"type\":\"page\",\"version\":\"5\",\"id\":\"102942\"},\"space\":{\"key\":\"DWPEVID\",\"id\":\"68738\"}},\"url\":{\"displayUrl\":\"https://mrcnhughes.atlassian.net/wiki\"}}",
+    "contentClassifier":"content",
+    "productCtx":"{\"page.id\":\"102942\",\"macro.hash\":\"d5ec6f57-a35a-41d0-b34b-7eeb26fb2eb0\",\"tracing.sampled\":\"0\",\"page.type\":\"page\",\"macro.localId\":\"143e3c2d-779a-4aa1-9378-7bb27025bf51\",\": = | RAW | = :\":\"toolbar=bottom|filename=Evidence Confidence Flow|zoom=fit|revision=1\",\"space.id\":\"68738\",\"tracing.traceId\":\"d2f24a79082c6e7c13f08e03d54a8095\",\"tracing.spanId\":\"66d23d90e06d7f5f\",\"user.isExternalCollaborator\":\"false\",\"space.key\":\"DWPEVID\",\"content.version\":\"5\",\"page.title\":\"High-Level Design\",\"zoom\":\"fit\",\"macro.body\":\"\",\"macro.truncated\":\"false\",\"content.type\":\"page\",\"output.type\":\"html_export\",\"page.version\":\"5\",\"revision\":\"1\",\"toolbar\":\"bottom\",\"filename\":\"Evidence Confidence Flow\",\"macro.fragmentLocalId\":\"\",\"content.id\":\"102942\",\"macro.id\":\"d5ec6f57-a35a-41d0-b34b-7eeb26fb2eb0\",\"editor.version\":\"v2\"}",
+    "timeZone":"Europe/London",
+    "origin":"https://mermaid.stratus-addons.com",
+    "hostOrigin":"https://mrcnhughes.atlassian.net",
+    "sandbox":"allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-storage-access-by-user-activation",            "apiMigrations": {
+        "gdpr": true
+    }
+}
+;
+    if(window.AP && window.AP.subCreate) {
+      window._AP.appendConnectAddon(data);
+    } else {
+      require(['ac/create'], function(create){
+        create.appendConnectAddon(data);
+      });
+    }
+
+    // For Confluence App Analytics. This code works in conjunction with CFE's ConnectSupport.js.
+    // Here, we add a listener to the initial HTML page that stores events if the ConnectSupport component
+    // has not mounted yet. In CFE, we process the missed event data and disable this initial listener.
+    const __MAX_EVENT_ARRAY_SIZE__ = 20;
+    const connectAppAnalytics = "ecosystem.confluence.connect.analytics";
+    window.connectHost && window.connectHost.onIframeEstablished((eventData) => {
+      if (!window.__CONFLUENCE_CONNECT_SUPPORT_LOADED__) {
+        let events = JSON.parse(window.localStorage.getItem(connectAppAnalytics)) || [];
+        if (events.length >= __MAX_EVENT_ARRAY_SIZE__) {
+          events.shift();
+        }
+        events.push(eventData);
+        window.localStorage.setItem(connectAppAnalytics, JSON.stringify(events));
+      }
+    });
+
+  }());
+</script>
+
+</div>
+<h2 id="High-LevelDesign-ServiceIntegrationArchitecture">Service Integration Architecture</h2><p>The platform's microservices architecture enables independent development, deployment, and scaling of different capabilities while maintaining strict interface contracts and comprehensive audit trails. Each service owns specific business capabilities and data domains, with well-defined APIs that enable composition into complex workflows.</p><p>The Evidence Ingestion Service processes all incoming evidence through document parsing, cryptographic verification, and assertion extraction pipelines. This service transforms unstructured inputs (documents, forms, API calls) into structured RDF assertions with full provenance metadata, confidence scoring, and temporal validity markers.</p><p>Identity Resolution Service manages the complex probabilistic algorithms that correlate evidence to identity clusters, handling the uncertainty inherent in real-world identity management. This service implements machine learning models for attribute matching, graph analysis for relationship detection, and confidence calculation algorithms that account for evidence quality, temporal factors, and correlation strength.</p><p>The Semantic Translation Service applies OWL ontologies to enable evidence sharing between different policy contexts while preserving meaning and confidence levels. This service handles the complex mappings between different vocabulary systems, ensuring that evidence verified for BasicSupport can be appropriately interpreted for FamilyAssist assessment or external partner requirements.</p><p>Award Calculation Service implements the policy engines and business rules that determine benefit entitlements based on available evidence and confidence levels. This service integrates with Drools rule engines to apply complex eligibility criteria while maintaining clear audit trails that link decisions back to specific evidence and reasoning processes.</p><p>The Investigation Queue Service manages exception workflows when confidence levels are insufficient for automated processing or when evidence conflicts are detected. This service implements sophisticated case prioritization, skill-based routing, and outcome tracking that ensure human attention focuses where it can add most value.</p><h2 id="High-LevelDesign-ExternalIntegrationPatterns">External Integration Patterns</h2><p>The External Integration Gateway provides secure, standardized interfaces for partner organizations to submit evidence and query processing status. This gateway implements OAuth 2.0 authentication, mTLS for high-security partners, and comprehensive rate limiting to ensure system stability while supporting high-volume integration patterns.</p><p>Partner integration follows evidence-over-attributes principles, with APIs designed to capture full verification context rather than just derived data points. HMRC's Real Time Information integration provides employment evidence with complete employer verification details, enabling high-confidence income assessment while preserving audit trails back to the original source systems.</p><p>Local authority integration enables bidirectional evidence sharing that supports coordinated service delivery while respecting different policy frameworks. The semantic translation service ensures that evidence verified for DCS purposes can be appropriately interpreted for housing benefit, council tax support, or social care assessments without requiring duplicate verification processes.</p><p>Healthcare provider integration follows strict privacy controls with granular consent management, enabling appropriate information sharing that supports coordinated care while preserving patient autonomy. Citizens control which health information can be shared with DCS for benefit assessment purposes, with all sharing tracked through comprehensive audit trails.</p><p>The platform's standards-based approach using W3C semantic web technologies ensures interoperability with any system that implements compatible protocols, while providing clear migration paths for partners using traditional integration methods. This approach future-proofs integration investments while enabling immediate benefits from semantic capabilities.</p><h2 id="High-LevelDesign-ManagedComplexityArchitecture">Managed Complexity Architecture</h2><div class="ap-container" id="ap-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud7402337539316559470">
+
+  <div class="ap-content " id="embedded-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud7402337539316559470"></div>
+  <script nonce="68d79dbbd0103abe35ea29aaae309458" class="ap-iframe-body-script">
+  (function(){
+    var data = {
+    "addon_key":"com.stratusaddons.confluence.plugins.mermaid",
+    "uniqueKey":"com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud7402337539316559470",
+    "key":"mermaid-cloud",
+     "moduleType":"dynamicContentMacros",      "moduleLocation":"content",         "cp":"/wiki",
+            "general":"",
+    "w":"100%",
+    "h":"1px",
+    "url":"https://mermaid.stratus-addons.com/viewer.html?pageId=102942&filename=Managed+Complexity+Architecture&revision=1&zoom=fit&toolbar=bottom&repository=&xdm_e=https%3A%2F%2Fmrcnhughes.atlassian.net&xdm_c=channel-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud7402337539316559470&cp=%2Fwiki&xdm_deprecated_addon_key_do_not_use=com.stratusaddons.confluence.plugins.mermaid&lic=active&cv=1000.0.0-f1c99b2191e8&traceId=1f5d1b401346c8f32be11b66d17e429e&spanId=350e5d5d0b8a93d8&traceSampled=0&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiZTEyMmJlMjliMmRkNWFjYjRiZjBiNDE5OTc4ZjlhMjI1Y2M0NDhjNDE1NTNmYTI2ZWM0MWNlNjc5YjZhMGI2NSIsImlzcyI6IjIxOGQwY2QyLWUxZmQtMzlkYy04ZDI2LTk2MzZlMTQ4NDc0NSIsImNvbnRleHQiOnt9LCJleHAiOjE3NTg5NjEyNjksImlhdCI6MTc1ODk2MTA4OX0.nFbSXYio05JPQxcQ-8HDy_yc26KocJjdZubpQDe5i6A",
+     "contextJwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiY29udGV4dC1xc2giLCJpc3MiOiIyMThkMGNkMi1lMWZkLTM5ZGMtOGQyNi05NjM2ZTE0ODQ3NDUiLCJjb250ZXh0Ijp7ImxpY2Vuc2UiOnsiYWN0aXZlIjp0cnVlfSwiY29uZmx1ZW5jZSI6eyJlZGl0b3IiOnsidmVyc2lvbiI6InYyIn0sIm1hY3JvIjp7Im91dHB1dFR5cGUiOiJodG1sX2V4cG9ydCIsImhhc2giOiJiMDdkMGM4OS1iYmRhLTRhMjEtOWJiNy0wZTIxNmZhZjkxNDgiLCJpZCI6ImIwN2QwYzg5LWJiZGEtNGEyMS05YmI3LTBlMjE2ZmFmOTE0OCJ9LCJ0cmFjaW5nIjp7InRyYWNlSWQiOiIxZjVkMWI0MDEzNDZjOGYzMmJlMTFiNjZkMTdlNDI5ZSIsInNwYW5JZCI6IjM1MGU1ZDVkMGI4YTkzZDgiLCJzYW1wbGVkIjoiMCJ9LCJjb250ZW50Ijp7InR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjUiLCJpZCI6IjEwMjk0MiJ9LCJzcGFjZSI6eyJrZXkiOiJEV1BFVklEIiwiaWQiOiI2ODczOCJ9fSwidXJsIjp7ImRpc3BsYXlVcmwiOiJodHRwczpcL1wvbXJjbmh1Z2hlcy5hdGxhc3NpYW4ubmV0XC93aWtpIn19LCJleHAiOjE3NTg5NjE5ODksImlhdCI6MTc1ODk2MTA4OX0.mideS_d3fmHuAovZrDstqrPdxlMRumfN4F8wxlCp30U",    "structuredContext": "{\"license\":{\"active\":true},\"confluence\":{\"editor\":{\"version\":\"v2\"},\"macro\":{\"outputType\":\"html_export\",\"hash\":\"b07d0c89-bbda-4a21-9bb7-0e216faf9148\",\"id\":\"b07d0c89-bbda-4a21-9bb7-0e216faf9148\"},\"tracing\":{\"traceId\":\"1f5d1b401346c8f32be11b66d17e429e\",\"spanId\":\"350e5d5d0b8a93d8\",\"sampled\":\"0\"},\"content\":{\"type\":\"page\",\"version\":\"5\",\"id\":\"102942\"},\"space\":{\"key\":\"DWPEVID\",\"id\":\"68738\"}},\"url\":{\"displayUrl\":\"https://mrcnhughes.atlassian.net/wiki\"}}",
+    "contentClassifier":"content",
+    "productCtx":"{\"page.id\":\"102942\",\"macro.hash\":\"b07d0c89-bbda-4a21-9bb7-0e216faf9148\",\"tracing.sampled\":\"0\",\"page.type\":\"page\",\"macro.localId\":\"b9f2f7a1-e6d5-4782-a471-1148a39c9ca8\",\": = | RAW | = :\":\"toolbar=bottom|filename=Managed Complexity Architecture|zoom=fit|revision=1\",\"space.id\":\"68738\",\"tracing.traceId\":\"1f5d1b401346c8f32be11b66d17e429e\",\"tracing.spanId\":\"350e5d5d0b8a93d8\",\"user.isExternalCollaborator\":\"false\",\"space.key\":\"DWPEVID\",\"content.version\":\"5\",\"page.title\":\"High-Level Design\",\"zoom\":\"fit\",\"macro.body\":\"\",\"macro.truncated\":\"false\",\"content.type\":\"page\",\"output.type\":\"html_export\",\"page.version\":\"5\",\"revision\":\"1\",\"toolbar\":\"bottom\",\"filename\":\"Managed Complexity Architecture\",\"macro.fragmentLocalId\":\"\",\"content.id\":\"102942\",\"macro.id\":\"b07d0c89-bbda-4a21-9bb7-0e216faf9148\",\"editor.version\":\"v2\"}",
+    "timeZone":"Europe/London",
+    "origin":"https://mermaid.stratus-addons.com",
+    "hostOrigin":"https://mrcnhughes.atlassian.net",
+    "sandbox":"allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-storage-access-by-user-activation",            "apiMigrations": {
+        "gdpr": true
+    }
+}
+;
+    if(window.AP && window.AP.subCreate) {
+      window._AP.appendConnectAddon(data);
+    } else {
+      require(['ac/create'], function(create){
+        create.appendConnectAddon(data);
+      });
+    }
+
+    // For Confluence App Analytics. This code works in conjunction with CFE's ConnectSupport.js.
+    // Here, we add a listener to the initial HTML page that stores events if the ConnectSupport component
+    // has not mounted yet. In CFE, we process the missed event data and disable this initial listener.
+    const __MAX_EVENT_ARRAY_SIZE__ = 20;
+    const connectAppAnalytics = "ecosystem.confluence.connect.analytics";
+    window.connectHost && window.connectHost.onIframeEstablished((eventData) => {
+      if (!window.__CONFLUENCE_CONNECT_SUPPORT_LOADED__) {
+        let events = JSON.parse(window.localStorage.getItem(connectAppAnalytics)) || [];
+        if (events.length >= __MAX_EVENT_ARRAY_SIZE__) {
+          events.shift();
+        }
+        events.push(eventData);
+        window.localStorage.setItem(connectAppAnalytics, JSON.stringify(events));
+      }
+    });
+
+  }());
+</script>
+
+</div>
+<h2 id="High-LevelDesign-Event-DrivenProcessingArchitecture">Event-Driven Processing Architecture</h2><p>The platform implements comprehensive event streaming using Apache Kafka to ensure reliable processing of evidence updates, identity changes, and award recalculations. Event-driven architecture enables loose coupling between services while maintaining strict ordering and delivery guarantees for critical processing workflows.</p><p>Evidence ingestion events trigger cascading updates through identity resolution, semantic translation, and award calculation services, with sophisticated dependency management that ensures consistent processing even during high-volume periods. Event ordering preserves temporal relationships that are crucial for accurate retrospective change processing.</p><p>The event store provides comprehensive audit capabilities by maintaining complete history of all evidence updates, confidence changes, and decision modifications. This immutable log enables both compliance reporting and operational resilience by supporting recovery from various failure scenarios while maintaining accountability for all automated processing.</p><p>Event-driven architecture enables sophisticated monitoring and alerting based on processing patterns, confidence trends, and system performance metrics. Real-time analytics identify potential issues before they impact citizen services, while historical analysis supports continuous improvement of processing algorithms and operational procedures.</p><p>Change propagation through event streams ensures that evidence updates automatically trigger appropriate recalculation and notification processes across all affected systems and services. When HMRC provides updated employment information, the platform automatically assesses impact on all relevant awards and initiates appropriate citizen contact without requiring manual intervention.</p><h2 id="High-LevelDesign-SecurityandPrivacyArchitecture">Security and Privacy Architecture</h2><p>Security controls operate at multiple layers, with defense-in-depth strategies that protect citizen information even if individual components are compromised. The platform implements zero-trust networking where all communications are authenticated and encrypted, with fine-grained access controls that enforce least-privilege principles.</p><p>Identity and access management integrates with existing DCS infrastructure while supporting federated authentication for external partners. Caseworkers authenticate through Active Directory with multi-factor authentication, while citizens can use <a href="http://GOV.UK" data-card-appearance="inline" class="external-link" rel="nofollow">http://GOV.UK</a>  Verify, OneLogin, or other federated identity providers that meet government assurance standards.</p><p>Data encryption covers both data-at-rest and data-in-transit scenarios, with comprehensive key management through Hardware Security Modules (HSMs) that ensure cryptographic keys remain secure even from privileged system administrators. Encryption keys are rotated automatically according to government security standards.</p><p>The platform's decentralized DID architecture enables strong privacy protection by allowing citizens to control their digital identity without requiring central government identity infrastructure. Citizens can maintain multiple DIDs for different purposes while choosing which services can correlate their interactions.</p><p>Audit logging captures comprehensive information about all data access, processing decisions, and system modifications, with tamper-evident storage that supports both compliance requirements and forensic investigation capabilities. All audit data includes user attribution, business context, and technical details necessary for accountability and continuous improvement.</p><h2 id="High-LevelDesign-PerformanceandScalabilityDesign">Performance and Scalability Design</h2><p>The platform architecture supports horizontal scaling across all major components, with particular attention to the query-intensive operations that characterize real-time award calculation and evidence correlation. The triple store cluster can expand to accommodate growing evidence volumes while maintaining query performance through intelligent caching and indexing strategies.</p><p>Microservices architecture enables independent scaling based on operational demands, with containerized deployment using Kubernetes that supports automated scaling policies based on processing load and response time requirements. Evidence ingestion can scale independently from identity resolution, while award calculation scales separately from investigation queue management.</p><p>Caching strategies balance performance requirements with data consistency needs, using Redis clusters for high-frequency access patterns while ensuring cache invalidation maintains data accuracy. Identity cluster results benefit from aggressive caching due to their relative stability, while real-time evidence updates require more careful cache management.</p><p>Performance monitoring provides comprehensive visibility into system behavior under various load conditions, with automated alerting that identifies potential bottlenecks before they impact citizen services. Load testing ensures that the platform can handle peak processing demands during benefit payment cycles and seasonal application surges.</p><p>The platform's event-driven architecture enables asynchronous processing that prevents blocking operations from impacting user-facing services. Evidence processing, confidence calculation, and semantic reasoning operate as background tasks that complete without affecting citizen or caseworker interface responsiveness.</p><h2 id="High-LevelDesign-OperationalMonitoringandManagement">Operational Monitoring and Management</h2><p>Comprehensive monitoring covers business metrics, technical performance, and security indicators through integrated dashboards that provide real-time visibility into platform operations. Business metrics track evidence processing volumes, confidence score distributions, investigation queue performance, and citizen satisfaction indicators.</p><p>Technical monitoring provides detailed insights into service performance, database query efficiency, event processing latency, and resource utilization across all platform components. Automated alerting ensures that operational issues are identified and resolved before they impact service delivery.</p><p>Health checks and dependency monitoring ensure that service availability problems are quickly identified and resolved, with automated failover capabilities that maintain service continuity during component maintenance or unexpected failures. Circuit breaker patterns prevent cascading failures when individual services experience problems.</p><p>Log aggregation and analysis enable comprehensive troubleshooting and performance optimization through centralized visibility into all platform operations. Structured logging ensures that debug information is available for all processing workflows while maintaining security controls over sensitive citizen information.</p><p>Configuration management ensures that all platform settings, semantic mappings, and confidence thresholds are version-controlled and auditable, with approval workflows for changes that could impact citizen services. This approach enables continuous improvement while maintaining operational stability and accountability.</p><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/102942/103387">Evidence Confidence Flow</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/102942/1081571">Managed Complexity Architecture</a> (text/plain)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Sept 27, 2025 09:18</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

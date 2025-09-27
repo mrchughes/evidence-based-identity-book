@@ -1,0 +1,88 @@
+graph TB
+    subgraph "Internet/Public Zone"
+        Citizens[Citizens]
+        Partners[External Partners]
+        WAF[Web Application Firewall]
+    end
+    
+    subgraph "DMZ Zone"
+        LB[Load Balancer]
+        EIG[External Integration Gateway]
+        CP[Citizen Portal]
+    end
+    
+    subgraph "Application Zone"
+        subgraph "Microservices Mesh (mTLS)"
+            EIS[Evidence Ingestion]
+            IRS[Identity Resolution]
+            STS[Semantic Translation]
+            ACS[Award Calculation]
+        end
+        
+        subgraph "Security Services"
+            Auth[Authentication Service]
+            AuthZ[Authorization Service]
+            Audit[Audit Service]
+        end
+    end
+    
+    subgraph "Data Zone"
+        subgraph "Encrypted at Rest"
+            TS[Triple Store<br/>AES-256]
+            DB[(Operational DB<br/>TDE)]
+            Cache[(Redis Cache<br/>Encrypted)]
+        end
+        
+        HSM[Hardware Security Module]
+    end
+    
+    subgraph "Management Zone"
+        Mon[Monitoring]
+        Log[Log Aggregation]
+        Backup[Backup Systems]
+    end
+    
+    %% Network Flows
+    Citizens -->|HTTPS/TLS 1.3| WAF
+    Partners -->|mTLS + OAuth 2.0| WAF
+    WAF --> LB
+    LB --> CP
+    LB --> EIG
+    
+    CP -->|Zero Trust Check| Auth
+    EIG -->|Zero Trust Check| Auth
+    
+    Auth --> AuthZ
+    AuthZ --> EIS
+    AuthZ --> IRS
+    AuthZ --> STS
+    AuthZ --> ACS
+    
+    %% Data Access
+    EIS -.->|Encrypted| TS
+    IRS -.->|Encrypted| TS
+    STS -.->|Encrypted| TS
+    ACS -.->|Encrypted| DB
+    
+    %% Security
+    HSM -.->|Key Management| TS
+    HSM -.->|Key Management| DB
+    HSM -.->|Key Management| Cache
+    
+    %% Monitoring
+    Mon -.->|Metrics Collection| EIS
+    Mon -.->|Metrics Collection| IRS
+    Log -.->|Audit Trails| Audit
+    
+    %% Network Policies
+    classDef public fill:#ffcdd2
+    classDef dmz fill:#fff3e0
+    classDef app fill:#f3e5f5
+    classDef data fill:#e8f5e8
+    classDef mgmt fill:#e1f5fe
+    
+    class Citizens,Partners,WAF public
+    class LB,EIG,CP dmz
+    class EIS,IRS,STS,ACS,Auth,AuthZ,Audit app
+    class TS,DB,Cache,HSM data
+    class Mon,Log,Backup mgmt

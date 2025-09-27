@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DCS Evidence-Based Identity Platform : Triple Store Design</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DCS Evidence-Based Identity Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Building-Evidence-Based-Services-for-a-Unified-Citizen-Experience_68910.html">Building Evidence-Based Services for a Unified Citizen Experience</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Data-Architecture_363069.html">Data Architecture</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DCS Evidence-Based Identity Platform : Triple Store Design
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Christian Hughes</span>, last modified on Sept 15, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="TripleStoreDesign-ApacheJenaFusekiArchitecture">Apache Jena Fuseki Architecture</h2><p>The triple store implementation uses Apache Jena Fuseki with TDB2 as the foundational data layer that stores all evidence, identity clusters, confidence scores, and semantic relationships as RDF triples. This architecture provides native support for SPARQL queries, RDFS/OWL reasoning, and transactional updates while scaling to handle the millions of evidence assertions required for government-scale operations.</p><p>The Fuseki deployment follows a master-replica pattern with dedicated write operations directed to the master node and read operations load-balanced across multiple replica nodes. This configuration supports the query-intensive nature of identity resolution and award calculation while ensuring data consistency for evidence updates and confidence score modifications.</p><p>TDB2 provides significant performance improvements over the previous TDB1 implementation through better concurrency handling, reduced memory footprint, and optimized indexing strategies. The database maintains six core indexes (SPO, SOP, PSO, POS, OSP, OPS) that enable efficient querying regardless of triple pattern structure, supporting both precise evidence lookups and complex graph traversal operations.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">┌───────────────────────────────────────────────────────────────
+│                 Fuseki Cluster Architecture                 │
+│  ┌─────────────┐  ┌─────────────┐  ┌────────────────────┐ │
+│  │   Master    │  │  Replica 1  │  │    Replica N...     │ │
+│  │  (Write)    │  │   (Read)    │  │      (Read)         │ │
+│  │   TDB2      │  │    TDB2     │  │       TDB2          │ │
+│  └─────────────┘  └─────────────┘  └────────────────────┘ │
+└───────────────────────────────────────────────────────────────
+           │                    │                    │
+           ▼                    ▼                    ▼
+┌───────────────────────────────────────────────────────────────
+│              Load Balancer &amp; Query Router                  │
+│    - Write operations → Master                              │
+│    - Read operations → Replica pool                        │
+│    - Health monitoring &amp; failover                          │
+└───────────────────────────────────────────────────────────────
+</pre>
+</div></div><h2 id="TripleStoreDesign-DatasetOrganizationandNamedGraphs">Dataset Organization and Named Graphs</h2><p>The triple store organizes information using named graphs that provide logical separation between different types of data while enabling cross-graph queries when necessary. This organization supports efficient querying, access control, and maintenance operations while preserving the semantic relationships that span different data categories.</p><p><strong>Core Named Graphs:</strong></p><ul><li><p><code>&lt;urn:dcs:evidence&gt;</code> - All evidence assertions with provenance metadata</p></li><li><p><code>&lt;urn:dcs:identity&gt;</code> - Identity clusters and correlation information</p></li><li><p><code>&lt;urn:dcs:awards&gt;</code> - Benefit calculations and decision records</p></li><li><p><code>&lt;urn:dcs:investigations&gt;</code> - Case management and workflow data</p></li><li><p><code>&lt;urn:dcs:ontologies&gt;</code> - Semantic vocabularies and mapping rules</p></li><li><p><code>&lt;urn:dcs:audit&gt;</code> - System events and change tracking</p></li></ul><p>Named graph organization enables targeted backup and recovery operations, with critical evidence data backed up more frequently than less volatile information like ontology definitions. Graph-level access controls ensure that sensitive investigation data remains separate from general evidence information while enabling authorized cross-graph queries for comprehensive case analysis.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Query across multiple named graphs for comprehensive citizen view
+SELECT ?property ?value ?confidence ?source
+FROM &lt;urn:dcs:evidence&gt;
+FROM &lt;urn:dcs:identity&gt;
+WHERE {
+  GRAPH &lt;urn:dcs:identity&gt; {
+    :cluster_789 dcs:containsSubject ?subject .
+  }
+  GRAPH &lt;urn:dcs:evidence&gt; {
+    ?assertion dcs:aboutSubject ?subject ;
+               dcs:assertsProperty ?property ;
+               dcs:assertsValue ?value ;
+               dcs:hasConfidence ?confidence ;
+               prov:wasAttributedTo ?source .
+  }
+  FILTER(?confidence &gt; 0.7)
+}
+</pre>
+</div></div><h2 id="TripleStoreDesign-IndexOptimizationandQueryPerformance">Index Optimization and Query Performance</h2><p>TDB2's indexing strategy optimizes for the diverse query patterns required by the evidence-based platform, from precise evidence lookups during award calculation to complex graph traversal during identity resolution. The six-index approach ensures that queries perform efficiently regardless of which triple components are bound or unbound.</p><p>Custom indexes supplement the standard TDB2 indexes for platform-specific query patterns. Temporal indexes optimize queries involving date ranges and evidence validity periods, confidence indexes enable efficient filtering by confidence thresholds, and subject clustering indexes accelerate identity resolution operations by pre-computing relationship patterns.</p><p><strong>Query Optimization Strategies:</strong></p><ul><li><p><strong>Prepared Query Plans</strong>: Common SPARQL patterns are pre-analyzed and optimized with cached execution plans</p></li><li><p><strong>Index Selectivity</strong>: Query planner uses index statistics to choose optimal join orders for complex queries</p></li><li><p><strong>Partial Evaluation</strong>: Queries with repeated patterns use partial evaluation to avoid redundant computation</p></li><li><p><strong>Result Set Caching</strong>: Frequently accessed query results are cached with appropriate invalidation policies</p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Optimized query using index hints and selective filtering
+SELECT ?cluster ?confidence
+FROM &lt;urn:dcs:identity&gt;
+WHERE {
+  ?cluster rdf:type dcs:IdentityCluster ;
+           dcs:hasOverallConfidence ?confidence ;
+           dcs:lastUpdated ?updated .
+  FILTER(?confidence &gt; 0.8 &amp;&amp; ?updated &gt; &quot;2025-09-01T00:00:00Z&quot;^^xsd:dateTime)
+}
+ORDER BY DESC(?confidence)
+LIMIT 100
+</pre>
+</div></div><p>Performance monitoring tracks query execution times, index utilization, and memory consumption to identify optimization opportunities. Slow query logging captures complex queries that exceed performance thresholds, enabling analysis of query patterns and potential index additions or query restructuring.</p><h2 id="TripleStoreDesign-SemanticReasoningIntegration">Semantic Reasoning Integration</h2><p>The triple store integrates with HermiT reasoner and other OWL reasoning engines to provide logical inference capabilities that derive new knowledge from existing evidence while maintaining complete provenance for inferred information. Reasoning operates both in real-time for critical decision paths and in batch mode for comprehensive knowledge derivation.</p><p>Incremental reasoning updates minimize computational overhead by processing only the changes since the last reasoning cycle rather than re-reasoning over the entire knowledge base. This approach enables near real-time inference for urgent cases while ensuring comprehensive reasoning occurs regularly for all evidence.</p><p><strong>Reasoning Integration Architecture:</strong></p><ul><li><p><strong>Real-time Reasoning</strong>: Critical inference rules applied immediately for high-priority cases</p></li><li><p><strong>Batch Reasoning</strong>: Comprehensive reasoning cycles executed during low-traffic periods</p></li><li><p><strong>Incremental Updates</strong>: Change-based reasoning that processes only modified evidence</p></li><li><p><strong>Reasoning Provenance</strong>: Complete audit trails for all inferred knowledge with derivation chains</p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Example inference rule in OWL format
+:FamilyIncomeInference rdf:type owl:Class ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSpouse ;
+        owl:someValuesFrom [
+            rdf:type owl:Restriction ;
+            owl:onProperty :hasIncome ;
+            owl:someValuesFrom xsd:decimal
+        ]
+    ] .
+
+# Inferred assertion with provenance
+:derived_family_income_456 rdf:type dcs:DerivedAssertion ;
+    dcs:derivedFor :identity_cluster_789 ;
+    dcs:derivedProperty dcs:hasFamilyIncome ;
+    dcs:derivedValue &quot;43000&quot;^^xsd:decimal ;
+    dcs:derivedFrom :individual_income_assertion, :marriage_assertion ;
+    dcs:derivationRule :FamilyIncomeInference ;
+    dcs:derivationConfidence &quot;0.78&quot;^^xsd:decimal ;
+    prov:wasGeneratedBy :reasoning_engine_v2_1 .
+</pre>
+</div></div><h2 id="TripleStoreDesign-BackupandRecoveryArchitecture">Backup and Recovery Architecture</h2><p>The triple store implements comprehensive backup strategies that account for the critical nature of evidence data while supporting rapid recovery from various failure scenarios. Backup operations preserve both data integrity and semantic consistency through coordinated snapshots across all named graphs.</p><p><strong>Multi-layered Backup Strategy:</strong></p><ul><li><p><strong>Continuous WAL Archival</strong>: Write-ahead logs archived to secure storage with 15-minute recovery point objectives</p></li><li><p><strong>Daily Full Snapshots</strong>: Complete database snapshots with consistency across all named graphs</p></li><li><p><strong>Weekly Verification</strong>: Automated backup integrity testing with sample query validation</p></li><li><p><strong>Geographic Replication</strong>: Off-site backup storage in separate data centers for disaster recovery</p></li></ul><p>Recovery procedures support both complete database restoration and selective graph recovery for scenarios where only specific data categories are affected. Point-in-time recovery enables restoration to specific timestamps when evidence corruption or administrative errors require rollback to known good states.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Automated backup verification script
+#!/bin/bash
+# Verify backup integrity through sample queries
+tdbquery --loc=/backup/tdb2/evidence --query=&quot;
+SELECT (COUNT(*) as ?count) 
+FROM &lt;urn:dcs:evidence&gt;
+WHERE { ?s ?p ?o }&quot;
+
+# Validate semantic consistency
+tdbquery --loc=/backup/tdb2/evidence --query=&quot;
+ASK FROM &lt;urn:dcs:identity&gt; 
+WHERE { 
+  ?cluster dcs:containsSubject ?s1, ?s2 .
+  FILTER(?s1 != ?s2)
+}&quot;
+</pre>
+</div></div><h2 id="TripleStoreDesign-DataLifecycleManagement">Data Lifecycle Management</h2><p>The triple store implements sophisticated data lifecycle policies that balance retention requirements with performance optimization and storage costs. Different categories of data have different retention schedules based on legal requirements, operational needs, and audit compliance.</p><p><strong>Retention Categories:</strong></p><ul><li><p><strong>Evidence Assertions</strong>: 7-year retention with archived storage after 2 years</p></li><li><p><strong>Identity Clusters</strong>: Indefinite retention with periodic confidence recalculation</p></li><li><p><strong>Award Decisions</strong>: 7-year retention with full audit trail preservation</p></li><li><p><strong>Investigation Records</strong>: 10-year retention with redaction after case closure</p></li><li><p><strong>System Audit Logs</strong>: 7-year retention with compression after 1 year</p></li></ul><p>Automated archival processes move older data to cost-effective storage while maintaining query access through federated query capabilities. Archived data remains accessible for appeals and investigations but with longer query response times appropriate for historical analysis rather than operational decision-making.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Automated archival query identifying old evidence
+CONSTRUCT {
+  ?assertion ?p ?o .
+  ?assertion dcs:archivalCandidate true .
+}
+FROM &lt;urn:dcs:evidence&gt;
+WHERE {
+  ?assertion prov:generatedAtTime ?time ;
+             ?p ?o .
+  FILTER(?time &lt; &quot;2023-09-15T00:00:00Z&quot;^^xsd:dateTime)
+  FILTER NOT EXISTS {
+    ?award dcs:basedOnEvidence ?assertion .
+    ?award dcs:status dcs:active .
+  }
+}
+</pre>
+</div></div><h2 id="TripleStoreDesign-PerformanceMonitoringandOptimization">Performance Monitoring and Optimization</h2><p>Comprehensive monitoring tracks triple store performance across multiple dimensions including query response times, index efficiency, reasoning performance, and resource utilization. Monitoring data supports both operational alerting and strategic capacity planning for platform growth.</p><p><strong>Key Performance Metrics:</strong></p><ul><li><p><strong>Query Performance</strong>: Response time percentiles for different query types and complexity levels</p></li><li><p><strong>Index Utilization</strong>: Hit rates and efficiency metrics for all TDB2 indexes</p></li><li><p><strong>Reasoning Performance</strong>: Inference cycle times and incremental update processing rates</p></li><li><p><strong>Resource Consumption</strong>: Memory usage, disk I/O patterns, and CPU utilization during peak loads</p></li></ul><p>Automated performance optimization identifies queries that would benefit from additional indexes, suggests query rewrites for better performance, and recommends data reorganization when access patterns change significantly over time.</p><p>Performance baselines established during initial deployment enable detection of gradual performance degradation and support capacity planning as evidence volume grows. Predictive analysis identifies when hardware upgrades or architectural changes will be required to maintain service level objectives.</p><h2 id="TripleStoreDesign-SecurityandAccessControl">Security and Access Control</h2><p>Triple store security operates at multiple levels including transport encryption, authentication integration, authorization policies, and audit logging. Security controls ensure that sensitive citizen information remains protected while enabling appropriate access for operational and analytical purposes.</p><p><strong>Security Architecture:</strong></p><ul><li><p><strong>Transport Security</strong>: TLS 1.3 encryption for all client connections with certificate-based authentication</p></li><li><p><strong>Authentication Integration</strong>: LDAP integration for caseworker access and OAuth 2.0 for service-to-service communication</p></li><li><p><strong>Graph-level Authorization</strong>: Named graph access controls based on user roles and case assignment</p></li><li><p><strong>Query-level Filtering</strong>: Automatic query modification to enforce data access restrictions</p></li></ul><p>Audit logging captures all database access with user attribution, query details, and result set summaries. Security monitoring identifies unusual access patterns that might indicate unauthorized activity or potential security violations requiring investigation.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Example of query-level security filtering
+# Original query automatically modified to include access controls
+SELECT ?property ?value
+FROM &lt;urn:dcs:evidence&gt;
+WHERE {
+  ?assertion dcs:aboutSubject ?subject ;
+             dcs:assertsProperty ?property ;
+             dcs:assertsValue ?value .
+  # Automatically added security constraint
+  FILTER EXISTS {
+    ?subject dcs:assignedTo ?user .
+    VALUES ?user { :current_user_id }
+  }
+}
+</pre>
+</div></div><p>The security model balances protection requirements with operational efficiency, ensuring that authorized users can access necessary information quickly while maintaining comprehensive audit trails and preventing unauthorized access to sensitive citizen data.</p><p />
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Sept 27, 2025 09:18</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

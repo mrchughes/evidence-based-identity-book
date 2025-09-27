@@ -1,0 +1,48 @@
+graph LR
+    subgraph "Evidence Sources"
+        PS[Passport Scan<br/>Confidence: 0.95]
+        BS[Bank Statement<br/>Confidence: 0.85]
+        EL[Employer Letter<br/>Confidence: 0.70]
+        SD[Self Declaration<br/>Confidence: 0.30]
+    end
+    
+    subgraph "Evidence Correlation"
+        IC[Identity Clustering<br/>Algorithm]
+        CC[Confidence Calculation<br/>Weighted Average]
+    end
+    
+    subgraph "Decision Thresholds"
+        HT[High Threshold<br/>&ge; 0.85<br/>Automatic Processing]
+        MT[Medium Threshold<br/>0.60 - 0.84<br/>Enhanced Review]
+        LT[Low Threshold<br/>&lt; 0.60<br/>Manual Investigation]
+    end
+    
+    subgraph "Processing Outcomes"
+        AP[Automatic Award<br/>24-48 hours]
+        ER[Enhanced Review<br/>3-5 days]
+        MI[Manual Investigation<br/>7-14 days]
+    end
+    
+    PS --> IC
+    BS --> IC
+    EL --> IC
+    SD --> IC
+    
+    IC --> CC
+    CC --> HT
+    CC --> MT
+    CC --> LT
+    
+    HT --> AP
+    MT --> ER
+    LT --> MI
+    
+    classDef source fill:#e8f5e8
+    classDef process fill:#e3f2fd
+    classDef threshold fill:#fff3e0
+    classDef outcome fill:#f3e5f5
+    
+    class PS,BS,EL,SD source
+    class IC,CC process
+    class HT,MT,LT threshold
+    class AP,ER,MI outcome

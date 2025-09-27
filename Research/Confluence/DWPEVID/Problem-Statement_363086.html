@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DCS Evidence-Based Identity Platform : Problem Statement</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DCS Evidence-Based Identity Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Building-Evidence-Based-Services-for-a-Unified-Citizen-Experience_68910.html">Building Evidence-Based Services for a Unified Citizen Experience</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="133927.html">Strategy &amp; Vision</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DCS Evidence-Based Identity Platform : Problem Statement
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Christian Hughes</span>, last modified on Sept 17, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="ProblemStatement-TheEvidenceFragmentationCrisis">The Evidence Fragmentation Crisis</h2><p>The Department of Citizen Services operates a fragmented evidence architecture that creates systematic inefficiencies, enables fraud, and undermines citizen experience through semantic confusion and architectural complexity. While the shared document storage provides basic file sharing across BasicSupport, FamilyAssist, and AgeCare benefit lines, the fundamental design separates evidence ingestion, business context extraction, and semantic interpretation in ways that prevent effective evidence correlation and enable sophisticated fraud schemes.</p><p>This fragmentation manifests most critically in the semantic confusion created when different products use identical attribute names with incompatible meanings. When BasicSupport publishes &quot;monthly income&quot; including all benefit sources for means testing, while ResidenceSupport interprets &quot;monthly income&quot; as excluding housing allowances, the central publication service cannot distinguish between these semantically different concepts, leading to systematic calculation errors and missed fraud detection opportunities.</p><p>The problem extends beyond technical architecture to operational inefficiency and citizen burden. Citizens applying for multiple benefits encounter duplicate evidence requests affecting 23% of multi-product applications, despite DCS already possessing the required documents through shared storage. This occurs because evidence ingestion through separate product pipelines creates divergent business metadata that remains trapped in local ontologies, preventing effective evidence reuse even when documents are technically available.</p><p>Cross-product cases demonstrate 23% error rates compared to 15% for single-product applications, reflecting the complexity of manually coordinating evidence interpretation across incompatible semantic frameworks. Investigation cycle times average 18 working days for multi-product fraud cases versus 7 days for single-product investigations, as caseworkers must manually correlate evidence across fragmented metadata stores without systematic cross-reference capabilities.</p><p /><div class="ap-container" id="ap-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud2842832695814611151">
+
+  <div class="ap-content " id="embedded-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud2842832695814611151"></div>
+  <script nonce="68d79dbbd0103abe35ea29aaae309458" class="ap-iframe-body-script">
+  (function(){
+    var data = {
+    "addon_key":"com.stratusaddons.confluence.plugins.mermaid",
+    "uniqueKey":"com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud2842832695814611151",
+    "key":"mermaid-cloud",
+     "moduleType":"dynamicContentMacros",      "moduleLocation":"content",         "cp":"/wiki",
+            "general":"",
+    "w":"100%",
+    "h":"1px",
+    "url":"https://mermaid.stratus-addons.com/viewer.html?pageId=363086&filename=Evidence-Based+vs+Record-Based+Paradigm+Shift&revision=1&zoom=fit&toolbar=bottom&repository=&xdm_e=https%3A%2F%2Fmrcnhughes.atlassian.net&xdm_c=channel-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud2842832695814611151&cp=%2Fwiki&xdm_deprecated_addon_key_do_not_use=com.stratusaddons.confluence.plugins.mermaid&lic=active&cv=1000.0.0-f1c99b2191e8&traceId=bb8774848e97bc4a56e789a224a88e4b&spanId=de5cec6c47696f3b&traceSampled=0&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiYmYyYTE0ODI1MmYyNDFkMDBlYWIyZjI1ZmIyYWJiMzY2MDgwY2ZlZTNmNWVhZjBjZDAzZjkzMDk1ZWMyNDY5NyIsImlzcyI6IjIxOGQwY2QyLWUxZmQtMzlkYy04ZDI2LTk2MzZlMTQ4NDc0NSIsImNvbnRleHQiOnt9LCJleHAiOjE3NTg5NjEyNjYsImlhdCI6MTc1ODk2MTA4Nn0.LElwHMPCK5-LrGtrAVcRvBwll1Bp7LXmLsoy6wGx8KA",
+     "contextJwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiY29udGV4dC1xc2giLCJpc3MiOiIyMThkMGNkMi1lMWZkLTM5ZGMtOGQyNi05NjM2ZTE0ODQ3NDUiLCJjb250ZXh0Ijp7ImxpY2Vuc2UiOnsiYWN0aXZlIjp0cnVlfSwiY29uZmx1ZW5jZSI6eyJlZGl0b3IiOnsidmVyc2lvbiI6InYyIn0sIm1hY3JvIjp7Im91dHB1dFR5cGUiOiJodG1sX2V4cG9ydCIsImhhc2giOiI0Y2E3OTczOC1hNjE3LTQyYWYtOGMzOS01OTczMThiZjc0ZTAiLCJpZCI6IjRjYTc5NzM4LWE2MTctNDJhZi04YzM5LTU5NzMxOGJmNzRlMCJ9LCJ0cmFjaW5nIjp7InRyYWNlSWQiOiJiYjg3NzQ4NDhlOTdiYzRhNTZlNzg5YTIyNGE4OGU0YiIsInNwYW5JZCI6ImRlNWNlYzZjNDc2OTZmM2IiLCJzYW1wbGVkIjoiMCJ9LCJjb250ZW50Ijp7InR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjUiLCJpZCI6IjM2MzA4NiJ9LCJzcGFjZSI6eyJrZXkiOiJEV1BFVklEIiwiaWQiOiI2ODczOCJ9fSwidXJsIjp7ImRpc3BsYXlVcmwiOiJodHRwczpcL1wvbXJjbmh1Z2hlcy5hdGxhc3NpYW4ubmV0XC93aWtpIn19LCJleHAiOjE3NTg5NjE5ODYsImlhdCI6MTc1ODk2MTA4Nn0.h6Til6-ZBhnSsGs_TRq9CqjGL8RBYltwGJa6i27UjNc",    "structuredContext": "{\"license\":{\"active\":true},\"confluence\":{\"editor\":{\"version\":\"v2\"},\"macro\":{\"outputType\":\"html_export\",\"hash\":\"4ca79738-a617-42af-8c39-597318bf74e0\",\"id\":\"4ca79738-a617-42af-8c39-597318bf74e0\"},\"tracing\":{\"traceId\":\"bb8774848e97bc4a56e789a224a88e4b\",\"spanId\":\"de5cec6c47696f3b\",\"sampled\":\"0\"},\"content\":{\"type\":\"page\",\"version\":\"5\",\"id\":\"363086\"},\"space\":{\"key\":\"DWPEVID\",\"id\":\"68738\"}},\"url\":{\"displayUrl\":\"https://mrcnhughes.atlassian.net/wiki\"}}",
+    "contentClassifier":"content",
+    "productCtx":"{\"page.id\":\"363086\",\"macro.hash\":\"4ca79738-a617-42af-8c39-597318bf74e0\",\"tracing.sampled\":\"0\",\"page.type\":\"page\",\"macro.localId\":\"cd209fdb-081c-4601-9468-c173aac69bdd\",\": = | RAW | = :\":\"toolbar=bottom|filename=Evidence-Based vs Record-Based Paradigm Shift|zoom=fit|revision=1\",\"space.id\":\"68738\",\"tracing.traceId\":\"bb8774848e97bc4a56e789a224a88e4b\",\"tracing.spanId\":\"de5cec6c47696f3b\",\"user.isExternalCollaborator\":\"false\",\"space.key\":\"DWPEVID\",\"content.version\":\"5\",\"page.title\":\"Problem Statement\",\"zoom\":\"fit\",\"macro.body\":\"\",\"macro.truncated\":\"false\",\"content.type\":\"page\",\"output.type\":\"html_export\",\"page.version\":\"5\",\"revision\":\"1\",\"toolbar\":\"bottom\",\"filename\":\"Evidence-Based vs Record-Based Paradigm Shift\",\"macro.fragmentLocalId\":\"\",\"content.id\":\"363086\",\"macro.id\":\"4ca79738-a617-42af-8c39-597318bf74e0\",\"editor.version\":\"v2\"}",
+    "timeZone":"Europe/London",
+    "origin":"https://mermaid.stratus-addons.com",
+    "hostOrigin":"https://mrcnhughes.atlassian.net",
+    "sandbox":"allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-storage-access-by-user-activation",            "apiMigrations": {
+        "gdpr": true
+    }
+}
+;
+    if(window.AP && window.AP.subCreate) {
+      window._AP.appendConnectAddon(data);
+    } else {
+      require(['ac/create'], function(create){
+        create.appendConnectAddon(data);
+      });
+    }
+
+    // For Confluence App Analytics. This code works in conjunction with CFE's ConnectSupport.js.
+    // Here, we add a listener to the initial HTML page that stores events if the ConnectSupport component
+    // has not mounted yet. In CFE, we process the missed event data and disable this initial listener.
+    const __MAX_EVENT_ARRAY_SIZE__ = 20;
+    const connectAppAnalytics = "ecosystem.confluence.connect.analytics";
+    window.connectHost && window.connectHost.onIframeEstablished((eventData) => {
+      if (!window.__CONFLUENCE_CONNECT_SUPPORT_LOADED__) {
+        let events = JSON.parse(window.localStorage.getItem(connectAppAnalytics)) || [];
+        if (events.length >= __MAX_EVENT_ARRAY_SIZE__) {
+          events.shift();
+        }
+        events.push(eventData);
+        window.localStorage.setItem(connectAppAnalytics, JSON.stringify(events));
+      }
+    });
+
+  }());
+</script>
+
+</div>
+<h2 id="ProblemStatement-TheCircularIdentityVerificationProblem">The Circular Identity Verification Problem</h2><p>Current identity verification processes suffer from fundamental logical circularity that the fragmented architecture compounds rather than resolves. The central identity service maintains verification status flags separately from the shared document repository, creating disconnects between identity claims and supporting evidence that sophisticated fraud schemes can exploit.</p><p>When identity verification degrades over time or conflicting information emerges from different external partners using incompatible identification mechanisms, the system cannot trace back to original evidence sources or assess the relative reliability of different verification methods. A citizen verified through biometric passport checking receives identical &quot;identity verified&quot; status to someone confirmed through utility bill address matching, despite vastly different reliability levels.</p><p>This creates bootstrap problems where identity confidence cannot be appropriately assessed because verification context has been stripped away during the attribute publication process. External partners sharing evidence through Revenue Authority tax references, local authority tenant numbers, or NHS identifiers use different verification standards that current correlation mechanisms cannot distinguish, enabling identity fraud across organizational boundaries.</p><p>The circular identity problem becomes particularly acute when citizens interact with multiple DCS products over extended periods during which their circumstances change. Evidence about employment status from Revenue Authority systems using tax references may fail to correlate with housing benefit claims using council tenant numbers, particularly when citizens have moved residence or changed names since establishing different service relationships.</p><p /><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="image-20250917-121519.png" width="354" loading="lazy" src="attachments/363086/1835049.png?width=354" data-image-src="attachments/363086/1835049.png" data-height="1024" data-width="1024" data-unresolved-comment-count="0" data-linked-resource-id="1835049" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20250917-121519.png" data-base-url="https://mrcnhughes.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="363086" data-linked-resource-container-version="5" data-media-id="33654f9d-f4e7-4176-9ff2-f84733b95dae" data-media-type="file"></span><p /><h2 id="ProblemStatement-MultipleDigitalIdentityandExternalPartnerComplexity">Multiple Digital Identity and External Partner Complexity</h2><p>The emergence of diverse external partner integration requirements creates complexity that current systems cannot handle effectively. Healthcare providers sharing medical evidence through NHS numbers, private sector employers submitting payroll data through commercial verification services, and local authorities providing housing information through council systems each maintain legitimate but incompatible ontological frameworks.</p><p>These external ontological differences compound the internal semantic confusion between DCS products. &quot;Monthly income&quot; from Revenue Authority systems reflects tax period calculations that may not align with benefit assessment periods, while &quot;housing costs&quot; from local authorities include service charges that different DCS products handle inconsistently for various benefit calculations.</p><p>Current integration mechanisms cannot resolve these semantic differences systematically, requiring manual intervention when evidence from external partners needs interpretation across multiple DCS product contexts. This creates operational bottlenecks while enabling fraud schemes that exploit the semantic misalignments between different organizational vocabularies and verification standards.</p><p>The multiple identification mechanism problem intensifies as external partners implement their own digital identity solutions that may not correlate with DCS central identity services. Citizens may maintain separate digital relationships with Revenue Authority, healthcare providers, and local authorities that current systems cannot reliably link, preventing comprehensive fraud detection and creating duplicate evidence gathering requirements.</p><h2 id="ProblemStatement-ManualCross-ProductEvidenceCorrelation">Manual Cross-Product Evidence Correlation</h2><p>When evidence requires interpretation across multiple DCS products, current systems force manual caseworker intervention to resolve semantic conflicts and correlate information stored in separate metadata repositories. This manual approach is expensive, error-prone, and creates significant delays for citizens awaiting resolution of cross-product cases.</p><p>A typical cross-product investigation requires caseworkers to examine multiple local metadata stores, interpret different semantic frameworks, apply conflicting business rules across product boundaries, and manually verify that derived attributes published through the central service accurately reflect underlying evidence. This process can take weeks when complex cases involve evidence from multiple external partners using different identification and verification mechanisms.</p><p>The manual approach creates inconsistency when different caseworkers interpret identical evidence differently based on their understanding of various product ontologies. Without systematic semantic translation capabilities, caseworker training becomes crucial for accurate evidence interpretation, but training cannot eliminate the fundamental architectural problem of incompatible semantic frameworks operating across product boundaries.</p><p>Cross-product fraud detection relies entirely on manual correlation that may identify suspicious patterns only after significant financial loss has occurred. Sophisticated fraud schemes exploiting semantic differences between products remain invisible until manual investigation discovers the contradictions, by which time multiple fraudulent payments may have been processed.</p><h2 id="ProblemStatement-CentralPublicationServiceLimitations">Central Publication Service Limitations</h2><p>The central publication service creates systematic information loss by sharing derived attributes rather than raw evidence with verification context. When BasicSupport publishes &quot;employment verified: true,&quot; this binary signal provides no information about verification method, confidence level, temporal validity, or supporting evidence that would enable other products to assess appropriateness for their specific policy requirements.</p><p>Temporal consistency problems arise when multiple products update related attributes asynchronously through the publication service. Employment status changes from BasicSupport may arrive before income updates from Revenue Authority systems, creating temporary inconsistent states where different products hold contradictory information about identical citizen circumstances.</p><p>The publication service cannot resolve semantic conflicts when different products publish attributes with identical names but incompatible meanings. Receiving systems have no mechanism to distinguish between &quot;annual income&quot; calculations optimized for BasicSupport means testing versus FamilyAssist tax charge calculations, leading to inappropriate attribute usage and systematic calculation errors.</p><p>Without comprehensive provenance tracking, errors discovered in one product context cannot be systematically corrected across all systems that consumed the incorrect attributes through publication service distribution. Manual error correction requires caseworkers to identify and contact all potentially affected products rather than relying on systematic impact assessment and correction workflows.</p><h2 id="ProblemStatement-TheCompoundingEffect">The Compounding Effect</h2><p>These architectural problems interact and amplify each other, creating operational burden that exceeds the sum of individual inefficiencies. Semantic confusion between product ontologies compounds external partner integration complexity when Revenue Authority employment data interpreted differently by BasicSupport and FamilyAssist creates contradictory publications that confuse downstream processing.</p><p>Identity verification problems multiply when external partner identification mechanisms cannot be reliably correlated with DCS central identity services, while different products apply incompatible confidence assessment methods to identical identity evidence. This creates scenarios where sophisticated fraud schemes can exploit multiple verification weaknesses simultaneously.</p><p>Manual cross-product correlation requirements increase exponentially as the number of involved products and external partners grows, creating operational bottlenecks that delay citizen services while consuming disproportionate caseworker resources. The publication service temporal consistency problems create additional manual workload when caseworkers must resolve contradictory attribute states manually.</p><p>This analysis demonstrates why incremental improvements to individual system components provide limited benefit while fundamental architectural changes could deliver transformational improvements across all problem dimensions simultaneously. Current approaches that address symptoms rather than underlying semantic and architectural causes are likely to provide diminishing returns while the fundamental problems continue to worsen.</p><p>The compounding effect means that sophisticated fraud schemes can exploit multiple architectural weaknesses simultaneously, while legitimate citizens experience multiplicative delays and errors when their circumstances require cross-product coordination that current systems cannot provide systematically.</p><p /><ul class='childpages-macro'><li><a href="Problems-with-Traditional-Approaches_3768324.html" data-linked-resource-id="3768324" data-linked-resource-version="1" data-linked-resource-type="page">Problems with Traditional Approaches</a></li></ul>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/363086/1114346">Evidence-Based vs Record-Based Paradigm Shift</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/363086/1114352.png">Evidence-Based vs Record-Based Paradigm Shift.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/363086/1835049.png">image-20250917-121519.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Sept 27, 2025 09:18</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

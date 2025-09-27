@@ -1,0 +1,40 @@
+graph TB
+    subgraph "Current State"
+        CS1[Apply for BasicSupport<br/>Time: 2-3 hours<br/>Documents: 8-12 items]
+        CS2[Wait for Processing<br/>Time: 14-21 days<br/>Manual verification]
+        CS3[Apply for FamilyAssist<br/>Time: 2-3 hours<br/>Re-submit same documents]
+        CS4[Wait for Processing<br/>Time: 10-14 days<br/>Duplicate verification]
+    end
+    
+    subgraph "Future State"
+        FS1[Apply for BasicSupport<br/>Time: 45 minutes<br/>Documents: 8-12 items]
+        FS2[Evidence Processing<br/>Time: 2-4 hours<br/>Automated confidence scoring]
+        FS3[Apply for FamilyAssist<br/>Time: 10 minutes<br/>Evidence reuse + birth certificate]
+        FS4[Award Calculation<br/>Time: 15 minutes<br/>Cross-product translation]
+    end
+    
+    subgraph "Value Improvements"
+        VI1[80% time reduction<br/>for additional benefits]
+        VI2[90% faster processing<br/>for high-confidence cases]
+        VI3[85% reduction in<br/>evidence re-submission]
+        VI4[70% reduction in<br/>caseworker manual effort]
+    end
+    
+    CS1 --> CS2 --> CS3 --> CS4
+    FS1 --> FS2 --> FS3 --> FS4
+    
+    CS3 -.->|Transformation| FS3
+    CS4 -.->|Transformation| FS4
+    
+    FS3 --> VI1
+    FS2 --> VI2
+    FS3 --> VI3
+    FS2 --> VI4
+    
+    classDef current fill:#ffebee
+    classDef future fill:#e8f5e8
+    classDef value fill:#e3f2fd
+    
+    class CS1,CS2,CS3,CS4 current
+    class FS1,FS2,FS3,FS4 future
+    class VI1,VI2,VI3,VI4 value

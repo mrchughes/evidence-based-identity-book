@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DCS Evidence-Based Identity Platform : Ontology Framework</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DCS Evidence-Based Identity Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Building-Evidence-Based-Services-for-a-Unified-Citizen-Experience_68910.html">Building Evidence-Based Services for a Unified Citizen Experience</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Data-Architecture_363069.html">Data Architecture</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DCS Evidence-Based Identity Platform : Ontology Framework
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Christian Hughes</span>, last modified on Sept 15, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="OntologyFramework-CoreDCSOntologyArchitecture">Core DCS Ontology Architecture</h2><p>The ontology framework provides the semantic foundation that enables evidence sharing across different DCS products and external partners while preserving the distinct policy vocabularies that reflect legitimate differences in how various services interpret citizen circumstances. The framework implements a layered approach with shared core concepts, product-specific extensions, and formal mappings that enable automatic translation between contexts.</p><p>The core DCS ontology defines fundamental classes and properties that apply across all benefit areas including Person, Evidence, Assertion, IdentityCluster, and Confidence. These base concepts provide semantic consistency while enabling product-specific specialization through ontology inheritance and extension patterns that preserve interoperability.</p><p>Product-specific ontologies extend the core vocabulary with concepts unique to particular benefit areas. BasicSupport defines employment assessment concepts, housing element calculations, and earned income deduction rules. FamilyAssist introduces family relationship modeling and child-specific evidence requirements. AgeCare implements retirement income assessment and means testing vocabularies appropriate for older citizens.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Core DCS Ontology - Base Classes
+@prefix dcs: &lt;http://ontology.dcs.gov.uk/core#&gt; .
+@prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+
+dcs:Person rdf:type owl:Class ;
+    rdfs:label &quot;Person&quot; ;
+    rdfs:comment &quot;A real-world individual who may interact with DCS services&quot; .
+
+dcs:Evidence rdf:type owl:Class ;
+    rdfs:label &quot;Evidence&quot; ;
+    rdfs:comment &quot;Information that supports assertions about person circumstances&quot; .
+
+dcs:Assertion rdf:type owl:Class ;
+    rdfs:label &quot;Assertion&quot; ;
+    rdfs:comment &quot;A claim made by a source about a person&#39;s circumstances&quot; .
+
+dcs:IdentityCluster rdf:type owl:Class ;
+    rdfs:label &quot;Identity Cluster&quot; ;
+    rdfs:comment &quot;A collection of subject identifiers believed to represent the same person&quot; .
+
+# Core Properties
+dcs:hasConfidence rdf:type owl:DatatypeProperty ;
+    rdfs:domain dcs:Assertion ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment &quot;Confidence score between 0.0 and 1.0 indicating assertion reliability&quot; .
+
+dcs:aboutSubject rdf:type owl:ObjectProperty ;
+    rdfs:domain dcs:Assertion ;
+    rdfs:comment &quot;Links assertion to the subject it describes&quot; .
+</pre>
+</div></div><h2 id="OntologyFramework-Product-SpecificVocabularyDevelopment">Product-Specific Vocabulary Development</h2><p>Each DCS product maintains its own ontological vocabulary that reflects the specific policy framework and business rules governing that benefit area. These vocabularies are developed in collaboration with policy teams to ensure accurate representation of legal requirements and operational procedures while maintaining semantic precision that enables automated reasoning.</p><p>BasicSupport ontology encompasses the complex rules for means-tested benefits including employment income assessment, housing cost calculation, child element determination, and earned income taper rules. The ontology models the intricate relationships between different income sources, allowable deductions, and benefit calculations that reflect the policy intent of BasicSupport as a simplified benefit system.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># BasicSupport Specific Ontology
+@prefix bs: &lt;http://ontology.dcs.gov.uk/bs#&gt; .
+
+bs:BasicSupportClaimant rdf:type owl:Class ;
+    rdfs:subClassOf dcs:Person ;
+    rdfs:label &quot;BasicSupport Claimant&quot; .
+
+bs:hasMonthlyIncome rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf dcs:hasIncome ;
+    rdfs:domain bs:BasicSupportClaimant ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment &quot;Monthly income amount for BS assessment purposes&quot; .
+
+bs:StandardAllowance rdf:type owl:Class ;
+    rdfs:subClassOf bs:BenefitElement ;
+    rdfs:comment &quot;Basic living allowance varying by age and couple status&quot; .
+
+bs:HousingElement rdf:type owl:Class ;
+    rdfs:subClassOf bs:BenefitElement ;
+    rdfs:comment &quot;Housing cost support based on actual rent and local housing allowance&quot; .
+
+# BS-specific calculation rules
+bs:EarnedIncomeDeduction rdf:type owl:Class ;
+    rdfs:comment &quot;Reduction in BS award based on earned income above work allowance&quot; .
+
+bs:hasWorkAllowance rdf:type owl:DatatypeProperty ;
+    rdfs:domain bs:BasicSupportClaimant ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment &quot;Income disregard before taper applies&quot; .
+</pre>
+</div></div><p>FamilyAssist ontology focuses on family relationships, child eligibility criteria, and the simpler calculation model appropriate for universal child support. The vocabulary emphasizes relationship verification, child age bands, and residence requirements that determine entitlement.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># FamilyAssist Specific Ontology  
+@prefix fa: &lt;http://ontology.dcs.gov.uk/fa#&gt; .
+
+fa:FamilyAssistClaimant rdf:type owl:Class ;
+    rdfs:subClassOf dcs:Person ;
+    rdfs:label &quot;FamilyAssist Claimant&quot; .
+
+fa:EligibleChild rdf:type owl:Class ;
+    rdfs:subClassOf dcs:Person ;
+    rdfs:comment &quot;Child meeting age and education criteria for FamilyAssist&quot; .
+
+fa:hasResponsibilityFor rdf:type owl:ObjectProperty ;
+    rdfs:domain fa:FamilyAssistClaimant ;
+    rdfs:range fa:EligibleChild ;
+    rdfs:comment &quot;Indicates primary care responsibility for child&quot; .
+
+fa:HighIncomeCharge rdf:type owl:Class ;
+    rdfs:comment &quot;Tax charge for high earners receiving FamilyAssist&quot; .
+
+fa:hasAnnualIncome rdf:type owl:DatatypeProperty ;
+    rdfs:domain fa:FamilyAssistClaimant ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment &quot;Annual income for high income charge calculation&quot; .
+</pre>
+</div></div><h2 id="OntologyFramework-Cross-ProductSemanticMappings">Cross-Product Semantic Mappings</h2><p>Semantic mappings define formal relationships between concepts across different DCS products, enabling evidence verified for one benefit to be appropriately interpreted for other benefits while preserving the distinct policy contexts that legitimately interpret the same evidence differently.</p><p>Income concept mappings illustrate the complexity of cross-product translation. Revenue Authority's annual salary information translates to BasicSupport's monthly income through mathematical conversion, but the confidence level may decrease due to the transformation uncertainty. The same revenue data maps to FamilyAssist's annual income threshold assessment with different relevance and confidence scoring.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Cross-Product Semantic Mappings
+@prefix map: &lt;http://ontology.dcs.gov.uk/mappings#&gt; .
+
+# Income concept equivalences with transformation rules
+revenue:annualSalary owl:equivalentProperty bs:monthlyIncome ;
+    map:transformationRule &quot;divide by 12&quot; ;
+    map:confidenceAdjustment &quot;-0.02&quot; ;
+    map:applicableContext &quot;employment_income&quot; .
+
+revenue:annualSalary owl:equivalentProperty fa:annualIncome ;
+    map:transformationRule &quot;direct_mapping&quot; ;
+    map:confidenceAdjustment &quot;0.0&quot; ;
+    map:applicableContext &quot;high_income_charge_assessment&quot; .
+
+# Address concept mappings
+bs:hasResidentialAddress owl:equivalentProperty fa:hasAddress ;
+    map:transformationRule &quot;address_normalization&quot; ;
+    map:applicableContext &quot;residence_verification&quot; .
+
+la:councilTaxAddress owl:equivalentProperty bs:hasResidentialAddress ;
+    map:transformationRule &quot;address_standardization&quot; ;
+    map:confidenceAdjustment &quot;-0.05&quot; ;
+    map:applicableContext &quot;housing_element_verification&quot; .
+</pre>
+</div></div><p>Relationship mappings enable family structure information to flow appropriately between benefits with different family modeling requirements. BasicSupport's household composition concepts map to FamilyAssist's responsibility relationships through semantic rules that account for the different ways each benefit defines family units.</p><h2 id="OntologyFramework-ExternalPartnerOntologies">External Partner Ontologies</h2><p>External partner ontologies define the vocabularies used by organizations like Revenue Authority, local authorities, and healthcare providers, enabling semantic translation when evidence crosses organizational boundaries. These ontologies respect partner autonomy while providing the mapping infrastructure needed for evidence sharing.</p><p>Revenue Authority ontology reflects the tax authority's perspective on employment, income, and business relationships. Real Time Information concepts, PAYE categories, and statutory reporting requirements are modeled with appropriate semantic precision to enable accurate evidence interpretation within DCS policy contexts.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Revenue Authority Partner Ontology
+@prefix revenue: &lt;http://ontology.revenue-authority.gov.uk/core#&gt; .
+
+revenue:RTISubmission rdf:type owl:Class ;
+    rdfs:comment &quot;Real Time Information submission from employer to Revenue Authority&quot; .
+
+revenue:EmployeeRecord rdf:type owl:Class ;
+    rdfs:comment &quot;Individual employment record within RTI submission&quot; .
+
+revenue:hasGrossPay rdf:type owl:DatatypeProperty ;
+    rdfs:domain revenue:EmployeeRecord ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment &quot;Gross pay amount reported by employer&quot; .
+
+revenue:hasEmployerReference rdf:type owl:DatatypeProperty ;
+    rdfs:domain revenue:EmployeeRecord ;
+    rdfs:range xsd:string ;
+    rdfs:comment &quot;Employer PAYE reference number&quot; .
+
+# Verification context for Revenue Authority assertions
+revenue:StatutoryReporting rdf:type owl:Class ;
+    rdfs:comment &quot;Information provided under statutory reporting requirements&quot; .
+
+revenue:hasVerificationMethod rdf:type owl:ObjectProperty ;
+    rdfs:domain revenue:RTISubmission ;
+    rdfs:range revenue:StatutoryReporting .
+</pre>
+</div></div><p>Local authority ontologies accommodate the diverse structures and responsibilities across different councils while providing sufficient semantic consistency to enable evidence sharing. Housing benefit, council tax, and social care vocabularies are modeled with appropriate flexibility for local variation.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Local Authority Partner Ontology
+@prefix la: &lt;http://ontology.localauth.gov.uk/core#&gt; .
+
+la:CouncilTaxRecord rdf:type owl:Class ;
+    rdfs:comment &quot;Council tax liability and payment record&quot; .
+
+la:HousingBenefitClaim rdf:type owl:Class ;
+    rdfs:comment &quot;Local authority administered housing benefit claim&quot; .
+
+la:hasPropertyReference rdf:type owl:DatatypeProperty ;
+    rdfs:domain la:CouncilTaxRecord ;
+    rdfs:range xsd:string ;
+    rdfs:comment &quot;Unique property identifier for council tax purposes&quot; .
+
+la:hasRentAmount rdf:type owl:DatatypeProperty ;
+    rdfs:domain la:HousingBenefitClaim ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment &quot;Weekly rent amount for housing benefit calculation&quot; .
+</pre>
+</div></div><h2 id="OntologyFramework-ReasoningRulesandInferencePatterns">Reasoning Rules and Inference Patterns</h2><p>The ontology framework includes formal reasoning rules that enable automatic derivation of new knowledge from existing evidence while maintaining complete provenance for inferred information. These rules implement policy logic and business relationships that support automated decision-making within appropriate confidence bounds.</p><p>Family income derivation rules demonstrate complex reasoning where individual income evidence combined with relationship evidence produces household income calculations relevant for means-tested benefits. The reasoning preserves confidence scoring through the inference chain while documenting the logical steps that produced derived conclusions.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Family Income Inference Rule
+@prefix rule: &lt;http://ontology.dcs.gov.uk/rules#&gt; .
+
+rule:FamilyIncomeDerivation rdf:type owl:Class ;
+    rdfs:comment &quot;Rule for deriving family income from individual incomes and relationships&quot; .
+
+# OWL rule definition
+[] rdf:type swrl:Imp ;
+   swrl:body [
+       rdf:type swrl:AtomList ;
+       rdf:first [
+           rdf:type swrl:IndividualPropertyAtom ;
+           swrl:propertyPredicate dcs:hasSpouse ;
+           swrl:argument1 ?person1 ;
+           swrl:argument2 ?person2
+       ] ;
+       rdf:rest [
+           rdf:type swrl:AtomList ;
+           rdf:first [
+               rdf:type swrl:DatavaluedPropertyAtom ;
+               swrl:propertyPredicate dcs:hasIncome ;
+               swrl:argument1 ?person1 ;
+               swrl:argument2 ?income1
+           ] ;
+           rdf:rest [
+               rdf:type swrl:AtomList ;
+               rdf:first [
+                   rdf:type swrl:DatavaluedPropertyAtom ;
+                   swrl:propertyPredicate dcs:hasIncome ;
+                   swrl:argument1 ?person2 ;
+                   swrl:argument2 ?income2
+               ]
+           ]
+       ]
+   ] ;
+   swrl:head [
+       rdf:type swrl:AtomList ;
+       rdf:first [
+           rdf:type swrl:DatavaluedPropertyAtom ;
+           swrl:propertyPredicate dcs:hasFamilyIncome ;
+           swrl:argument1 ?person1 ;
+           swrl:argument2 ?totalIncome
+       ]
+   ] .
+</pre>
+</div></div><p>Employment verification rules enable cross-validation between different evidence sources. When Revenue Authority employment data aligns with citizen-provided payslip information, confidence scores increase through corroboration. When sources conflict, investigation workflows are triggered for human review.</p><h2 id="OntologyFramework-OntologyVersioningandEvolution">Ontology Versioning and Evolution</h2><p>The ontology framework implements comprehensive versioning strategies that enable policy evolution while maintaining backward compatibility and audit integrity. Ontology changes are tracked through semantic versioning with automated impact assessment that identifies affected evidence and calculations.</p><p>Version control operates at multiple levels including major versions for significant policy changes that require system-wide updates, minor versions for new concept additions that maintain backward compatibility, and patch versions for clarifications and corrections that don't affect semantic meaning.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Ontology Version Management
+@prefix version: &lt;http://ontology.dcs.gov.uk/versioning#&gt; .
+
+dcs:CoreOntologyV2_1 rdf:type owl:Ontology ;
+    owl:versionIRI &lt;http://ontology.dcs.gov.uk/core/2.1&gt; ;
+    owl:priorVersion &lt;http://ontology.dcs.gov.uk/core/2.0&gt; ;
+    dcterms:created &quot;2025-09-15T10:00:00Z&quot;^^xsd:dateTime ;
+    rdfs:comment &quot;Added confidence decay modeling and enhanced provenance tracking&quot; ;
+    version:hasCompatibilityLevel &quot;minor&quot; ;
+    version:requiresSystemUpdate false .
+
+# Change tracking for ontology evolution
+version:ChangeRecord rdf:type owl:Class ;
+    rdfs:comment &quot;Record of ontological changes for impact assessment&quot; .
+
+version:ConceptAddition rdf:type owl:Class ;
+    rdfs:subClassOf version:ChangeRecord ;
+    rdfs:comment &quot;Addition of new concepts that maintain backward compatibility&quot; .
+
+version:ConceptModification rdf:type owl:Class ;
+    rdfs:subClassOf version:ChangeRecord ;
+    rdfs:comment &quot;Modification of existing concepts requiring impact analysis&quot; .
+</pre>
+</div></div><p>Migration strategies ensure that evidence collected under previous ontology versions remains valid and queryable while enabling gradual adoption of new semantic capabilities. Automated translation rules convert assertions between ontology versions where semantic equivalence exists, while flagging cases requiring manual review.</p><h2 id="OntologyFramework-QualityAssuranceandValidation">Quality Assurance and Validation</h2><p>Ontology quality assurance operates through automated consistency checking, semantic validation, and empirical testing against real evidence patterns. SHACL shapes define validation constraints that ensure ontological consistency while preventing logical contradictions that could compromise reasoning reliability.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># SHACL Validation Shapes
+@prefix sh: &lt;http://www.w3.org/ns/shacl#&gt; .
+
+# Confidence score validation
+dcs:ConfidenceShape rdf:type sh:NodeShape ;
+    sh:targetClass dcs:Assertion ;
+    sh:property [
+        sh:path dcs:hasConfidence ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0.0 ;
+        sh:maxInclusive 1.0 ;
+        sh:message &quot;Confidence scores must be between 0.0 and 1.0&quot;
+    ] .
+
+# Identity cluster consistency validation
+dcs:IdentityClusterShape rdf:type sh:NodeShape ;
+    sh:targetClass dcs:IdentityCluster ;
+    sh:property [
+        sh:path dcs:containsSubject ;
+        sh:minCount 1 ;
+        sh:message &quot;Identity clusters must contain at least one subject&quot;
+    ] ;
+    sh:property [
+        sh:path dcs:hasOverallConfidence ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0.0 ;
+        sh:maxInclusive 1.0
+    ] .
+</pre>
+</div></div><p>Empirical validation tests ontological concepts against real evidence patterns to ensure that semantic models accurately reflect operational reality. Statistical analysis identifies concept usage patterns, relationship frequencies, and confidence distributions that inform ontology refinement and optimization.</p><p>The quality assurance framework supports continuous improvement through feedback loops that capture operational experience with semantic translation, reasoning accuracy, and decision quality, enabling evidence-based evolution of the ontological framework that improves system performance over time.</p><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/102976/1114369">Semantic Translation Concept</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/102976/1114375.png">Semantic Translation Concept.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Sept 27, 2025 09:18</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

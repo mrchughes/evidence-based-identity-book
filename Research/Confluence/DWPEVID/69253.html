@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DCS Evidence-Based Identity Platform : Performance &amp; Scaling</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DCS Evidence-Based Identity Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Building-Evidence-Based-Services-for-a-Unified-Citizen-Experience_68910.html">Building Evidence-Based Services for a Unified Citizen Experience</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Infrastructure-Architecture_133957.html">Infrastructure Architecture</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DCS Evidence-Based Identity Platform : Performance &amp; Scaling
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Christian Hughes</span>, last modified on Sept 15, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="Performance&amp;Scaling-HorizontalScalingArchitecture">Horizontal Scaling Architecture</h2><p>The evidence-based identity platform implements comprehensive horizontal scaling capabilities that enable the system to handle government-scale workloads through distributed processing, intelligent load balancing, and elastic resource allocation. The architecture scales different components independently based on their specific performance characteristics and operational demands.</p><p>Microservices architecture enables granular scaling where compute-intensive services like identity resolution can scale independently from I/O-intensive services like evidence ingestion. This approach optimizes resource utilization while maintaining performance during varying load patterns including seasonal application surges, bulk partner data feeds, and emergency processing scenarios.</p><p><strong>Service-Specific Scaling Patterns:</strong></p><ul><li><p><strong>Evidence Ingestion</strong>: Scales based on document upload volume and OCR processing queues</p></li><li><p><strong>Identity Resolution</strong>: Scales based on clustering computation requirements and ML model inference load</p></li><li><p><strong>Award Calculation</strong>: Scales based on policy complexity and calculation request volume</p></li><li><p><strong>Investigation Queue</strong>: Scales based on case assignment patterns and workflow complexity</p></li></ul><p>Kubernetes Horizontal Pod Autoscaler (HPA) implements automatic scaling policies that respond to multiple metrics including CPU utilization, memory consumption, custom application metrics, and queue depth indicators. Scaling policies account for startup time, warmup periods, and graceful shutdown requirements to maintain service availability during scaling operations.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Example HPA configuration for Evidence Ingestion Service
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: evidence-ingestion-hpa
+  namespace: evidence-processing
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: evidence-ingestion
+  minReplicas: 3
+  maxReplicas: 50
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  - type: Object
+    object:
+      metric:
+        name: document_processing_queue_depth
+      target:
+        type: AverageValue
+        averageValue: &quot;10&quot;
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 15
+    scaleDown:
+      stabilizationWindowSeconds: 600
+      policies:
+      - type: Percent
+        value: 50
+        periodSeconds: 60
+</pre>
+</div></div><h2 id="Performance&amp;Scaling-DatabasePerformanceOptimization">Database Performance Optimization</h2><p>Database performance optimization operates across multiple storage systems with different optimization strategies appropriate for RDF triple stores, relational databases, and caching systems. Performance tuning accounts for query patterns, data volume growth, and access frequency to maintain sub-second response times for citizen-facing operations.</p><p><strong>Triple Store Optimization:</strong></p><ul><li><p><strong>Index Strategy</strong>: Six-index TDB2 configuration with custom indexes for temporal and confidence-based queries</p></li><li><p><strong>Query Optimization</strong>: SPARQL query plan caching with prepared statement optimization for common patterns</p></li><li><p><strong>Memory Management</strong>: Configurable memory allocation for different query types and dataset sizes</p></li><li><p><strong>Parallel Processing</strong>: Query parallelization for complex graph traversal and reasoning operations</p></li></ul><p>PostgreSQL optimization includes connection pooling, query plan optimization, and strategic indexing for operational data storage. Index strategies account for different query patterns including case management lookups, audit trail searches, and reporting analytics.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">-- Example PostgreSQL performance optimization
+-- Connection pooling configuration
+ALTER SYSTEM SET max_connections = 200;
+ALTER SYSTEM SET shared_buffers = &#39;256MB&#39;;
+ALTER SYSTEM SET effective_cache_size = &#39;1GB&#39;;
+ALTER SYSTEM SET work_mem = &#39;4MB&#39;;
+ALTER SYSTEM SET maintenance_work_mem = &#39;64MB&#39;;
+
+-- Strategic indexing for award calculations
+CREATE INDEX CONCURRENTLY idx_awards_cluster_active 
+ON awards (cluster_id, status) 
+WHERE status = &#39;active&#39;;
+
+CREATE INDEX CONCURRENTLY idx_evidence_confidence_temporal
+ON evidence_assertions (cluster_id, confidence, created_date)
+WHERE confidence &gt; 0.7;
+
+-- Partial index for investigation queue performance
+CREATE INDEX CONCURRENTLY idx_investigations_pending
+ON investigations (priority, assigned_to, created_date)
+WHERE status = &#39;pending&#39;;
+</pre>
+</div></div><p>Redis caching strategies implement intelligent cache warming, eviction policies, and distributed caching across multiple Redis clusters. Cache performance includes monitoring hit rates, memory utilization, and cache coherence across distributed deployments.</p><h2 id="Performance&amp;Scaling-Real-TimeProcessingCapabilities">Real-Time Processing Capabilities</h2><p>Real-time processing enables immediate response to evidence updates, confidence changes, and citizen interactions while maintaining system stability during high-volume operations. Stream processing architecture handles event flows with guaranteed delivery, ordering preservation, and exactly-once processing semantics.</p><p><strong>Event Stream Processing:</strong></p><ul><li><p><strong>Kafka Streams</strong>: Real-time evidence correlation and confidence calculation updates</p></li><li><p><strong>Apache Flink</strong>: Complex event processing for fraud detection and pattern analysis</p></li><li><p><strong>Redis Streams</strong>: Low-latency notification delivery and cache invalidation</p></li><li><p><strong>WebSocket Connections</strong>: Real-time citizen portal updates and caseworker notifications</p></li></ul><p>Event processing pipelines implement backpressure handling, circuit breaker patterns, and graceful degradation to maintain system stability when downstream services experience performance issues. Processing guarantees ensure that evidence updates are never lost while maintaining performance during peak load periods.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Example Kafka configuration for high-throughput processing
+kafka_config:
+  bootstrap_servers: &quot;kafka-cluster:9092&quot;
+  producer_config:
+    acks: &quot;all&quot;
+    retries: 2147483647
+    batch_size: 16384
+    linger_ms: 5
+    buffer_memory: 33554432
+    compression_type: &quot;snappy&quot;
+    enable_idempotence: true
+  consumer_config:
+    auto_offset_reset: &quot;earliest&quot;
+    enable_auto_commit: false
+    max_poll_records: 500
+    session_timeout_ms: 30000
+    heartbeat_interval_ms: 3000
+  stream_config:
+    processing_guarantee: &quot;exactly_once&quot;
+    num_stream_threads: 4
+    default_deserialization_exception_handler: &quot;continue&quot;
+    cache_max_bytes_buffering: 10485760
+</pre>
+</div></div><h2 id="Performance&amp;Scaling-LoadTestingandCapacityPlanning">Load Testing and Capacity Planning</h2><p>Comprehensive load testing validates system performance under various scenarios including normal operations, peak load conditions, and failure scenarios. Testing methodology includes gradual load increases, sustained load testing, and spike testing that simulates real-world usage patterns.</p><p><strong>Load Testing Scenarios:</strong></p><ul><li><p><strong>Normal Operations</strong>: Baseline performance with typical citizen application and evidence processing volumes</p></li><li><p><strong>Peak Load</strong>: Seasonal surges during benefit application periods and policy change implementations</p></li><li><p><strong>Partner Bulk Feeds</strong>: High-volume data ingestion from Revenue Authority RTI feeds and local authority batch updates</p></li><li><p><strong>Emergency Scenarios</strong>: Rapid scaling during crisis situations requiring emergency benefit processing</p></li></ul><p>Performance benchmarks establish service level objectives (SLOs) for different operation types with appropriate response time targets for citizen-facing operations versus batch processing workflows. SLOs account for different confidence levels and processing complexity while maintaining user experience expectations.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Example load testing configuration using k6
+load_test_scenarios:
+  normal_operations:
+    executor: &quot;constant-vus&quot;
+    vus: 100
+    duration: &quot;30m&quot;
+    env:
+      EVIDENCE_UPLOAD_RATE: &quot;10/s&quot;
+      IDENTITY_QUERY_RATE: &quot;50/s&quot;
+      AWARD_CALCULATION_RATE: &quot;20/s&quot;
+  
+  peak_load:
+    executor: &quot;ramping-vus&quot;
+    stages:
+      - duration: &quot;10m&quot;
+        target: 500
+      - duration: &quot;30m&quot;
+        target: 500
+      - duration: &quot;10m&quot;
+        target: 0
+    env:
+      EVIDENCE_UPLOAD_RATE: &quot;50/s&quot;
+      IDENTITY_QUERY_RATE: &quot;200/s&quot;
+      AWARD_CALCULATION_RATE: &quot;100/s&quot;
+  
+  spike_test:
+    executor: &quot;ramping-vus&quot;
+    stages:
+      - duration: &quot;2m&quot;
+        target: 100
+      - duration: &quot;1m&quot;
+        target: 1000
+      - duration: &quot;2m&quot;
+        target: 100
+    thresholds:
+      http_req_duration:
+        - &quot;p(95)&lt;2000&quot;
+        - &quot;p(99)&lt;5000&quot;
+      http_req_failed:
+        - &quot;rate&lt;0.1&quot;
+</pre>
+</div></div><p>Capacity planning uses historical usage patterns, growth projections, and policy impact assessments to predict future resource requirements. Planning models account for different growth scenarios including steady-state growth, policy-driven surges, and emergency scaling requirements.</p><h2 id="Performance&amp;Scaling-CachingStrategyandPerformance">Caching Strategy and Performance</h2><p>Multi-layered caching strategy optimizes performance across different data types and access patterns while maintaining data consistency and accuracy for government decision-making. Caching implementation balances performance gains with data freshness requirements and memory utilization constraints.</p><p><strong>Caching Architecture:</strong></p><ul><li><p><strong>Application-Level Caching</strong>: In-memory caching for frequently computed values like confidence scores and semantic translations</p></li><li><p><strong>Distributed Caching</strong>: Redis clusters for shared cache across multiple service instances</p></li><li><p><strong>Database Query Caching</strong>: PostgreSQL query result caching for operational data and reporting</p></li><li><p><strong>CDN Caching</strong>: Content delivery network caching for static assets and public information</p></li></ul><p>Cache invalidation strategies ensure data consistency while minimizing cache misses that could impact performance. Intelligent cache warming preloads frequently accessed data during low-traffic periods to maintain performance during peak usage.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">// Example intelligent caching for identity resolution
+class IdentityClusterCache {
+  private redis: Redis;
+  private localCache: LRUCache&lt;string, IdentityCluster&gt;;
+  
+  constructor() {
+    this.redis = new Redis({
+      host: &#39;redis-cluster&#39;,
+      retryDelayOnFailover: 100,
+      enableOfflineQueue: false
+    });
+    
+    this.localCache = new LRUCache({
+      max: 1000,
+      ttl: 300000 // 5 minutes
+    });
+  }
+  
+  async getCluster(clusterId: string): Promise&lt;IdentityCluster | null&gt; {
+    // L1 Cache: Local memory
+    let cluster = this.localCache.get(clusterId);
+    if (cluster) {
+      this.recordCacheHit(&#39;l1&#39;);
+      return cluster;
+    }
+    
+    // L2 Cache: Redis distributed cache
+    const cached = await this.redis.get(`cluster:${clusterId}`);
+    if (cached) {
+      cluster = JSON.parse(cached);
+      this.localCache.set(clusterId, cluster);
+      this.recordCacheHit(&#39;l2&#39;);
+      return cluster;
+    }
+    
+    // L3: Database lookup with cache warming
+    cluster = await this.loadFromDatabase(clusterId);
+    if (cluster) {
+      await this.warmCache(clusterId, cluster);
+      this.recordCacheMiss();
+    }
+    
+    return cluster;
+  }
+  
+  private async warmCache(clusterId: string, cluster: IdentityCluster): Promise&lt;void&gt; {
+    // Cache with expiration based on cluster stability
+    const ttl = this.calculateTTL(cluster.confidence, cluster.lastUpdated);
+    
+    await Promise.all([
+      this.redis.setex(`cluster:${clusterId}`, ttl, JSON.stringify(cluster)),
+      this.localCache.set(clusterId, cluster)
+    ]);
+  }
+  
+  private calculateTTL(confidence: number, lastUpdated: Date): number {
+    const baseTimeout = 3600; // 1 hour
+    const confidenceMultiplier = confidence * 2; // Higher confidence = longer cache
+    const ageMultiplier = Math.min(2, (Date.now() - lastUpdated.getTime()) / (24 * 60 * 60 * 1000));
+    
+    return Math.floor(baseTimeout * confidenceMultiplier * ageMultiplier);
+  }
+}
+</pre>
+</div></div><h2 id="Performance&amp;Scaling-ResourceMonitoringandOptimization">Resource Monitoring and Optimization</h2><p>Comprehensive resource monitoring provides real-time visibility into system performance with predictive analytics that identify potential bottlenecks before they impact citizen services. Monitoring architecture supports both reactive problem-solving and proactive capacity planning.</p><p><strong>Monitoring Dimensions:</strong></p><ul><li><p><strong>Infrastructure Metrics</strong>: CPU, memory, network, and storage utilization across all system components</p></li><li><p><strong>Application Metrics</strong>: Request rates, response times, error rates, and business logic performance</p></li><li><p><strong>Business Metrics</strong>: Evidence processing rates, confidence score distributions, and citizen satisfaction indicators</p></li><li><p><strong>Cost Metrics</strong>: Resource utilization efficiency and cost optimization opportunities</p></li></ul><p>Performance analytics include trend analysis, anomaly detection, and capacity forecasting that support strategic planning and operational optimization. Analytics integrate with alerting systems to provide early warning of performance degradation or capacity constraints.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Example Prometheus monitoring configuration
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - &quot;performance_rules.yml&quot;
+  - &quot;capacity_rules.yml&quot;
+
+scrape_configs:
+  - job_name: &#39;evidence-ingestion&#39;
+    kubernetes_sd_configs:
+      - role: pod
+        namespaces:
+          names:
+            - evidence-processing
+    relabel_configs:
+      - source_labels: [__meta_kubernetes_pod_label_app]
+        action: keep
+        regex: evidence-ingestion
+    metrics_path: /metrics
+    scrape_interval: 10s
+
+  - job_name: &#39;triple-store&#39;
+    static_configs:
+      - targets: [&#39;fuseki:3030&#39;]
+    metrics_path: /$/stats
+    scrape_interval: 30s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+# Performance alerting rules
+groups:
+  - name: performance.rules
+    rules:
+      - alert: HighResponseTime
+        expr: histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le, service)) &gt; 2
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: &quot;High response time detected&quot;
+          description: &quot;95th percentile response time is {{ $value }}s for {{ $labels.service }}&quot;
+      
+      - alert: MemoryUsageHigh
+        expr: (container_memory_working_set_bytes / container_spec_memory_limit_bytes) &gt; 0.8
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: &quot;Container memory usage is high&quot;
+          description: &quot;Memory usage is {{ $value | humanizePercentage }} for {{ $labels.pod }}&quot;
+</pre>
+</div></div><p>Automated optimization includes dynamic resource allocation, intelligent scaling policies, and performance tuning that adapts to changing workload patterns. Optimization considers cost efficiency, service quality, and resource availability to maintain optimal system performance while controlling operational costs.</p><p />
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Sept 27, 2025 09:18</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

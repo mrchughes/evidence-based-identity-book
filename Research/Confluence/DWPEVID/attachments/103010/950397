@@ -1,0 +1,29 @@
+sequenceDiagram
+    participant Citizen
+    participant FAPortal as FamilyAssist Portal
+    participant IdentityResolution
+    participant SemanticTranslation
+    participant AwardCalculation
+    participant Notification
+
+    Note over Citizen: Sarah has DID from previous BasicSupport application
+    Citizen->>FAPortal: Apply for FamilyAssist using existing DID
+    FAPortal->>IdentityResolution: POST /identity/correlate-dids (BasicSupport DID + FA context)
+    IdentityResolution->>IdentityResolution: Analyze DID correlation evidence
+    IdentityResolution-->>FAPortal: High confidence same person (0.92)
+    
+    Note over FAPortal: Offer evidence reuse
+    FAPortal->>Citizen: "We found existing verified information. Use for FamilyAssist?"
+    Citizen->>FAPortal: Consent to reuse verified address, income, identity
+    
+    FAPortal->>SemanticTranslation: POST /semantic/translate (BasicSupport evidence to FA requirements)
+    SemanticTranslation-->>FAPortal: Address valid, income meets FA threshold
+    FAPortal->>Citizen: Only need birth certificate for new child
+    
+    Citizen->>FAPortal: Submit birth certificate
+    FAPortal->>AwardCalculation: POST /awards/calculate (high confidence identity + new evidence)
+    AwardCalculation-->>FAPortal: CB award calculated
+    FAPortal->>Notification: POST /notifications/send (award approved)
+    Notification->>Citizen: FamilyAssist approved in 24 hours
+    
+    Note over Citizen,Notification: Same evidence reused across services while preserving policy differences

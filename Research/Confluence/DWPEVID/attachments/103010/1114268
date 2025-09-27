@@ -1,0 +1,33 @@
+sequenceDiagram
+    participant Citizen
+    participant CitizenPortal
+    participant EvidenceIngestion
+    participant IdentityResolution
+    participant SemanticTranslation
+    participant AwardCalculation
+    participant InvestigationQueue
+    participant Notification
+
+    Citizen->>CitizenPortal: Submit UC Application
+    CitizenPortal->>EvidenceIngestion: POST /evidence/document (passport, payslips)
+    EvidenceIngestion->>EvidenceIngestion: Extract assertions from documents
+    EvidenceIngestion->>IdentityResolution: POST /identity/cluster
+    IdentityResolution->>IdentityResolution: Create new identity cluster (low confidence)
+    IdentityResolution-->>EvidenceIngestion: cluster_id, confidence: 0.3
+    
+    Note over IdentityResolution: Confidence too low for award
+    EvidenceIngestion->>InvestigationQueue: POST /investigations/create (identity verification required)
+    InvestigationQueue->>Notification: POST /notifications/send (request additional evidence)
+    Notification->>Citizen: Additional evidence required
+    
+    Citizen->>CitizenPortal: Submit bank statements, employer letter
+    CitizenPortal->>EvidenceIngestion: POST /evidence/document
+    EvidenceIngestion->>IdentityResolution: Update cluster with new evidence
+    IdentityResolution->>IdentityResolution: Increase confidence to 0.85
+    IdentityResolution-->>AwardCalculation: High confidence identity cluster
+    
+    AwardCalculation->>SemanticTranslation: POST /semantic/translate (for UC context)
+    SemanticTranslation-->>AwardCalculation: Translated evidence attributes
+    AwardCalculation->>AwardCalculation: Calculate UC entitlement
+    AwardCalculation->>Notification: POST /notifications/send (award approved)
+    Notification->>Citizen: UC Award Approved: £180.50/week

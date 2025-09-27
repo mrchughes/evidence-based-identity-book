@@ -1,0 +1,30 @@
+sequenceDiagram
+    participant HMRC
+    participant ExternalGateway
+    participant EvidenceIngestion
+    participant IdentityResolution
+    participant AwardCalculation
+    participant InvestigationQueue
+    participant Caseworker
+    participant Notification
+    participant Citizen
+
+    HMRC->>ExternalGateway: POST /external/evidence/submit (employment started 3 months ago)
+    ExternalGateway->>EvidenceIngestion: POST /evidence/assertion
+    EvidenceIngestion->>IdentityResolution: Correlate to existing identity cluster
+    IdentityResolution-->>EvidenceIngestion: Matched to BasicSupport recipient Sarah Johnson
+    
+    EvidenceIngestion->>AwardCalculation: POST /awards/recalculate (historical period)
+    AwardCalculation->>AwardCalculation: Calculate overpayment: £2,160 over 3 months
+    
+    Note over AwardCalculation: Significant overpayment detected
+    AwardCalculation->>InvestigationQueue: POST /investigations/create (overpayment verification)
+    InvestigationQueue->>Caseworker: Investigation assigned
+    
+    Caseworker->>IdentityResolution: GET /identity/cluster/{id} (review evidence)
+    Caseworker->>AwardCalculation: GET /awards/audit-trail/{id} (review calculation)
+    Caseworker->>InvestigationQueue: PUT /investigations/{id}/resolve (confirmed overpayment)
+    
+    InvestigationQueue->>AwardCalculation: Update award with recovery plan
+    AwardCalculation->>Notification: POST /notifications/send (overpayment notice)
+    Notification->>Citizen: Overpayment identified, recovery plan attached

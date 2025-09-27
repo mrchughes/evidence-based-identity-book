@@ -1,0 +1,74 @@
+graph TB
+    subgraph "Award Calculation Service"
+        API[FastAPI Router<br/>REST Endpoints<br/>Async Processing]
+        
+        subgraph "Eligibility Engine"
+            EligibilityRules[Eligibility Rules<br/>Rule evaluation<br/>Condition matching<br/>Evidence validation]
+            EligibilityCalculator[Eligibility Calculator<br/>Eligibility score<br/>Threshold evaluation<br/>Override handling]
+        end
+        
+        subgraph "Calculation Engine"
+            BenefitCalculator[Benefit Calculator<br/>Rate application<br/>Date range handling<br/>Special case logic]
+            DeductionEngine[Deduction Engine<br/>Income assessment<br/>Capital assessment<br/>Other benefits]
+            AggregationEngine[Aggregation Engine<br/>Component totaling<br/>Rounding rules<br/>Currency handling]
+        end
+        
+        subgraph "Frequency Manager"
+            PaymentScheduler[Payment Scheduler<br/>Frequency determination<br/>Date calculation<br/>Calendar handling]
+            PaymentAdjuster[Payment Adjuster<br/>Back payments<br/>Advance payments<br/>Split payments]
+        end
+        
+        subgraph "Simulation & Analysis"
+            WhatIfEngine[What-If Engine<br/>Scenario modeling<br/>Parameter variation<br/>Impact analysis]
+            AuditTrail[Audit Trail<br/>Decision tracking<br/>Rule application logging<br/>Evidence linkage]
+        end
+        
+        subgraph "Data Access Layer"
+            RuleStore[(Rule Store<br/>Policy definition<br/>Rates and thresholds)]
+            CalculationCache[(Redis Cache<br/>Calculation results)]
+            CaseStore[(Case Store<br/>Current awards<br/>History)]
+        end
+        
+        subgraph "External Services"
+            EvidenceAPI[Evidence Ingestion API]
+            IdentityAPI[Identity Resolution API]
+            PaymentAPI[Payment Service API]
+            NotificationAPI[Notification Service API]
+        end
+    end
+    
+    %% External inputs
+    CitizenPortal[Citizen Portal] --> API
+    CaseManagement[Case Management] --> API
+    PolicyManagement[Policy Management] --> RuleStore
+    
+    %% Main flow
+    API --> EligibilityRules
+    EligibilityRules --> EligibilityCalculator
+    EligibilityCalculator --> BenefitCalculator
+    
+    %% Calculation flow
+    BenefitCalculator --> DeductionEngine
+    DeductionEngine --> AggregationEngine
+    AggregationEngine --> PaymentScheduler
+    PaymentScheduler --> PaymentAdjuster
+    
+    %% Analysis and auditing
+    API --> WhatIfEngine
+    EligibilityCalculator --> AuditTrail
+    BenefitCalculator --> AuditTrail
+    AggregationEngine --> AuditTrail
+    
+    %% Data access
+    EligibilityRules --> RuleStore
+    BenefitCalculator --> RuleStore
+    DeductionEngine --> RuleStore
+    AggregationEngine --> CalculationCache
+    WhatIfEngine --> CalculationCache
+    PaymentScheduler --> CaseStore
+    
+    %% External API calls
+    EligibilityRules --> EvidenceAPI
+    EligibilityCalculator --> IdentityAPI
+    PaymentAdjuster --> PaymentAPI
+    API --> NotificationAPI

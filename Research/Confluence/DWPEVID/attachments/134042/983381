@@ -1,0 +1,65 @@
+graph TB
+    subgraph "Primary Region (London)"
+        subgraph "Active Services"
+            P_LB[Load Balancer]
+            P_APP[Application Services<br/>Full Capacity]
+            P_DB[(Primary Database<br/>Read/Write)]
+            P_CACHE[(Redis Primary)]
+        end
+        
+        P_BACKUP[Continuous Backup]
+    end
+    
+    subgraph "Secondary Region (Manchester)"
+        subgraph "Warm Standby"
+            S_LB[Load Balancer<br/>Standby]
+            S_APP[Application Services<br/>30% Capacity]
+            S_DB[(Replica Database<br/>Read Only)]
+            S_CACHE[(Redis Replica)]
+        end
+        
+        S_BACKUP[Incremental Backup]
+    end
+    
+    subgraph "DR Region (Edinburgh)"
+        subgraph "Cold Standby"
+            DR_INFRA[Infrastructure Templates]
+            DR_BACKUP[Backup Storage<br/>Encrypted]
+            DR_RESTORE[Automated Restore<br/>Scripts]
+        end
+    end
+    
+    subgraph "Citizens & Partners"
+        USERS[Users]
+        PARTNERS[External Partners]
+    end
+    
+    %% Normal Operations
+    USERS -->|Active Traffic| P_LB
+    PARTNERS -->|API Calls| P_LB
+    P_LB --> P_APP
+    P_APP --> P_DB
+    P_APP --> P_CACHE
+    
+    %% Replication
+    P_DB -.->|Sync Replication| S_DB
+    P_CACHE -.->|Async Replication| S_CACHE
+    P_BACKUP -.->|Daily Sync| DR_BACKUP
+    
+    %% Failover
+    P_LB -.->|Automatic Failover<br/>RTO: 5 minutes| S_LB
+    S_APP -.->|Scale to Full Capacity| S_APP
+    
+    %% Disaster Recovery
+    S_LB -.->|Manual Activation<br/>RTO: 4 hours| DR_RESTORE
+    DR_BACKUP -.->|Data Recovery<br/>RPO: 1 hour| DR_RESTORE
+    
+    classDef primary fill:#e8f5e8
+    classDef secondary fill:#fff3e0
+    classDef dr fill:#ffebee
+    classDef external fill:#e3f2fd
+    
+    class P_LB,P_APP,P_DB,P_CACHE,P_BACKUP primary
+    class S_LB,S_APP,S_DB,S_CACHE,S_BACKUP secondary
+    class DR_INFRA,DR_BACKUP,DR_RESTORE dr
+    class USERS,PARTNERS external

@@ -1,0 +1,29 @@
+sequenceDiagram
+    participant Citizen
+    participant CBPortal as Child Benefit Portal
+    participant IdentityResolution
+    participant SemanticTranslation
+    participant AwardCalculation
+    participant Notification
+
+    Note over Citizen: Sarah has DID from previous UC application
+    Citizen->>CBPortal: Apply for Child Benefit using existing DID
+    CBPortal->>IdentityResolution: POST /identity/correlate-dids (UC DID + CB context)
+    IdentityResolution->>IdentityResolution: Analyze DID correlation evidence
+    IdentityResolution-->>CBPortal: High confidence same person (0.92)
+    
+    Note over CBPortal: Offer evidence reuse
+    CBPortal->>Citizen: "We found existing verified information. Use for Child Benefit?"
+    Citizen->>CBPortal: Consent to reuse verified address, income, identity
+    
+    CBPortal->>SemanticTranslation: POST /semantic/translate (UC evidence to CB requirements)
+    SemanticTranslation-->>CBPortal: Address valid, income meets CB threshold
+    CBPortal->>Citizen: Only need birth certificate for new child
+    
+    Citizen->>CBPortal: Submit birth certificate
+    CBPortal->>AwardCalculation: POST /awards/calculate (high confidence identity + new evidence)
+    AwardCalculation-->>CBPortal: CB award calculated
+    CBPortal->>Notification: POST /notifications/send (award approved)
+    Notification->>Citizen: Child Benefit approved in 24 hours
+    
+    Note over Citizen,Notification: Same evidence reused across services while preserving policy differences

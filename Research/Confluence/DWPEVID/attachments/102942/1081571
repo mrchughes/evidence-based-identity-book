@@ -1,0 +1,51 @@
+graph TB
+    subgraph "Citizen Experience Layer"
+        CE1[Simple Application Forms<br/>Binary Outcomes<br/>Clear Status Updates]
+        CE2[Familiar Process Flow<br/>Definitive Decisions<br/>Traditional Appeals]
+    end
+    
+    subgraph "Caseworker Interface Layer"
+        CW1[Investigation Queues<br/>Evidence Summaries<br/>Decision Support Tools]
+        CW2[Confidence Indicators<br/>Risk Assessments<br/>Recommended Actions]
+    end
+    
+    subgraph "Complexity Management Layer"
+        ABSTRACTION[Complexity Abstraction<br/>Hide uncertainty from users<br/>Present binary outcomes]
+        
+        THRESHOLDS[Confidence Thresholds<br/>Convert probabilities<br/>to clear decisions]
+        
+        ESCALATION[Exception Handling<br/>Route uncertain cases<br/>to human review]
+    end
+    
+    subgraph "Backend Processing Layer"
+        PROBABILITY[Probabilistic Reasoning<br/>Uncertainty Quantification<br/>Bayesian Inference]
+        
+        SEMANTIC[Semantic Web Technologies<br/>RDF Triple Stores<br/>OWL Reasoning]
+        
+        ML[Machine Learning<br/>Pattern Recognition<br/>Confidence Scoring]
+    end
+    
+    CE1 --> ABSTRACTION
+    CE2 --> ABSTRACTION
+    CW1 --> THRESHOLDS
+    CW2 --> THRESHOLDS
+    
+    ABSTRACTION --> ESCALATION
+    THRESHOLDS --> ESCALATION
+    
+    ESCALATION --> PROBABILITY
+    ESCALATION --> SEMANTIC
+    ESCALATION --> ML
+    
+    PROBABILITY -.->|Feedback Loop| THRESHOLDS
+    SEMANTIC -.->|Continuous Learning| ABSTRACTION
+    ML -.->|Pattern Updates| ESCALATION
+    
+    classDef user fill:#e8f5e8
+    classDef interface fill:#e3f2fd
+    classDef management fill:#fff3e0
+    classDef backend fill:#f3e5f5
+    
+    class CE1,CE2,CW1,CW2 user
+    class ABSTRACTION,THRESHOLDS,ESCALATION management
+    class PROBABILITY,SEMANTIC,ML backend

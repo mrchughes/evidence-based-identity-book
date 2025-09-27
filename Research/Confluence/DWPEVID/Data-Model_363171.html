@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DCS Evidence-Based Identity Platform : Data Model</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DCS Evidence-Based Identity Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Building-Evidence-Based-Services-for-a-Unified-Citizen-Experience_68910.html">Building Evidence-Based Services for a Unified Citizen Experience</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Data-Architecture_363069.html">Data Architecture</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DCS Evidence-Based Identity Platform : Data Model
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Christian Hughes</span>, last modified on Sept 15, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="DataModel-CoreRDFTripleModel">Core RDF Triple Model</h2><p>The evidence-based identity platform represents all information as Resource Description Framework (RDF) triples following the fundamental pattern of subject-predicate-object statements with comprehensive metadata about provenance, confidence, and temporal validity. This uniform representation enables sophisticated reasoning capabilities while maintaining complete audit trails for every piece of information in the system.</p><p>Every assertion in the platform follows the basic triple structure where a subject (who or what the assertion is about) is connected to an object (the value or entity being asserted) through a predicate (the relationship or property). For example, the assertion &quot;John Smith earns £30,000 annually&quot; becomes the triple <code>subject:john_smith_cluster_123 dcs:hasAnnualIncome &quot;30000&quot;^^xsd:decimal</code> with additional metadata triples describing confidence, source, and verification details.</p><p>The model extends basic RDF triples with comprehensive provenance metadata that captures who made each assertion, when it was made, how it was verified, and what confidence level should be assigned. This metadata exists as additional triples that reference the primary assertion, creating a rich web of interconnected information that supports both operational decision-making and comprehensive audit requirements.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Primary assertion
+:john_smith_cluster_123 dcs:hasAnnualIncome &quot;30000&quot;^^xsd:decimal .
+
+# Provenance metadata
+:assertion_456 rdf:type prov:Entity ;
+    prov:wasAttributedTo :revenue_authority_system ;
+    prov:generatedAtTime &quot;2025-09-15T10:30:00Z&quot;^^xsd:dateTime ;
+    dcs:hasConfidence &quot;0.85&quot;^^xsd:decimal ;
+    dcs:verificationMethod &quot;employer_digital_submission&quot; ;
+    dcs:aboutSubject :john_smith_cluster_123 ;
+    dcs:assertsProperty dcs:hasAnnualIncome ;
+    dcs:assertsValue &quot;30000&quot;^^xsd:decimal .
+</pre>
+</div></div><h2 id="DataModel-IdentityClusterDataStructure">Identity Cluster Data Structure</h2><p>Identity clusters represent the platform's solution to the fundamental challenge of correlating evidence about the same real-world person across different systems and contexts. Each cluster maintains probabilistic relationships between subject identifiers while preserving uncertainty through confidence scoring.</p><p /><div class="ap-container" id="ap-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud7534230764521949693">
+
+  <div class="ap-content " id="embedded-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud7534230764521949693"></div>
+  <script nonce="68d79dbbd0103abe35ea29aaae309458" class="ap-iframe-body-script">
+  (function(){
+    var data = {
+    "addon_key":"com.stratusaddons.confluence.plugins.mermaid",
+    "uniqueKey":"com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud7534230764521949693",
+    "key":"mermaid-cloud",
+     "moduleType":"dynamicContentMacros",      "moduleLocation":"content",         "cp":"/wiki",
+            "general":"",
+    "w":"100%",
+    "h":"1px",
+    "url":"https://mermaid.stratus-addons.com/viewer.html?pageId=363171&filename=Identity+Resolution+Through+Evidence+Correlation&revision=1&zoom=fit&toolbar=bottom&repository=&xdm_e=https%3A%2F%2Fmrcnhughes.atlassian.net&xdm_c=channel-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud7534230764521949693&cp=%2Fwiki&xdm_deprecated_addon_key_do_not_use=com.stratusaddons.confluence.plugins.mermaid&lic=active&cv=1000.0.0-f1c99b2191e8&traceId=2cec1c4a6d6fb0dc30bba24ef462dc07&spanId=5ebf5c88a90ba877&traceSampled=0&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiZmY4NDMzZjU2MzVlZWZmMTVkOWQ4ZmJhOGUxOWI5OGEzMjBjMGQ2NjA0NGFhMTQ1OTY0MGFjYmM2YTcyNzNhMCIsImlzcyI6IjIxOGQwY2QyLWUxZmQtMzlkYy04ZDI2LTk2MzZlMTQ4NDc0NSIsImNvbnRleHQiOnt9LCJleHAiOjE3NTg5NjEyNzAsImlhdCI6MTc1ODk2MTA5MH0.9mSbSeF_ubzyTTGAAq4wLgiMppJRGGw34UeC1KAlev0",
+     "contextJwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiY29udGV4dC1xc2giLCJpc3MiOiIyMThkMGNkMi1lMWZkLTM5ZGMtOGQyNi05NjM2ZTE0ODQ3NDUiLCJjb250ZXh0Ijp7ImxpY2Vuc2UiOnsiYWN0aXZlIjp0cnVlfSwiY29uZmx1ZW5jZSI6eyJlZGl0b3IiOnsidmVyc2lvbiI6InYyIn0sIm1hY3JvIjp7Im91dHB1dFR5cGUiOiJodG1sX2V4cG9ydCIsImhhc2giOiJiMGM4OTk5OC1kNDVhLTQ0OGItYmQ1OS03NjkxMGMwMTAzMzciLCJpZCI6ImIwYzg5OTk4LWQ0NWEtNDQ4Yi1iZDU5LTc2OTEwYzAxMDMzNyJ9LCJ0cmFjaW5nIjp7InRyYWNlSWQiOiIyY2VjMWM0YTZkNmZiMGRjMzBiYmEyNGVmNDYyZGMwNyIsInNwYW5JZCI6IjVlYmY1Yzg4YTkwYmE4NzciLCJzYW1wbGVkIjoiMCJ9LCJjb250ZW50Ijp7InR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjQiLCJpZCI6IjM2MzE3MSJ9LCJzcGFjZSI6eyJrZXkiOiJEV1BFVklEIiwiaWQiOiI2ODczOCJ9fSwidXJsIjp7ImRpc3BsYXlVcmwiOiJodHRwczpcL1wvbXJjbmh1Z2hlcy5hdGxhc3NpYW4ubmV0XC93aWtpIn19LCJleHAiOjE3NTg5NjE5OTAsImlhdCI6MTc1ODk2MTA5MH0.U9lg71BxXdZvnUYuK8XUhTg-Y_oRlga4r_AeY_bJfks",    "structuredContext": "{\"license\":{\"active\":true},\"confluence\":{\"editor\":{\"version\":\"v2\"},\"macro\":{\"outputType\":\"html_export\",\"hash\":\"b0c89998-d45a-448b-bd59-76910c010337\",\"id\":\"b0c89998-d45a-448b-bd59-76910c010337\"},\"tracing\":{\"traceId\":\"2cec1c4a6d6fb0dc30bba24ef462dc07\",\"spanId\":\"5ebf5c88a90ba877\",\"sampled\":\"0\"},\"content\":{\"type\":\"page\",\"version\":\"4\",\"id\":\"363171\"},\"space\":{\"key\":\"DWPEVID\",\"id\":\"68738\"}},\"url\":{\"displayUrl\":\"https://mrcnhughes.atlassian.net/wiki\"}}",
+    "contentClassifier":"content",
+    "productCtx":"{\"page.id\":\"363171\",\"macro.hash\":\"b0c89998-d45a-448b-bd59-76910c010337\",\"tracing.sampled\":\"0\",\"page.type\":\"page\",\"macro.localId\":\"228fa7b2-684e-4c45-b2f7-0ce17aecafec\",\": = | RAW | = :\":\"toolbar=bottom|filename=Identity Resolution Through Evidence Correlation|zoom=fit|revision=1\",\"space.id\":\"68738\",\"tracing.traceId\":\"2cec1c4a6d6fb0dc30bba24ef462dc07\",\"tracing.spanId\":\"5ebf5c88a90ba877\",\"user.isExternalCollaborator\":\"false\",\"space.key\":\"DWPEVID\",\"content.version\":\"4\",\"page.title\":\"Data Model\",\"zoom\":\"fit\",\"macro.body\":\"\",\"macro.truncated\":\"false\",\"content.type\":\"page\",\"output.type\":\"html_export\",\"page.version\":\"4\",\"revision\":\"1\",\"toolbar\":\"bottom\",\"filename\":\"Identity Resolution Through Evidence Correlation\",\"macro.fragmentLocalId\":\"\",\"content.id\":\"363171\",\"macro.id\":\"b0c89998-d45a-448b-bd59-76910c010337\",\"editor.version\":\"v2\"}",
+    "timeZone":"Europe/London",
+    "origin":"https://mermaid.stratus-addons.com",
+    "hostOrigin":"https://mrcnhughes.atlassian.net",
+    "sandbox":"allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-storage-access-by-user-activation",            "apiMigrations": {
+        "gdpr": true
+    }
+}
+;
+    if(window.AP && window.AP.subCreate) {
+      window._AP.appendConnectAddon(data);
+    } else {
+      require(['ac/create'], function(create){
+        create.appendConnectAddon(data);
+      });
+    }
+
+    // For Confluence App Analytics. This code works in conjunction with CFE's ConnectSupport.js.
+    // Here, we add a listener to the initial HTML page that stores events if the ConnectSupport component
+    // has not mounted yet. In CFE, we process the missed event data and disable this initial listener.
+    const __MAX_EVENT_ARRAY_SIZE__ = 20;
+    const connectAppAnalytics = "ecosystem.confluence.connect.analytics";
+    window.connectHost && window.connectHost.onIframeEstablished((eventData) => {
+      if (!window.__CONFLUENCE_CONNECT_SUPPORT_LOADED__) {
+        let events = JSON.parse(window.localStorage.getItem(connectAppAnalytics)) || [];
+        if (events.length >= __MAX_EVENT_ARRAY_SIZE__) {
+          events.shift();
+        }
+        events.push(eventData);
+        window.localStorage.setItem(connectAppAnalytics, JSON.stringify(events));
+      }
+    });
+
+  }());
+</script>
+
+</div>
+<p>The cluster structure includes references to all subject identifiers that likely represent the same person, confidence scores for the overall cluster and individual correlations, temporal information about when correlations were established, and metadata about the clustering algorithms and evidence that supported correlation decisions.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">:identity_cluster_789 rdf:type dcs:IdentityCluster ;
+    dcs:hasOverallConfidence &quot;0.85&quot;^^xsd:decimal ;
+    dcs:containsSubject :subject_nino_AB123456C ;
+    dcs:containsSubject :subject_did_citizen123 ;
+    dcs:containsSubject :subject_la_housing_456 ;
+    dcs:clusteringAlgorithm &quot;fuzzy_match_v2.1&quot; ;
+    dcs:lastUpdated &quot;2025-09-15T14:20:00Z&quot;^^xsd:dateTime ;
+    dcs:createdBy :identity_resolution_service .
+
+# Individual correlation confidence
+:correlation_123 rdf:type dcs:SubjectCorrelation ;
+    dcs:correlatesSubject :subject_nino_AB123456C ;
+    dcs:correlatesSubject :subject_did_citizen123 ;
+    dcs:correlationConfidence &quot;0.92&quot;^^xsd:decimal ;
+    dcs:basedOnEvidence :shared_name_evidence, :shared_address_evidence ;
+    dcs:correlationMethod &quot;attribute_overlap_analysis&quot; .
+</pre>
+</div></div><p>Cluster evolution tracking maintains historical information about how clusters have changed over time, including merge operations when new evidence suggests separate identities are the same person, split operations when investigation reveals incorrect merging, and confidence adjustments based on evidence quality changes.</p><h2 id="DataModel-EvidenceAssertionModel">Evidence Assertion Model</h2><p>Evidence assertions capture structured claims about citizen circumstances with complete context about verification methods, source credibility, and confidence assessment. The assertion model accommodates diverse evidence types while maintaining consistent metadata patterns that enable cross-evidence reasoning and correlation.</p><p>Each assertion includes the core claim being made, attribution to the asserting organization or system, verification method details that explain how the claim was validated, confidence scoring based on verification strength and source credibility, temporal validity indicating when the assertion applies and when it expires, and supporting evidence references that provide additional context.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">:assertion_employment_123 rdf:type dcs:EmploymentAssertion ;
+    dcs:aboutSubject :subject_nino_AB123456C ;
+    dcs:hasEmployer &quot;TechCorp Solutions Ltd&quot; ;
+    dcs:hasAnnualSalary &quot;30000&quot;^^xsd:decimal ;
+    dcs:employmentStartDate &quot;2025-01-15&quot;^^xsd:date ;
+    prov:wasAttributedTo :revenue_authority_system ;
+    dcs:verificationMethod &quot;employer_digital_filing&quot; ;
+    dcs:hasConfidence &quot;0.90&quot;^^xsd:decimal ;
+    dcs:effectiveFrom &quot;2025-01-15&quot;^^xsd:date ;
+    dcs:validUntil &quot;2026-01-15&quot;^^xsd:date ;
+    dcs:supportingDocument :payslip_scan_456 .
+
+:assertion_address_124 rdf:type dcs:AddressAssertion ;
+    dcs:aboutSubject :subject_nino_AB123456C ;
+    dcs:hasAddress &quot;123 Oak Street, London, SW1A 1AA&quot; ;
+    dcs:hasPostcode &quot;SW1A 1AA&quot; ;
+    dcs:addressType &quot;residential&quot; ;
+    prov:wasAttributedTo :council_tax_system ;
+    dcs:verificationMethod &quot;council_tax_record&quot; ;
+    dcs:hasConfidence &quot;0.75&quot;^^xsd:decimal ;
+    dcs:effectiveFrom &quot;2024-04-01&quot;^^xsd:date .
+</pre>
+</div></div><p>The assertion model supports hierarchical evidence structures where complex evidence items can be decomposed into multiple related assertions. A payslip document generates assertions about employment, income, tax status, and payment frequency, with relationships between assertions maintained through supporting evidence links.</p><h2 id="DataModel-ConfidenceandUncertaintyRepresentation">Confidence and Uncertainty Representation</h2><p>Confidence scoring represents the platform's explicit acknowledgment that government decisions must be made with incomplete information while providing transparent frameworks for managing uncertainty. The confidence model operates at multiple levels with different scoring algorithms appropriate for each type of uncertainty.</p><p>Evidence-level confidence reflects the reliability of individual assertions based on source credibility, verification method strength, document quality, and temporal factors. Identity-level confidence assesses how certain the system is about identity clustering decisions, accounting for correlation strength and evidence consistency. Decision-level confidence combines evidence and identity confidence with policy-specific requirements to determine overall reliability for specific benefit decisions.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">:confidence_assessment_123 rdf:type dcs:ConfidenceAssessment ;
+    dcs:assessesAssertion :assertion_employment_123 ;
+    dcs:overallConfidence &quot;0.85&quot;^^xsd:decimal ;
+    dcs:sourceCredibility &quot;0.90&quot;^^xsd:decimal ;
+    dcs:verificationStrength &quot;0.88&quot;^^xsd:decimal ;
+    dcs:temporalReliability &quot;0.82&quot;^^xsd:decimal ;
+    dcs:corroborationLevel &quot;0.80&quot;^^xsd:decimal ;
+    dcs:calculatedBy :confidence_scoring_algorithm_v2_1 ;
+    dcs:calculatedAt &quot;2025-09-15T10:30:00Z&quot;^^xsd:dateTime .
+
+:identity_confidence_456 rdf:type dcs:IdentityConfidence ;
+    dcs:assessesCluster :identity_cluster_789 ;
+    dcs:overallConfidence &quot;0.85&quot;^^xsd:decimal ;
+    dcs:attributeConsistency &quot;0.88&quot;^^xsd:decimal ;
+    dcs:temporalStability &quot;0.82&quot;^^xsd:decimal ;
+    dcs:crossValidation &quot;0.87&quot;^^xsd:decimal ;
+    dcs:evidenceQuality &quot;0.83&quot;^^xsd:decimal .
+</pre>
+</div></div><p>Confidence decay models account for temporal factors that affect evidence reliability over time. Employment evidence from recent payslips receives higher confidence than historical salary information, while address verification loses confidence unless refreshed through recent interaction or external confirmation.</p><h2 id="DataModel-SemanticTranslationandOntologyModel">Semantic Translation and Ontology Model</h2><p>The semantic translation layer enables evidence sharing between different policy contexts through formal ontology mappings that preserve meaning while accommodating legitimate vocabulary differences between DCS products and external partners.</p><p>The ontology model includes core DCS vocabularies that define common concepts across all benefit areas, product-specific vocabularies for BasicSupport, FamilyAssist, AgeCare and other services, external partner vocabularies for Revenue Authority, local authorities, and healthcare providers, and formal semantic mappings that define equivalence and transformation rules between different vocabulary systems.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Ontology mapping example
+dcs-bs:monthlyIncome owl:equivalentProperty dcs-ac:weeklyIncome .
+dcs-bs:monthlyIncome dcs:conversionFactor &quot;4.33&quot;^^xsd:decimal .
+revenue:annualSalary dcs:equivalentTo dcs-bs:monthlyIncome .
+revenue:annualSalary dcs:conversionFormula &quot;annual ÷ 12&quot; .
+
+# Semantic translation result
+:translated_assertion_789 rdf:type dcs:TranslatedAssertion ;
+    dcs:sourceAssertion :assertion_employment_123 ;
+    dcs:sourceContext &quot;revenue_authority_vocabulary&quot; ;
+    dcs:targetContext &quot;basic_support_vocabulary&quot; ;
+    dcs:translatedProperty dcs-bs:monthlyIncome ;
+    dcs:translatedValue &quot;2500.00&quot;^^xsd:decimal ;
+    dcs:translationConfidence &quot;0.83&quot;^^xsd:decimal ;
+    dcs:translationMethod &quot;annual_to_monthly_conversion&quot; ;
+    dcs:appliedMapping :mapping_annual_to_monthly .
+</pre>
+</div></div><p>Reasoning capabilities enable derivation of new assertions from existing evidence through logical inference rules defined in the ontologies. Family relationship evidence combined with individual income assertions can derive household income calculations relevant for means-tested benefits.</p><h2 id="DataModel-AwardandDecisionModel">Award and Decision Model</h2><p>Award calculations represent the culmination of evidence-based processing where verified information about citizen circumstances is converted into specific benefit entitlements through policy rule application and confidence threshold management.</p><p>The award model captures entitlement decisions with complete audit trails linking back to supporting evidence, policy rules applied, confidence assessments, and any human interventions or overrides. Each award maintains references to the identity cluster it benefits, the evidence that supported the calculation, confidence levels for both identity and attributes, policy rules and rates applied, effective dates and review schedules, and audit trails for all changes and recalculations.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">:award_bs_123456 rdf:type dcs:BasicSupportAward ;
+    dcs:beneficiary :identity_cluster_789 ;
+    dcs:weeklyAmount &quot;180.50&quot;^^xsd:decimal ;
+    dcs:calculationDate &quot;2025-09-15T10:00:00Z&quot;^^xsd:dateTime ;
+    dcs:effectiveFrom &quot;2025-09-15&quot;^^xsd:date ;
+    dcs:reviewDate &quot;2026-03-15&quot;^^xsd:date ;
+    dcs:identityConfidence &quot;0.85&quot;^^xsd:decimal ;
+    dcs:attributeConfidence &quot;0.80&quot;^^xsd:decimal ;
+    dcs:overallDecisionConfidence &quot;0.82&quot;^^xsd:decimal ;
+    dcs:status dcs:active .
+
+# Award calculation breakdown
+:calculation_breakdown_123 rdf:type dcs:CalculationBreakdown ;
+    dcs:forAward :award_bs_123456 ;
+    dcs:standardAllowance &quot;156.30&quot;^^xsd:decimal ;
+    dcs:housingElement &quot;95.20&quot;^^xsd:decimal ;
+    dcs:childElement &quot;45.00&quot;^^xsd:decimal ;
+    dcs:earnedIncomeDeduction &quot;-116.00&quot;^^xsd:decimal ;
+    dcs:basedOnEvidence :assertion_employment_123, :assertion_address_124 ;
+    dcs:appliedRules :bs_standard_allowance_rule, :bs_housing_element_rule .
+</pre>
+</div></div><p>Historical award tracking maintains complete records of award changes over time, enabling retrospective analysis and supporting appeals processes where citizens need to understand how decisions evolved based on changing evidence.</p><h2 id="DataModel-InvestigationandWorkflowModel">Investigation and Workflow Model</h2><p>Investigation cases represent structured workflows for handling exceptions when confidence levels are insufficient for automated processing or when evidence conflicts require human intervention. The investigation model supports complex case management while maintaining comprehensive audit trails.</p><p>Investigation entities include case identification and prioritization information, workflow state tracking through defined stages, evidence correlation and conflict analysis, caseworker assignment and skill matching, outcome recording and follow-up actions, and integration with award calculation for decision implementation.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">:investigation_789 rdf:type dcs:Investigation ;
+    dcs:investigationType dcs:identityVerification ;
+    dcs:subject :identity_cluster_789 ;
+    dcs:priority dcs:high ;
+    dcs:createdDate &quot;2025-09-15T14:00:00Z&quot;^^xsd:dateTime ;
+    dcs:triggerReason &quot;confidence_below_threshold&quot; ;
+    dcs:triggerEvidence :assertion_conflict_456 ;
+    dcs:assignedTo :caseworker_123 ;
+    dcs:currentStage &quot;evidence_review&quot; ;
+    dcs:estimatedResolution &quot;2025-09-17T17:00:00Z&quot;^^xsd:dateTime .
+
+# Investigation outcome
+:investigation_outcome_123 rdf:type dcs:InvestigationOutcome ;
+    dcs:forInvestigation :investigation_789 ;
+    dcs:resolution &quot;identity_verified&quot; ;
+    dcs:identityConfidenceUpdate &quot;0.90&quot;^^xsd:decimal ;
+    dcs:evidenceChanges :evidence_update_789 ;
+    dcs:resolutionDate &quot;2025-09-16T15:30:00Z&quot;^^xsd:dateTime ;
+    dcs:resolvedBy :caseworker_123 ;
+    dcs:resolutionNotes &quot;Additional documentation provided via video call&quot; .
+</pre>
+</div></div><p>Workflow state management through <a href="http://Temporal.io" data-card-appearance="inline" class="external-link" rel="nofollow">http://Temporal.io</a>  integration enables complex investigation processes with state persistence, automatic escalation, and recovery capabilities when investigations span multiple days or require coordination between different teams.</p><h2 id="DataModel-ExternalIntegrationDataModel">External Integration Data Model</h2><p>External partner integration requires careful data modeling that accommodates diverse partner systems while maintaining semantic consistency and audit requirements. The integration model handles evidence submission from external sources, status tracking and callback management, data quality assessment and validation, and semantic translation for cross-organizational evidence sharing.</p><p>Partner submissions include complete provenance information about external systems, verification methods used by submitting organizations, data quality scores and validation results, and semantic context for appropriate evidence interpretation within DCS systems.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">:external_submission_123 rdf:type dcs:ExternalSubmission ;
+    dcs:submittedBy :revenue_authority_system ;
+    dcs:submissionReference &quot;RTI_2025_Q3_batch_001&quot; ;
+    dcs:submissionDate &quot;2025-09-15T08:00:00Z&quot;^^xsd:dateTime ;
+    dcs:dataQualityScore &quot;0.92&quot;^^xsd:decimal ;
+    dcs:contains :assertion_employment_123, :assertion_employment_124 ;
+    dcs:processingStatus &quot;completed&quot; ;
+    dcs:callbackURL &quot;https://revenue-authority.gov.uk/callbacks/rti-processing&quot; .
+
+:partner_verification_context rdf:type dcs:VerificationContext ;
+    dcs:partnerOrganization :revenue_authority_system ;
+    dcs:verificationStandards &quot;statutory_employer_reporting&quot; ;
+    dcs:defaultConfidence &quot;0.90&quot;^^xsd:decimal ;
+    dcs:verificationMethod &quot;digital_submission_with_validation&quot; ;
+    dcs:trustLevel &quot;government_department_high_assurance&quot; .
+</pre>
+</div></div><p>Integration audit trails maintain complete records of all external interactions, enabling comprehensive analysis of partner data quality, processing efficiency, and decision impact while supporting regulatory compliance and continuous improvement initiatives.</p><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/363171/983402">Identity Resolution Through Evidence Correlation</a> (text/plain)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Sept 27, 2025 09:18</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

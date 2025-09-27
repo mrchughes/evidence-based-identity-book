@@ -1,0 +1,58 @@
+graph TB
+    subgraph "Evidence Ingestion Service"
+        API[REST API Layer<br/>Express.js Router<br/>OpenAPI Specification]
+        
+        subgraph "Document Processing Pipeline"
+            DocValidator[Document Validator<br/>Format validation<br/>Size limits<br/>Virus scanning]
+            OCRProcessor[OCR Processor<br/>Apache Tika<br/>Tesseract OCR<br/>Text extraction]
+            CryptoValidator[Crypto Validator<br/>Digital signatures<br/>Certificate chains<br/>PKI verification]
+        end
+        
+        subgraph "Assertion Extraction"
+            TextAnalyzer[Text Analyzer<br/>NLP processing<br/>Entity extraction<br/>Pattern matching]
+            TripleGenerator[Triple Generator<br/>RDF conversion<br/>Provenance metadata<br/>Confidence scoring]
+        end
+        
+        subgraph "Quality Assessment"
+            ConfidenceScorer[Confidence Scorer<br/>Source credibility<br/>Verification method<br/>Document quality]
+            ProvenanceTracker[Provenance Tracker<br/>Chain of custody<br/>Timestamp verification<br/>Audit trail]
+        end
+        
+        subgraph "Data Layer"
+            TripleStore[(Triple Store<br/>RDF Database)]
+            EventQueue[Event Queue<br/>Kafka Producer]
+            DocumentStore[(Document Store<br/>Binary storage)]
+        end
+        
+        subgraph "External Interfaces"
+            IdentityAPI[Identity Resolution API]
+            AuditAPI[Audit Service API]
+            NotificationAPI[Notification API]
+        end
+    end
+    
+    %% External inputs
+    CitizenPortal[Citizen Portal] --> API
+    ExternalSystems[External Systems<br/>HMRC LA etc] --> API
+    AgentWorkstation[Agent Workstation] --> API
+    
+    %% Internal flow
+    API --> DocValidator
+    API --> TextAnalyzer
+    
+    DocValidator --> OCRProcessor
+    OCRProcessor --> CryptoValidator
+    CryptoValidator --> TextAnalyzer
+    
+    TextAnalyzer --> TripleGenerator
+    TripleGenerator --> ConfidenceScorer
+    ConfidenceScorer --> ProvenanceTracker
+    
+    ProvenanceTracker --> TripleStore
+    ProvenanceTracker --> DocumentStore
+    ProvenanceTracker --> EventQueue
+    
+    %% External API calls
+    ConfidenceScorer --> IdentityAPI
+    ProvenanceTracker --> AuditAPI
+    EventQueue --> NotificationAPI

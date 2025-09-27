@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DCS Evidence-Based Identity Platform : Component Diagrams</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DCS Evidence-Based Identity Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Building-Evidence-Based-Services-for-a-Unified-Citizen-Experience_68910.html">Building Evidence-Based Services for a Unified Citizen Experience</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Process-Flows_69151.html">Process Flows</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DCS Evidence-Based Identity Platform : Component Diagrams
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Christian Hughes</span>, last modified on Sept 15, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="ComponentDiagrams-ComponentDiagrams">Component Diagrams</h1><h2 id="ComponentDiagrams-EvidenceIngestionServiceArchitecture">Evidence Ingestion Service Architecture</h2><p>The Evidence Ingestion Service transforms diverse evidence inputs into standardized RDF assertions while maintaining complete provenance and applying appropriate confidence scoring based on source credibility and verification methods.</p><p /><div class="ap-container" id="ap-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud8228370955581833155">
+
+  <div class="ap-content " id="embedded-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud8228370955581833155"></div>
+  <script nonce="68d79dbbd0103abe35ea29aaae309458" class="ap-iframe-body-script">
+  (function(){
+    var data = {
+    "addon_key":"com.stratusaddons.confluence.plugins.mermaid",
+    "uniqueKey":"com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud8228370955581833155",
+    "key":"mermaid-cloud",
+     "moduleType":"dynamicContentMacros",      "moduleLocation":"content",         "cp":"/wiki",
+            "general":"",
+    "w":"100%",
+    "h":"1px",
+    "url":"https://mermaid.stratus-addons.com/viewer.html?pageId=69236&filename=Diagram+1&revision=1&zoom=fit&toolbar=bottom&repository=&xdm_e=https%3A%2F%2Fmrcnhughes.atlassian.net&xdm_c=channel-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud8228370955581833155&cp=%2Fwiki&xdm_deprecated_addon_key_do_not_use=com.stratusaddons.confluence.plugins.mermaid&lic=active&cv=1000.0.0-f1c99b2191e8&traceId=339e3e9269b08cecfa46918a88ce654b&spanId=c9c6be0878650b5a&traceSampled=0&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiY2E4ZWFmNzIxZjY1OGUyYTJjYzI3YjIwNjkxNDFlMmIwZGNmZjNkYWFiNDRkZjE0NTdhYTc0ZTYyMGVjYWRhYSIsImlzcyI6IjIxOGQwY2QyLWUxZmQtMzlkYy04ZDI2LTk2MzZlMTQ4NDc0NSIsImNvbnRleHQiOnt9LCJleHAiOjE3NTg5NjEyODIsImlhdCI6MTc1ODk2MTEwMn0.rK1Trnuk2IA33xqqAIn26ExKGKr9yHzFoB4Ao7Jjeoo",
+     "contextJwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiY29udGV4dC1xc2giLCJpc3MiOiIyMThkMGNkMi1lMWZkLTM5ZGMtOGQyNi05NjM2ZTE0ODQ3NDUiLCJjb250ZXh0Ijp7ImxpY2Vuc2UiOnsiYWN0aXZlIjp0cnVlfSwiY29uZmx1ZW5jZSI6eyJlZGl0b3IiOnsidmVyc2lvbiI6InYyIn0sIm1hY3JvIjp7Im91dHB1dFR5cGUiOiJodG1sX2V4cG9ydCIsImhhc2giOiJiM2RiZGU2Mi03OTg4LTRlN2QtOWNkMC02ZTQ0NTI2MmRiOTQiLCJpZCI6ImIzZGJkZTYyLTc5ODgtNGU3ZC05Y2QwLTZlNDQ1MjYyZGI5NCJ9LCJ0cmFjaW5nIjp7InRyYWNlSWQiOiIzMzllM2U5MjY5YjA4Y2VjZmE0NjkxOGE4OGNlNjU0YiIsInNwYW5JZCI6ImM5YzZiZTA4Nzg2NTBiNWEiLCJzYW1wbGVkIjoiMCJ9LCJjb250ZW50Ijp7InR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjMiLCJpZCI6IjY5MjM2In0sInNwYWNlIjp7ImtleSI6IkRXUEVWSUQiLCJpZCI6IjY4NzM4In19LCJ1cmwiOnsiZGlzcGxheVVybCI6Imh0dHBzOlwvXC9tcmNuaHVnaGVzLmF0bGFzc2lhbi5uZXRcL3dpa2kifX0sImV4cCI6MTc1ODk2MjAwMiwiaWF0IjoxNzU4OTYxMTAyfQ.r-Ed_yxSmx12ZTRw72Lw0sRINCLXaofrrz2P9hPCTnY",    "structuredContext": "{\"license\":{\"active\":true},\"confluence\":{\"editor\":{\"version\":\"v2\"},\"macro\":{\"outputType\":\"html_export\",\"hash\":\"b3dbde62-7988-4e7d-9cd0-6e445262db94\",\"id\":\"b3dbde62-7988-4e7d-9cd0-6e445262db94\"},\"tracing\":{\"traceId\":\"339e3e9269b08cecfa46918a88ce654b\",\"spanId\":\"c9c6be0878650b5a\",\"sampled\":\"0\"},\"content\":{\"type\":\"page\",\"version\":\"3\",\"id\":\"69236\"},\"space\":{\"key\":\"DWPEVID\",\"id\":\"68738\"}},\"url\":{\"displayUrl\":\"https://mrcnhughes.atlassian.net/wiki\"}}",
+    "contentClassifier":"content",
+    "productCtx":"{\"page.id\":\"69236\",\"macro.hash\":\"b3dbde62-7988-4e7d-9cd0-6e445262db94\",\"tracing.sampled\":\"0\",\"page.type\":\"page\",\"macro.localId\":\"c3816792-9806-4100-98de-4634c02daba3\",\": = | RAW | = :\":\"toolbar=bottom|filename=Diagram 1|zoom=fit|revision=1\",\"space.id\":\"68738\",\"tracing.traceId\":\"339e3e9269b08cecfa46918a88ce654b\",\"tracing.spanId\":\"c9c6be0878650b5a\",\"user.isExternalCollaborator\":\"false\",\"space.key\":\"DWPEVID\",\"content.version\":\"3\",\"page.title\":\"Component Diagrams\",\"zoom\":\"fit\",\"macro.body\":\"\",\"macro.truncated\":\"false\",\"content.type\":\"page\",\"output.type\":\"html_export\",\"page.version\":\"3\",\"revision\":\"1\",\"toolbar\":\"bottom\",\"filename\":\"Diagram 1\",\"macro.fragmentLocalId\":\"\",\"content.id\":\"69236\",\"macro.id\":\"b3dbde62-7988-4e7d-9cd0-6e445262db94\",\"editor.version\":\"v2\"}",
+    "timeZone":"Europe/London",
+    "origin":"https://mermaid.stratus-addons.com",
+    "hostOrigin":"https://mrcnhughes.atlassian.net",
+    "sandbox":"allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-storage-access-by-user-activation",            "apiMigrations": {
+        "gdpr": true
+    }
+}
+;
+    if(window.AP && window.AP.subCreate) {
+      window._AP.appendConnectAddon(data);
+    } else {
+      require(['ac/create'], function(create){
+        create.appendConnectAddon(data);
+      });
+    }
+
+    // For Confluence App Analytics. This code works in conjunction with CFE's ConnectSupport.js.
+    // Here, we add a listener to the initial HTML page that stores events if the ConnectSupport component
+    // has not mounted yet. In CFE, we process the missed event data and disable this initial listener.
+    const __MAX_EVENT_ARRAY_SIZE__ = 20;
+    const connectAppAnalytics = "ecosystem.confluence.connect.analytics";
+    window.connectHost && window.connectHost.onIframeEstablished((eventData) => {
+      if (!window.__CONFLUENCE_CONNECT_SUPPORT_LOADED__) {
+        let events = JSON.parse(window.localStorage.getItem(connectAppAnalytics)) || [];
+        if (events.length >= __MAX_EVENT_ARRAY_SIZE__) {
+          events.shift();
+        }
+        events.push(eventData);
+        window.localStorage.setItem(connectAppAnalytics, JSON.stringify(events));
+      }
+    });
+
+  }());
+</script>
+
+</div>
+<p>The Evidence Ingestion Service handles the complex transformation of unstructured evidence into semantic assertions while preserving complete audit trails and applying sophisticated confidence scoring that accounts for source credibility, verification methods, and document quality indicators.</p><p /><h2 id="ComponentDiagrams-IdentityResolutionServiceArchitecture">Identity Resolution Service Architecture</h2><p>The Identity Resolution Service implements probabilistic clustering algorithms that correlate evidence across different subject identifiers while managing uncertainty through confidence scoring and supporting both automatic correlation and manual review workflows.</p><div class="ap-container" id="ap-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud7083192312791959587">
+
+  <div class="ap-content " id="embedded-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud7083192312791959587"></div>
+  <script nonce="68d79dbbd0103abe35ea29aaae309458" class="ap-iframe-body-script">
+  (function(){
+    var data = {
+    "addon_key":"com.stratusaddons.confluence.plugins.mermaid",
+    "uniqueKey":"com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud7083192312791959587",
+    "key":"mermaid-cloud",
+     "moduleType":"dynamicContentMacros",      "moduleLocation":"content",         "cp":"/wiki",
+            "general":"",
+    "w":"100%",
+    "h":"1px",
+    "url":"https://mermaid.stratus-addons.com/viewer.html?pageId=69236&filename=Image3&revision=1&zoom=fit&toolbar=bottom&repository=&xdm_e=https%3A%2F%2Fmrcnhughes.atlassian.net&xdm_c=channel-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud7083192312791959587&cp=%2Fwiki&xdm_deprecated_addon_key_do_not_use=com.stratusaddons.confluence.plugins.mermaid&lic=active&cv=1000.0.0-f1c99b2191e8&traceId=14115dbb95fb49aa000d572930885c94&spanId=3a504259e16853ac&traceSampled=1&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiMGJkNTBhMzQ3NDM4ZDJlZTc3ZDRjM2IzYzVhMDEwZjUzM2M1ZWY2M2EzZGYzYTY4ZjUxMjA0MDMyMTU2MTRmYSIsImlzcyI6IjIxOGQwY2QyLWUxZmQtMzlkYy04ZDI2LTk2MzZlMTQ4NDc0NSIsImNvbnRleHQiOnt9LCJleHAiOjE3NTg5NjEyODIsImlhdCI6MTc1ODk2MTEwMn0.y4hmmhacnPFzGY_BxnPd_d29BURA5XdZzBj3W2ZH7fs",
+     "contextJwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiY29udGV4dC1xc2giLCJpc3MiOiIyMThkMGNkMi1lMWZkLTM5ZGMtOGQyNi05NjM2ZTE0ODQ3NDUiLCJjb250ZXh0Ijp7ImxpY2Vuc2UiOnsiYWN0aXZlIjp0cnVlfSwiY29uZmx1ZW5jZSI6eyJlZGl0b3IiOnsidmVyc2lvbiI6InYyIn0sIm1hY3JvIjp7Im91dHB1dFR5cGUiOiJodG1sX2V4cG9ydCIsImhhc2giOiI4MmU2ZDBkMC1jOTU4LTQ4ZWUtOGJiOS1mOTAwN2Y3NWZjZDAiLCJpZCI6IjgyZTZkMGQwLWM5NTgtNDhlZS04YmI5LWY5MDA3Zjc1ZmNkMCJ9LCJ0cmFjaW5nIjp7InRyYWNlSWQiOiIxNDExNWRiYjk1ZmI0OWFhMDAwZDU3MjkzMDg4NWM5NCIsInNwYW5JZCI6IjNhNTA0MjU5ZTE2ODUzYWMiLCJzYW1wbGVkIjoiMSJ9LCJjb250ZW50Ijp7InR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjMiLCJpZCI6IjY5MjM2In0sInNwYWNlIjp7ImtleSI6IkRXUEVWSUQiLCJpZCI6IjY4NzM4In19LCJ1cmwiOnsiZGlzcGxheVVybCI6Imh0dHBzOlwvXC9tcmNuaHVnaGVzLmF0bGFzc2lhbi5uZXRcL3dpa2kifX0sImV4cCI6MTc1ODk2MjAwMiwiaWF0IjoxNzU4OTYxMTAyfQ.JS9sPD5G3A1RXu7XnJYg-SLJUsW1oMRyRyugZhCvuOs",    "structuredContext": "{\"license\":{\"active\":true},\"confluence\":{\"editor\":{\"version\":\"v2\"},\"macro\":{\"outputType\":\"html_export\",\"hash\":\"82e6d0d0-c958-48ee-8bb9-f9007f75fcd0\",\"id\":\"82e6d0d0-c958-48ee-8bb9-f9007f75fcd0\"},\"tracing\":{\"traceId\":\"14115dbb95fb49aa000d572930885c94\",\"spanId\":\"3a504259e16853ac\",\"sampled\":\"1\"},\"content\":{\"type\":\"page\",\"version\":\"3\",\"id\":\"69236\"},\"space\":{\"key\":\"DWPEVID\",\"id\":\"68738\"}},\"url\":{\"displayUrl\":\"https://mrcnhughes.atlassian.net/wiki\"}}",
+    "contentClassifier":"content",
+    "productCtx":"{\"page.id\":\"69236\",\"macro.hash\":\"82e6d0d0-c958-48ee-8bb9-f9007f75fcd0\",\"tracing.sampled\":\"1\",\"page.type\":\"page\",\"macro.localId\":\"af4b6fb5-39e9-4a9a-ad57-bc6a1d1f5d9e\",\": = | RAW | = :\":\"toolbar=bottom|filename=Image3|zoom=fit|revision=1\",\"space.id\":\"68738\",\"tracing.traceId\":\"14115dbb95fb49aa000d572930885c94\",\"tracing.spanId\":\"3a504259e16853ac\",\"user.isExternalCollaborator\":\"false\",\"space.key\":\"DWPEVID\",\"content.version\":\"3\",\"page.title\":\"Component Diagrams\",\"zoom\":\"fit\",\"macro.body\":\"\",\"macro.truncated\":\"false\",\"content.type\":\"page\",\"output.type\":\"html_export\",\"page.version\":\"3\",\"revision\":\"1\",\"toolbar\":\"bottom\",\"filename\":\"Image3\",\"macro.fragmentLocalId\":\"\",\"content.id\":\"69236\",\"macro.id\":\"82e6d0d0-c958-48ee-8bb9-f9007f75fcd0\",\"editor.version\":\"v2\"}",
+    "timeZone":"Europe/London",
+    "origin":"https://mermaid.stratus-addons.com",
+    "hostOrigin":"https://mrcnhughes.atlassian.net",
+    "sandbox":"allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-storage-access-by-user-activation",            "apiMigrations": {
+        "gdpr": true
+    }
+}
+;
+    if(window.AP && window.AP.subCreate) {
+      window._AP.appendConnectAddon(data);
+    } else {
+      require(['ac/create'], function(create){
+        create.appendConnectAddon(data);
+      });
+    }
+
+    // For Confluence App Analytics. This code works in conjunction with CFE's ConnectSupport.js.
+    // Here, we add a listener to the initial HTML page that stores events if the ConnectSupport component
+    // has not mounted yet. In CFE, we process the missed event data and disable this initial listener.
+    const __MAX_EVENT_ARRAY_SIZE__ = 20;
+    const connectAppAnalytics = "ecosystem.confluence.connect.analytics";
+    window.connectHost && window.connectHost.onIframeEstablished((eventData) => {
+      if (!window.__CONFLUENCE_CONNECT_SUPPORT_LOADED__) {
+        let events = JSON.parse(window.localStorage.getItem(connectAppAnalytics)) || [];
+        if (events.length >= __MAX_EVENT_ARRAY_SIZE__) {
+          events.shift();
+        }
+        events.push(eventData);
+        window.localStorage.setItem(connectAppAnalytics, JSON.stringify(events));
+      }
+    });
+
+  }());
+</script>
+
+</div>
+<p>The Identity Resolution Service balances automated clustering efficiency with accuracy through machine learning models, graph analysis, and sophisticated confidence assessment that accounts for evidence quality, temporal factors, and correlation strength.</p><h2 id="ComponentDiagrams-AwardCalculationServiceArchitecture">Award Calculation Service Architecture</h2><p>The Award Calculation Service implements complex policy engines that determine benefit entitlements based on confidence thresholds while supporting simulation capabilities and comprehensive audit requirements for financial decisions.</p><div class="ap-container" id="ap-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud1543333264163667691">
+
+  <div class="ap-content " id="embedded-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud1543333264163667691"></div>
+  <script nonce="68d79dbbd0103abe35ea29aaae309458" class="ap-iframe-body-script">
+  (function(){
+    var data = {
+    "addon_key":"com.stratusaddons.confluence.plugins.mermaid",
+    "uniqueKey":"com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud1543333264163667691",
+    "key":"mermaid-cloud",
+     "moduleType":"dynamicContentMacros",      "moduleLocation":"content",         "cp":"/wiki",
+            "general":"",
+    "w":"100%",
+    "h":"1px",
+    "url":"https://mermaid.stratus-addons.com/viewer.html?pageId=69236&filename=Diagram4&revision=1&zoom=fit&toolbar=bottom&repository=&xdm_e=https%3A%2F%2Fmrcnhughes.atlassian.net&xdm_c=channel-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud1543333264163667691&cp=%2Fwiki&xdm_deprecated_addon_key_do_not_use=com.stratusaddons.confluence.plugins.mermaid&lic=active&cv=1000.0.0-f1c99b2191e8&traceId=03f2548b8cd0eea1614574f838f27bcf&spanId=547e9c16fd9c99d1&traceSampled=0&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiOTUxYjk0Mzg0NjkyNzNmZTFkMDQyYTc4MTVhYzE3MzI5ZDU3NTQ0YWMzYTcxMGYzYTM2MjFlYjFjZmZiMzQ3ZSIsImlzcyI6IjIxOGQwY2QyLWUxZmQtMzlkYy04ZDI2LTk2MzZlMTQ4NDc0NSIsImNvbnRleHQiOnt9LCJleHAiOjE3NTg5NjEyODIsImlhdCI6MTc1ODk2MTEwMn0.dVvphXRhAGTs_z4mbB6KpwTX6wkg8OXixPwcJEWqaZ4",
+     "contextJwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiY29udGV4dC1xc2giLCJpc3MiOiIyMThkMGNkMi1lMWZkLTM5ZGMtOGQyNi05NjM2ZTE0ODQ3NDUiLCJjb250ZXh0Ijp7ImxpY2Vuc2UiOnsiYWN0aXZlIjp0cnVlfSwiY29uZmx1ZW5jZSI6eyJlZGl0b3IiOnsidmVyc2lvbiI6InYyIn0sIm1hY3JvIjp7Im91dHB1dFR5cGUiOiJodG1sX2V4cG9ydCIsImhhc2giOiIyYjBlY2ExYi02NDE5LTRkYmQtYTk1YS0wMDYwODBlYjg4OGUiLCJpZCI6IjJiMGVjYTFiLTY0MTktNGRiZC1hOTVhLTAwNjA4MGViODg4ZSJ9LCJ0cmFjaW5nIjp7InRyYWNlSWQiOiIwM2YyNTQ4YjhjZDBlZWExNjE0NTc0ZjgzOGYyN2JjZiIsInNwYW5JZCI6IjU0N2U5YzE2ZmQ5Yzk5ZDEiLCJzYW1wbGVkIjoiMCJ9LCJjb250ZW50Ijp7InR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjMiLCJpZCI6IjY5MjM2In0sInNwYWNlIjp7ImtleSI6IkRXUEVWSUQiLCJpZCI6IjY4NzM4In19LCJ1cmwiOnsiZGlzcGxheVVybCI6Imh0dHBzOlwvXC9tcmNuaHVnaGVzLmF0bGFzc2lhbi5uZXRcL3dpa2kifX0sImV4cCI6MTc1ODk2MjAwMiwiaWF0IjoxNzU4OTYxMTAyfQ.ir4K0CM_8h7f38UxtA-E6gWxEGLwSe4vm0T3a8Bd2S0",    "structuredContext": "{\"license\":{\"active\":true},\"confluence\":{\"editor\":{\"version\":\"v2\"},\"macro\":{\"outputType\":\"html_export\",\"hash\":\"2b0eca1b-6419-4dbd-a95a-006080eb888e\",\"id\":\"2b0eca1b-6419-4dbd-a95a-006080eb888e\"},\"tracing\":{\"traceId\":\"03f2548b8cd0eea1614574f838f27bcf\",\"spanId\":\"547e9c16fd9c99d1\",\"sampled\":\"0\"},\"content\":{\"type\":\"page\",\"version\":\"3\",\"id\":\"69236\"},\"space\":{\"key\":\"DWPEVID\",\"id\":\"68738\"}},\"url\":{\"displayUrl\":\"https://mrcnhughes.atlassian.net/wiki\"}}",
+    "contentClassifier":"content",
+    "productCtx":"{\"page.id\":\"69236\",\"macro.hash\":\"2b0eca1b-6419-4dbd-a95a-006080eb888e\",\"tracing.sampled\":\"0\",\"page.type\":\"page\",\"macro.localId\":\"67be5ee4-082e-4b5c-8e40-1a4d84c6ba76\",\": = | RAW | = :\":\"toolbar=bottom|filename=Diagram4|zoom=fit|revision=1\",\"space.id\":\"68738\",\"tracing.traceId\":\"03f2548b8cd0eea1614574f838f27bcf\",\"tracing.spanId\":\"547e9c16fd9c99d1\",\"user.isExternalCollaborator\":\"false\",\"space.key\":\"DWPEVID\",\"content.version\":\"3\",\"page.title\":\"Component Diagrams\",\"zoom\":\"fit\",\"macro.body\":\"\",\"macro.truncated\":\"false\",\"content.type\":\"page\",\"output.type\":\"html_export\",\"page.version\":\"3\",\"revision\":\"1\",\"toolbar\":\"bottom\",\"filename\":\"Diagram4\",\"macro.fragmentLocalId\":\"\",\"content.id\":\"69236\",\"macro.id\":\"2b0eca1b-6419-4dbd-a95a-006080eb888e\",\"editor.version\":\"v2\"}",
+    "timeZone":"Europe/London",
+    "origin":"https://mermaid.stratus-addons.com",
+    "hostOrigin":"https://mrcnhughes.atlassian.net",
+    "sandbox":"allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-storage-access-by-user-activation",            "apiMigrations": {
+        "gdpr": true
+    }
+}
+;
+    if(window.AP && window.AP.subCreate) {
+      window._AP.appendConnectAddon(data);
+    } else {
+      require(['ac/create'], function(create){
+        create.appendConnectAddon(data);
+      });
+    }
+
+    // For Confluence App Analytics. This code works in conjunction with CFE's ConnectSupport.js.
+    // Here, we add a listener to the initial HTML page that stores events if the ConnectSupport component
+    // has not mounted yet. In CFE, we process the missed event data and disable this initial listener.
+    const __MAX_EVENT_ARRAY_SIZE__ = 20;
+    const connectAppAnalytics = "ecosystem.confluence.connect.analytics";
+    window.connectHost && window.connectHost.onIframeEstablished((eventData) => {
+      if (!window.__CONFLUENCE_CONNECT_SUPPORT_LOADED__) {
+        let events = JSON.parse(window.localStorage.getItem(connectAppAnalytics)) || [];
+        if (events.length >= __MAX_EVENT_ARRAY_SIZE__) {
+          events.shift();
+        }
+        events.push(eventData);
+        window.localStorage.setItem(connectAppAnalytics, JSON.stringify(events));
+      }
+    });
+
+  }());
+</script>
+
+</div>
+<p>The Award Calculation Service integrates sophisticated policy engines with confidence-based processing to ensure that financial decisions occur only when evidence quality meets appropriate thresholds while maintaining complete audit trails for accountability and appeals.</p><h2 id="ComponentDiagrams-InvestigationQueueServiceArchitecture">Investigation Queue Service Architecture</h2><p>The Investigation Queue Service manages complex exception workflows through intelligent case routing, workflow orchestration, and outcome tracking that ensures human attention focuses on cases requiring judgment and expertise.</p><div class="ap-container" id="ap-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud8246427401986859628">
+
+  <div class="ap-content " id="embedded-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud8246427401986859628"></div>
+  <script nonce="68d79dbbd0103abe35ea29aaae309458" class="ap-iframe-body-script">
+  (function(){
+    var data = {
+    "addon_key":"com.stratusaddons.confluence.plugins.mermaid",
+    "uniqueKey":"com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud8246427401986859628",
+    "key":"mermaid-cloud",
+     "moduleType":"dynamicContentMacros",      "moduleLocation":"content",         "cp":"/wiki",
+            "general":"",
+    "w":"100%",
+    "h":"1px",
+    "url":"https://mermaid.stratus-addons.com/viewer.html?pageId=69236&filename=Diagram5&revision=1&zoom=fit&toolbar=bottom&repository=&xdm_e=https%3A%2F%2Fmrcnhughes.atlassian.net&xdm_c=channel-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud8246427401986859628&cp=%2Fwiki&xdm_deprecated_addon_key_do_not_use=com.stratusaddons.confluence.plugins.mermaid&lic=active&cv=1000.0.0-f1c99b2191e8&traceId=48dbc7529a57f25604c72a64987a2d3a&spanId=ec50ec02357a8cfb&traceSampled=0&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiMDU4Y2IzMTUwY2ExMTUxZjUyNjlhZTQ3ZDQxYzZmZDBiYzQ3YjJlMmNkOWU5MGJlNzQxNjk2MzNlYzkzNDQ4MyIsImlzcyI6IjIxOGQwY2QyLWUxZmQtMzlkYy04ZDI2LTk2MzZlMTQ4NDc0NSIsImNvbnRleHQiOnt9LCJleHAiOjE3NTg5NjEyODIsImlhdCI6MTc1ODk2MTEwMn0.p8Vc00r8Srdbe5BhznTQ3l2johLoFPtug1xLBCmoMhc",
+     "contextJwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiY29udGV4dC1xc2giLCJpc3MiOiIyMThkMGNkMi1lMWZkLTM5ZGMtOGQyNi05NjM2ZTE0ODQ3NDUiLCJjb250ZXh0Ijp7ImxpY2Vuc2UiOnsiYWN0aXZlIjp0cnVlfSwiY29uZmx1ZW5jZSI6eyJlZGl0b3IiOnsidmVyc2lvbiI6InYyIn0sIm1hY3JvIjp7Im91dHB1dFR5cGUiOiJodG1sX2V4cG9ydCIsImhhc2giOiJlNTEwYmZiNi04NmNmLTQ4NWEtOWE0Ny0wMDFhMWM5NmUyMDMiLCJpZCI6ImU1MTBiZmI2LTg2Y2YtNDg1YS05YTQ3LTAwMWExYzk2ZTIwMyJ9LCJ0cmFjaW5nIjp7InRyYWNlSWQiOiI0OGRiYzc1MjlhNTdmMjU2MDRjNzJhNjQ5ODdhMmQzYSIsInNwYW5JZCI6ImVjNTBlYzAyMzU3YThjZmIiLCJzYW1wbGVkIjoiMCJ9LCJjb250ZW50Ijp7InR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjMiLCJpZCI6IjY5MjM2In0sInNwYWNlIjp7ImtleSI6IkRXUEVWSUQiLCJpZCI6IjY4NzM4In19LCJ1cmwiOnsiZGlzcGxheVVybCI6Imh0dHBzOlwvXC9tcmNuaHVnaGVzLmF0bGFzc2lhbi5uZXRcL3dpa2kifX0sImV4cCI6MTc1ODk2MjAwMiwiaWF0IjoxNzU4OTYxMTAyfQ.QcRlJqZifs5tySuby7oAx2yELutlEbNiOYlbEevSye0",    "structuredContext": "{\"license\":{\"active\":true},\"confluence\":{\"editor\":{\"version\":\"v2\"},\"macro\":{\"outputType\":\"html_export\",\"hash\":\"e510bfb6-86cf-485a-9a47-001a1c96e203\",\"id\":\"e510bfb6-86cf-485a-9a47-001a1c96e203\"},\"tracing\":{\"traceId\":\"48dbc7529a57f25604c72a64987a2d3a\",\"spanId\":\"ec50ec02357a8cfb\",\"sampled\":\"0\"},\"content\":{\"type\":\"page\",\"version\":\"3\",\"id\":\"69236\"},\"space\":{\"key\":\"DWPEVID\",\"id\":\"68738\"}},\"url\":{\"displayUrl\":\"https://mrcnhughes.atlassian.net/wiki\"}}",
+    "contentClassifier":"content",
+    "productCtx":"{\"page.id\":\"69236\",\"macro.hash\":\"e510bfb6-86cf-485a-9a47-001a1c96e203\",\"tracing.sampled\":\"0\",\"page.type\":\"page\",\"macro.localId\":\"0313bedd-3857-4d02-8d0f-83ea7a68e608\",\": = | RAW | = :\":\"toolbar=bottom|filename=Diagram5|zoom=fit|revision=1\",\"space.id\":\"68738\",\"tracing.traceId\":\"48dbc7529a57f25604c72a64987a2d3a\",\"tracing.spanId\":\"ec50ec02357a8cfb\",\"user.isExternalCollaborator\":\"false\",\"space.key\":\"DWPEVID\",\"content.version\":\"3\",\"page.title\":\"Component Diagrams\",\"zoom\":\"fit\",\"macro.body\":\"\",\"macro.truncated\":\"false\",\"content.type\":\"page\",\"output.type\":\"html_export\",\"page.version\":\"3\",\"revision\":\"1\",\"toolbar\":\"bottom\",\"filename\":\"Diagram5\",\"macro.fragmentLocalId\":\"\",\"content.id\":\"69236\",\"macro.id\":\"e510bfb6-86cf-485a-9a47-001a1c96e203\",\"editor.version\":\"v2\"}",
+    "timeZone":"Europe/London",
+    "origin":"https://mermaid.stratus-addons.com",
+    "hostOrigin":"https://mrcnhughes.atlassian.net",
+    "sandbox":"allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-storage-access-by-user-activation",            "apiMigrations": {
+        "gdpr": true
+    }
+}
+;
+    if(window.AP && window.AP.subCreate) {
+      window._AP.appendConnectAddon(data);
+    } else {
+      require(['ac/create'], function(create){
+        create.appendConnectAddon(data);
+      });
+    }
+
+    // For Confluence App Analytics. This code works in conjunction with CFE's ConnectSupport.js.
+    // Here, we add a listener to the initial HTML page that stores events if the ConnectSupport component
+    // has not mounted yet. In CFE, we process the missed event data and disable this initial listener.
+    const __MAX_EVENT_ARRAY_SIZE__ = 20;
+    const connectAppAnalytics = "ecosystem.confluence.connect.analytics";
+    window.connectHost && window.connectHost.onIframeEstablished((eventData) => {
+      if (!window.__CONFLUENCE_CONNECT_SUPPORT_LOADED__) {
+        let events = JSON.parse(window.localStorage.getItem(connectAppAnalytics)) || [];
+        if (events.length >= __MAX_EVENT_ARRAY_SIZE__) {
+          events.shift();
+        }
+        events.push(eventData);
+        window.localStorage.setItem(connectAppAnalytics, JSON.stringify(events));
+      }
+    });
+
+  }());
+</script>
+
+</div>
+<p>The Investigation Queue Service implements sophisticated workflow management that balances automated efficiency with human expertise through intelligent case routing, priority management, and comprehensive outcome tracking.</p><h2 id="ComponentDiagrams-SemanticTranslationServiceArchitecture">Semantic Translation Service Architecture</h2><p>The Semantic Translation Service enables evidence sharing between different policy contexts through formal ontology management, reasoning engines, and translation validation that preserves semantic meaning while accommodating vocabulary differences.</p><div class="ap-container" id="ap-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud692724084929707653">
+
+  <div class="ap-content " id="embedded-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud692724084929707653"></div>
+  <script nonce="68d79dbbd0103abe35ea29aaae309458" class="ap-iframe-body-script">
+  (function(){
+    var data = {
+    "addon_key":"com.stratusaddons.confluence.plugins.mermaid",
+    "uniqueKey":"com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud692724084929707653",
+    "key":"mermaid-cloud",
+     "moduleType":"dynamicContentMacros",      "moduleLocation":"content",         "cp":"/wiki",
+            "general":"",
+    "w":"100%",
+    "h":"1px",
+    "url":"https://mermaid.stratus-addons.com/viewer.html?pageId=69236&filename=diagram6&revision=1&zoom=fit&toolbar=bottom&repository=&xdm_e=https%3A%2F%2Fmrcnhughes.atlassian.net&xdm_c=channel-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud692724084929707653&cp=%2Fwiki&xdm_deprecated_addon_key_do_not_use=com.stratusaddons.confluence.plugins.mermaid&lic=active&cv=1000.0.0-f1c99b2191e8&traceId=e3a3d9c13f460eeb04d114cc133b32e9&spanId=de20312b2e157713&traceSampled=0&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiM2FkOTlhYmM2NWU0YmVhMDViNjQ2YjdkNTcyYjFkZDI2ODQ5MjYxMzNlZTNiZWQwYTUwNmQ2ODM4MzljMWM0NCIsImlzcyI6IjIxOGQwY2QyLWUxZmQtMzlkYy04ZDI2LTk2MzZlMTQ4NDc0NSIsImNvbnRleHQiOnt9LCJleHAiOjE3NTg5NjEyODIsImlhdCI6MTc1ODk2MTEwMn0.JbGnPFXShwUsnY9psolKRKtFXp0gn6AUC_Z6pl_j8Ew",
+     "contextJwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiY29udGV4dC1xc2giLCJpc3MiOiIyMThkMGNkMi1lMWZkLTM5ZGMtOGQyNi05NjM2ZTE0ODQ3NDUiLCJjb250ZXh0Ijp7ImxpY2Vuc2UiOnsiYWN0aXZlIjp0cnVlfSwiY29uZmx1ZW5jZSI6eyJlZGl0b3IiOnsidmVyc2lvbiI6InYyIn0sIm1hY3JvIjp7Im91dHB1dFR5cGUiOiJodG1sX2V4cG9ydCIsImhhc2giOiIwMzZjOGQ1NS0zMWEyLTQ1NzEtODIzZS03OWUxNTZlZjk0MDAiLCJpZCI6IjAzNmM4ZDU1LTMxYTItNDU3MS04MjNlLTc5ZTE1NmVmOTQwMCJ9LCJ0cmFjaW5nIjp7InRyYWNlSWQiOiJlM2EzZDljMTNmNDYwZWViMDRkMTE0Y2MxMzNiMzJlOSIsInNwYW5JZCI6ImRlMjAzMTJiMmUxNTc3MTMiLCJzYW1wbGVkIjoiMCJ9LCJjb250ZW50Ijp7InR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjMiLCJpZCI6IjY5MjM2In0sInNwYWNlIjp7ImtleSI6IkRXUEVWSUQiLCJpZCI6IjY4NzM4In19LCJ1cmwiOnsiZGlzcGxheVVybCI6Imh0dHBzOlwvXC9tcmNuaHVnaGVzLmF0bGFzc2lhbi5uZXRcL3dpa2kifX0sImV4cCI6MTc1ODk2MjAwMiwiaWF0IjoxNzU4OTYxMTAyfQ.CKyYNyohqca_EnTtSsForJkcjrxsL8e_e1AWmqXMm1o",    "structuredContext": "{\"license\":{\"active\":true},\"confluence\":{\"editor\":{\"version\":\"v2\"},\"macro\":{\"outputType\":\"html_export\",\"hash\":\"036c8d55-31a2-4571-823e-79e156ef9400\",\"id\":\"036c8d55-31a2-4571-823e-79e156ef9400\"},\"tracing\":{\"traceId\":\"e3a3d9c13f460eeb04d114cc133b32e9\",\"spanId\":\"de20312b2e157713\",\"sampled\":\"0\"},\"content\":{\"type\":\"page\",\"version\":\"3\",\"id\":\"69236\"},\"space\":{\"key\":\"DWPEVID\",\"id\":\"68738\"}},\"url\":{\"displayUrl\":\"https://mrcnhughes.atlassian.net/wiki\"}}",
+    "contentClassifier":"content",
+    "productCtx":"{\"page.id\":\"69236\",\"macro.hash\":\"036c8d55-31a2-4571-823e-79e156ef9400\",\"tracing.sampled\":\"0\",\"page.type\":\"page\",\"macro.localId\":\"eb13e117-c178-4a28-bb62-24135fe2b99a\",\": = | RAW | = :\":\"toolbar=bottom|filename=diagram6|zoom=fit|revision=1\",\"space.id\":\"68738\",\"tracing.traceId\":\"e3a3d9c13f460eeb04d114cc133b32e9\",\"tracing.spanId\":\"de20312b2e157713\",\"user.isExternalCollaborator\":\"false\",\"space.key\":\"DWPEVID\",\"content.version\":\"3\",\"page.title\":\"Component Diagrams\",\"zoom\":\"fit\",\"macro.body\":\"\",\"macro.truncated\":\"false\",\"content.type\":\"page\",\"output.type\":\"html_export\",\"page.version\":\"3\",\"revision\":\"1\",\"toolbar\":\"bottom\",\"filename\":\"diagram6\",\"macro.fragmentLocalId\":\"\",\"content.id\":\"69236\",\"macro.id\":\"036c8d55-31a2-4571-823e-79e156ef9400\",\"editor.version\":\"v2\"}",
+    "timeZone":"Europe/London",
+    "origin":"https://mermaid.stratus-addons.com",
+    "hostOrigin":"https://mrcnhughes.atlassian.net",
+    "sandbox":"allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-storage-access-by-user-activation",            "apiMigrations": {
+        "gdpr": true
+    }
+}
+;
+    if(window.AP && window.AP.subCreate) {
+      window._AP.appendConnectAddon(data);
+    } else {
+      require(['ac/create'], function(create){
+        create.appendConnectAddon(data);
+      });
+    }
+
+    // For Confluence App Analytics. This code works in conjunction with CFE's ConnectSupport.js.
+    // Here, we add a listener to the initial HTML page that stores events if the ConnectSupport component
+    // has not mounted yet. In CFE, we process the missed event data and disable this initial listener.
+    const __MAX_EVENT_ARRAY_SIZE__ = 20;
+    const connectAppAnalytics = "ecosystem.confluence.connect.analytics";
+    window.connectHost && window.connectHost.onIframeEstablished((eventData) => {
+      if (!window.__CONFLUENCE_CONNECT_SUPPORT_LOADED__) {
+        let events = JSON.parse(window.localStorage.getItem(connectAppAnalytics)) || [];
+        if (events.length >= __MAX_EVENT_ARRAY_SIZE__) {
+          events.shift();
+        }
+        events.push(eventData);
+        window.localStorage.setItem(connectAppAnalytics, JSON.stringify(events));
+      }
+    });
+
+  }());
+</script>
+
+</div>
+<p>The Semantic Translation Service enables sophisticated cross-context evidence sharing through formal ontology management and reasoning capabilities while maintaining semantic precision and comprehensive audit trails for all translation decisions.</p><p>These component diagrams illustrate the internal architecture of each core service, showing how sophisticated capabilities like probabilistic identity resolution, confidence-based award calculation, and semantic translation are implemented through well-designed component interactions that maintain modularity, scalability, and audit requirements essential for government operations.</p><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/69236/103183">Diagram 1</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/69236/983147">Diagram2</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/69236/983154">Image3</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/69236/69348">Diagram4</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/69236/103190">Diagram5</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/69236/950429">diagram6</a> (text/plain)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Sept 27, 2025 09:18</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

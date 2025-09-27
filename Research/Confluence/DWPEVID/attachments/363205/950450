@@ -1,0 +1,84 @@
+flowchart TD
+    A[Caseworker Logs In] --> B[Access Investigation Queue]
+    B --> C[Review Assigned Cases]
+    C --> D{Cases Available?}
+    D -->|No| E[Monitor for New Assignments]
+    D -->|Yes| F[Select High Priority Case]
+    
+    E --> G[Receive New Case Assignment]
+    G --> F
+    
+    F --> H[Review Case Summary]
+    H --> I[Access Complete Evidence View]
+    I --> J{Investigation Type}
+    
+    J -->|Identity Verification| K[Identity Investigation Process]
+    J -->|Evidence Conflict| L[Conflict Resolution Process]
+    J -->|Fraud Investigation| M[Fraud Investigation Process]
+    J -->|Overpayment Review| N[Financial Investigation Process]
+    
+    K --> K1[Review Identity Cluster]
+    K1 --> K2[Analyze Confidence Factors]
+    K2 --> K3{Additional Evidence Needed?}
+    K3 -->|Yes| K4[Request Specific Evidence]
+    K3 -->|No| K5[Manual Verification Process]
+    
+    K4 --> K6[Contact Citizen]
+    K6 --> K7[Schedule Verification Appointment]
+    K7 --> K8[Conduct Identity Check]
+    K8 --> K9[Update Confidence Score]
+    
+    K5 --> K10[Review Existing Evidence Quality]
+    K10 --> K11{Sufficient for Decision?}
+    K11 -->|Yes| K12[Approve Identity Confidence]
+    K11 -->|No| K13[Escalate to Senior Caseworker]
+    
+    L --> L1[Review Conflicting Evidence Sources]
+    L1 --> L2[Analyze Source Credibility]
+    L2 --> L3[Contact Evidence Providers]
+    L3 --> L4[Request Clarification]
+    L4 --> L5[Receive Updated Information]
+    L5 --> L6{Conflict Resolved?}
+    L6 -->|Yes| L7[Update Evidence Confidence]
+    L6 -->|No| L8[Escalate Complex Conflict]
+    
+    M --> M1[Review Fraud Allegation Details]
+    M1 --> M2[Cross-Reference Evidence Patterns]
+    M2 --> M3[Contact External Verification Sources]
+    M3 --> M4[Gather Additional Evidence]
+    M4 --> M5{Fraud Confirmed?}
+    M5 -->|Yes| M6[Suspend Benefits]
+    M5 -->|No| M7[Clear Fraud Flag]
+    M6 --> M8[Calculate Overpayment]
+    M8 --> M9[Initiate Recovery Process]
+    
+    N --> N1[Review Historical Award Calculations]
+    N1 --> N2[Identify Calculation Errors]
+    N2 --> N3{Error Confirmed?}
+    N3 -->|Yes| N4[Calculate Adjustment Amount]
+    N3 -->|No| N5[Document Review Outcome]
+    N4 --> N6[Determine Recovery Method]
+    N6 --> N7[Generate Recovery Plan]
+    
+    K9 --> O[Update Case Resolution]
+    K12 --> O
+    L7 --> O
+    M7 --> O
+    M9 --> O
+    N5 --> O
+    N7 --> O
+    
+    O --> P[Record Investigation Outcome]
+    P --> Q[Generate Decision Documentation]
+    Q --> R[Notify Affected Systems]
+    R --> S[Send Citizen Communication]
+    S --> T{Additional Cases?}
+    T -->|Yes| C
+    T -->|No| U[End of Shift Procedures]
+    
+    K13 --> V[Escalation Process]
+    L8 --> V
+    V --> W[Senior Review]
+    W --> X[Escalation Decision]
+    X --> Y[Return to Caseworker with Guidance]
+    Y --> O

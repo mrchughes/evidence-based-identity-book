@@ -1,0 +1,81 @@
+graph TB
+    subgraph "Investigation Queue Service"
+        API[Gin REST API<br/>WebSocket Support<br/>Real-time Updates]
+        
+        subgraph "Case Management"
+            CaseClassifier[Case Classifier<br/>Type identification<br/>Priority scoring<br/>Complexity assessment]
+            SkillMatcher[Skill Matcher<br/>Caseworker expertise<br/>Workload balancing<br/>Availability checking]
+            WorkflowEngine[Workflow Engine<br/>Temporal.io integration<br/>State management<br/>Process definition]
+        end
+        
+        subgraph "Priority Management"
+            RiskScorer[Risk Scorer<br/>Financial impact<br/>Fraud indicators<br/>Citizen vulnerability]
+            QueueOptimizer[Queue Optimizer<br/>Load balancing<br/>Deadline management<br/>SLA monitoring]
+            EscalationManager[Escalation Manager<br/>Timeout handling<br/>Senior review<br/>Emergency protocols]
+        end
+        
+        subgraph "Integration Layer"
+            CaseDataAggregator[Case Data Aggregator<br/>Evidence correlation<br/>Cross-system queries<br/>Context building]
+            OutcomeProcessor[Outcome Processor<br/>Decision implementation<br/>System updates<br/>Notification triggering]
+        end
+        
+        subgraph "Analytics & Reporting"
+            PerformanceTracker[Performance Tracker<br/>Resolution times<br/>Quality metrics<br/>Caseworker productivity]
+            TrendAnalyzer[Trend Analyzer<br/>Case patterns<br/>Workload forecasting<br/>Resource planning]
+        end
+        
+        subgraph "Data Storage"
+            CaseDatabase[(MongoDB<br/>Case documents<br/>Workflow state)]
+            QueueCache[(Redis<br/>Active queues<br/>Performance data)]
+            MetricsStore[(InfluxDB<br/>Time series<br/>Analytics)]
+        end
+        
+        subgraph "External Systems"
+            IdentityAPI[Identity Resolution API]
+            EvidenceAPI[Evidence Ingestion API]
+            AwardAPI[Award Calculation API]
+            NotificationAPI[Notification Service API]
+            HRSystem[HR System<br/>Caseworker profiles]
+        end
+    end
+    
+    %% External inputs
+    AutomatedTriggers[Automated Triggers] --> API
+    CaseworkerUI[Caseworker UI] --> API
+    ManagementDashboard[Management Dashboard] --> API
+    
+    %% Case processing flow
+    API --> CaseClassifier
+    CaseClassifier --> RiskScorer
+    RiskScorer --> SkillMatcher
+    SkillMatcher --> QueueOptimizer
+    QueueOptimizer --> WorkflowEngine
+    
+    %% Data aggregation
+    API --> CaseDataAggregator
+    CaseDataAggregator --> IdentityAPI
+    CaseDataAggregator --> EvidenceAPI
+    CaseDataAggregator --> AwardAPI
+    
+    %% Outcome processing
+    WorkflowEngine --> OutcomeProcessor
+    OutcomeProcessor --> AwardAPI
+    OutcomeProcessor --> NotificationAPI
+    
+    %% Analytics and monitoring
+    WorkflowEngine --> PerformanceTracker
+    PerformanceTracker --> TrendAnalyzer
+    TrendAnalyzer --> MetricsStore
+    
+    %% Escalation handling
+    QueueOptimizer --> EscalationManager
+    EscalationManager --> WorkflowEngine
+    
+    %% Data storage
+    CaseClassifier --> CaseDatabase
+    WorkflowEngine --> CaseDatabase
+    QueueOptimizer --> QueueCache
+    PerformanceTracker --> QueueCache
+    
+    %% External system integration
+    SkillMatcher --> HRSystem

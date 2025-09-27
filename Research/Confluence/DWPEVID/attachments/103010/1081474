@@ -1,0 +1,24 @@
+sequenceDiagram
+    participant Citizen
+    participant CitizenPortal
+    participant IdentityResolution
+    participant SemanticTranslation
+    participant AwardCalculation
+    participant Notification
+
+    Citizen->>CitizenPortal: Apply for Child Benefit
+    CitizenPortal->>IdentityResolution: POST /identity/cluster (with name, DOB, address)
+    IdentityResolution->>IdentityResolution: Match to existing UC cluster (confidence: 0.85)
+    IdentityResolution-->>CitizenPortal: Existing high-confidence identity found
+    
+    Note over CitizenPortal: Pre-populate application with existing evidence
+    CitizenPortal->>Citizen: Confirm existing details, provide birth certificate only
+    Citizen->>CitizenPortal: Submit birth certificate
+    
+    CitizenPortal->>SemanticTranslation: POST /semantic/translate (UC evidence to CB context)
+    SemanticTranslation-->>AwardCalculation: Address verified, income confirmed for CB
+    AwardCalculation->>AwardCalculation: Calculate CB entitlement using existing + new evidence
+    AwardCalculation->>Notification: POST /notifications/send (award approved)
+    Notification->>Citizen: Child Benefit Approved: £25.60/week
+    
+    Note over Citizen,Notification: Total process time: 10 minutes vs 2 weeks for new application

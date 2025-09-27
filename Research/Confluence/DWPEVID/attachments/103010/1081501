@@ -1,0 +1,35 @@
+sequenceDiagram
+    participant Anonymous
+    participant ExternalGateway
+    participant EvidenceIngestion
+    participant IdentityResolution
+    participant InvestigationQueue
+    participant Caseworker
+    participant AwardCalculation
+    participant Notification
+    participant Citizen
+
+    Anonymous->>ExternalGateway: Report fraud via hotline
+    Note over ExternalGateway: "Chris Hughes working at ACME Corp while claiming UC"
+    
+    ExternalGateway->>EvidenceIngestion: POST /evidence/assertion (low confidence tip-off)
+    EvidenceIngestion->>IdentityResolution: POST /identity/similar-clusters (find Chris Hughes)
+    IdentityResolution-->>EvidenceIngestion: Multiple potential matches found
+    
+    EvidenceIngestion->>InvestigationQueue: POST /investigations/create (fraud allegation)
+    InvestigationQueue->>Caseworker: High priority investigation assigned
+    
+    Caseworker->>IdentityResolution: GET /identity/cluster/{id} (review each Chris Hughes)
+    Caseworker->>ExternalGateway: Request employment verification from ACME Corp
+    ExternalGateway-->>Caseworker: Employment confirmed for Chris Hughes, DOB 1985-06-12
+    
+    Caseworker->>IdentityResolution: Correlate employment to specific UC claim
+    IdentityResolution-->>Caseworker: Matched to active UC recipient
+    
+    Caseworker->>AwardCalculation: PUT /awards/{id}/suspend (stop payments pending investigation)
+    AwardCalculation->>Notification: POST /notifications/send (benefit suspended)
+    Notification->>Citizen: Benefit suspended - investigation in progress
+    
+    Note over Caseworker: Full investigation reveals unreported employment
+    Caseworker->>InvestigationQueue: PUT /investigations/{id}/resolve (fraud confirmed)
+    InvestigationQueue->>AwardCalculation: Terminate award, calculate overpayment

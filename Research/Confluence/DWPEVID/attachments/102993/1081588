@@ -1,0 +1,58 @@
+graph TB
+    subgraph "Citizen Control Layer"
+        CC1[Multiple DIDs<br/>Service-Specific Identities<br/>Privacy Separation]
+        
+        CC2[Granular Consent<br/>Evidence Sharing Control<br/>Purpose Limitation]
+        
+        CC3[Evidence Portfolio<br/>Citizen-Owned Data<br/>Portability Rights]
+    end
+    
+    subgraph "Privacy-Preserving Processing"
+        PP1[Selective Disclosure<br/>Minimum Necessary<br/>Information Sharing]
+        
+        PP2[Differential Privacy<br/>Statistical Analysis<br/>Without Individual Exposure]
+        
+        PP3[Zero-Knowledge Proofs<br/>Verification Without<br/>Data Revelation]
+    end
+    
+    subgraph "Identity Correlation Layer"
+        IC1[Privacy-Preserving<br/>Record Linkage<br/>Homomorphic Encryption]
+        
+        IC2[Confidence-Based<br/>Correlation<br/>Uncertain Matching]
+        
+        IC3[Audit Trails<br/>Complete Provenance<br/>Correlation Evidence]
+    end
+    
+    subgraph "Service Delivery Layer"
+        SD1[Coordinated Services<br/>Without Central Identity<br/>Federated Architecture]
+        
+        SD2[Evidence Reuse<br/>Across Service Boundaries<br/>With Consent Preservation]
+        
+        SD3[Citizen Transparency<br/>Clear Data Usage<br/>Explanation & Control]
+    end
+    
+    CC1 --> PP1
+    CC2 --> PP2
+    CC3 --> PP3
+    
+    PP1 --> IC1
+    PP2 --> IC2
+    PP3 --> IC3
+    
+    IC1 --> SD1
+    IC2 --> SD2
+    IC3 --> SD3
+    
+    SD1 -.->|Feedback Loop| CC1
+    SD2 -.->|Consent Verification| CC2
+    SD3 -.->|Transparency Reports| CC3
+    
+    classDef control fill:#e3f2fd
+    classDef privacy fill:#e8f5e8
+    classDef correlation fill:#fff3e0
+    classDef service fill:#f3e5f5
+    
+    class CC1,CC2,CC3 control
+    class PP1,PP2,PP3 privacy
+    class IC1,IC2,IC3 correlation
+    class SD1,SD2,SD3 service

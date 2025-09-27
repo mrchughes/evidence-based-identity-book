@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DCS Evidence-Based Identity Platform : Service Design</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DCS Evidence-Based Identity Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Building-Evidence-Based-Services-for-a-Unified-Citizen-Experience_68910.html">Building Evidence-Based Services for a Unified Citizen Experience</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Business-Architecture_102874.html">Business Architecture</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DCS Evidence-Based Identity Platform : Service Design
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Christian Hughes</span>, last modified on Sept 15, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="ServiceDesign-CitizenJourneyValueStreamMap">Citizen Journey Value Stream Map</h2><div class="ap-container" id="ap-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud4591645300041037453">
+
+  <div class="ap-content " id="embedded-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud4591645300041037453"></div>
+  <script nonce="68d79dbbd0103abe35ea29aaae309458" class="ap-iframe-body-script">
+  (function(){
+    var data = {
+    "addon_key":"com.stratusaddons.confluence.plugins.mermaid",
+    "uniqueKey":"com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud4591645300041037453",
+    "key":"mermaid-cloud",
+     "moduleType":"dynamicContentMacros",      "moduleLocation":"content",         "cp":"/wiki",
+            "general":"",
+    "w":"100%",
+    "h":"1px",
+    "url":"https://mermaid.stratus-addons.com/viewer.html?pageId=69185&filename=Citizen+Journey+Value+Stream+Map&revision=1&zoom=fit&toolbar=bottom&repository=&xdm_e=https%3A%2F%2Fmrcnhughes.atlassian.net&xdm_c=channel-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud4591645300041037453&cp=%2Fwiki&xdm_deprecated_addon_key_do_not_use=com.stratusaddons.confluence.plugins.mermaid&lic=active&cv=1000.0.0-f1c99b2191e8&traceId=e9f2e1414e8cef4e779d06becee2dd06&spanId=9a2c8e027871d4d9&traceSampled=0&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiYjMwM2Y5ZDhmOGIwZDlhZTM4ZDljMjg2NGVhNjYzZWJmZDNiYWQwMDQzOTM0MzZhYTM1MTJjNDQxNDk4MTZlMyIsImlzcyI6IjIxOGQwY2QyLWUxZmQtMzlkYy04ZDI2LTk2MzZlMTQ4NDc0NSIsImNvbnRleHQiOnt9LCJleHAiOjE3NTg5NjEyNjgsImlhdCI6MTc1ODk2MTA4OH0.C6pnTsvn6Df5g2zWckaUK6Gea8Jb3yHKMAV9pusoKNY",
+     "contextJwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiY29udGV4dC1xc2giLCJpc3MiOiIyMThkMGNkMi1lMWZkLTM5ZGMtOGQyNi05NjM2ZTE0ODQ3NDUiLCJjb250ZXh0Ijp7ImxpY2Vuc2UiOnsiYWN0aXZlIjp0cnVlfSwiY29uZmx1ZW5jZSI6eyJlZGl0b3IiOnsidmVyc2lvbiI6InYyIn0sIm1hY3JvIjp7Im91dHB1dFR5cGUiOiJodG1sX2V4cG9ydCIsImhhc2giOiJjMjQ4YjM5Yy03YTFhLTRiZmUtYTJiYy1iYTIyY2YwZTFiZjEiLCJpZCI6ImMyNDhiMzljLTdhMWEtNGJmZS1hMmJjLWJhMjJjZjBlMWJmMSJ9LCJ0cmFjaW5nIjp7InRyYWNlSWQiOiJlOWYyZTE0MTRlOGNlZjRlNzc5ZDA2YmVjZWUyZGQwNiIsInNwYW5JZCI6IjlhMmM4ZTAyNzg3MWQ0ZDkiLCJzYW1wbGVkIjoiMCJ9LCJjb250ZW50Ijp7InR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjQiLCJpZCI6IjY5MTg1In0sInNwYWNlIjp7ImtleSI6IkRXUEVWSUQiLCJpZCI6IjY4NzM4In19LCJ1cmwiOnsiZGlzcGxheVVybCI6Imh0dHBzOlwvXC9tcmNuaHVnaGVzLmF0bGFzc2lhbi5uZXRcL3dpa2kifX0sImV4cCI6MTc1ODk2MTk4OCwiaWF0IjoxNzU4OTYxMDg4fQ.5mxvYTksNJxgnzZBLN4_MZ0963vAFyJeGOXQO7uxKV4",    "structuredContext": "{\"license\":{\"active\":true},\"confluence\":{\"editor\":{\"version\":\"v2\"},\"macro\":{\"outputType\":\"html_export\",\"hash\":\"c248b39c-7a1a-4bfe-a2bc-ba22cf0e1bf1\",\"id\":\"c248b39c-7a1a-4bfe-a2bc-ba22cf0e1bf1\"},\"tracing\":{\"traceId\":\"e9f2e1414e8cef4e779d06becee2dd06\",\"spanId\":\"9a2c8e027871d4d9\",\"sampled\":\"0\"},\"content\":{\"type\":\"page\",\"version\":\"4\",\"id\":\"69185\"},\"space\":{\"key\":\"DWPEVID\",\"id\":\"68738\"}},\"url\":{\"displayUrl\":\"https://mrcnhughes.atlassian.net/wiki\"}}",
+    "contentClassifier":"content",
+    "productCtx":"{\"page.id\":\"69185\",\"macro.hash\":\"c248b39c-7a1a-4bfe-a2bc-ba22cf0e1bf1\",\"tracing.sampled\":\"0\",\"page.type\":\"page\",\"macro.localId\":\"90f56029-6292-4133-b201-adc12e9ff323\",\": = | RAW | = :\":\"toolbar=bottom|filename=Citizen Journey Value Stream Map|zoom=fit|revision=1\",\"space.id\":\"68738\",\"tracing.traceId\":\"e9f2e1414e8cef4e779d06becee2dd06\",\"tracing.spanId\":\"9a2c8e027871d4d9\",\"user.isExternalCollaborator\":\"false\",\"space.key\":\"DWPEVID\",\"content.version\":\"4\",\"page.title\":\"Service Design\",\"zoom\":\"fit\",\"macro.body\":\"\",\"macro.truncated\":\"false\",\"content.type\":\"page\",\"output.type\":\"html_export\",\"page.version\":\"4\",\"revision\":\"1\",\"toolbar\":\"bottom\",\"filename\":\"Citizen Journey Value Stream Map\",\"macro.fragmentLocalId\":\"\",\"content.id\":\"69185\",\"macro.id\":\"c248b39c-7a1a-4bfe-a2bc-ba22cf0e1bf1\",\"editor.version\":\"v2\"}",
+    "timeZone":"Europe/London",
+    "origin":"https://mermaid.stratus-addons.com",
+    "hostOrigin":"https://mrcnhughes.atlassian.net",
+    "sandbox":"allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-storage-access-by-user-activation",            "apiMigrations": {
+        "gdpr": true
+    }
+}
+;
+    if(window.AP && window.AP.subCreate) {
+      window._AP.appendConnectAddon(data);
+    } else {
+      require(['ac/create'], function(create){
+        create.appendConnectAddon(data);
+      });
+    }
+
+    // For Confluence App Analytics. This code works in conjunction with CFE's ConnectSupport.js.
+    // Here, we add a listener to the initial HTML page that stores events if the ConnectSupport component
+    // has not mounted yet. In CFE, we process the missed event data and disable this initial listener.
+    const __MAX_EVENT_ARRAY_SIZE__ = 20;
+    const connectAppAnalytics = "ecosystem.confluence.connect.analytics";
+    window.connectHost && window.connectHost.onIframeEstablished((eventData) => {
+      if (!window.__CONFLUENCE_CONNECT_SUPPORT_LOADED__) {
+        let events = JSON.parse(window.localStorage.getItem(connectAppAnalytics)) || [];
+        if (events.length >= __MAX_EVENT_ARRAY_SIZE__) {
+          events.shift();
+        }
+        events.push(eventData);
+        window.localStorage.setItem(connectAppAnalytics, JSON.stringify(events));
+      }
+    });
+
+  }());
+</script>
+
+</div>
+<h2 id="ServiceDesign-TransformingCitizenExperienceThroughEvidenceIntelligence">Transforming Citizen Experience Through Evidence Intelligence</h2><p>The proposed evidence-based identity platform would fundamentally transform how citizens interact with DCS by moving from fragmented, product-specific touchpoints to a unified service experience that recognizes them as complete individuals rather than collections of separate benefit claims. This transformation would be built on the platform's core capability to accumulate evidence once and reuse it across all relevant contexts while maintaining the familiar interfaces citizens expect.</p><p>Under current arrangements, citizens navigate distinct service channels for BasicSupport, FamilyAssist, Personal Independence Payment, and other benefits, each requiring separate evidence submission, identity verification, and case management. A citizen applying for FamilyAssist after receiving BasicSupport must re-submit identical documents like proof of address and identity verification, despite DCS already possessing high-confidence evidence about these attributes. This creates frustration and administrative burden that the proposed evidence-based platform would eliminate.</p><p>The platform's identity resolution service would enable automatic recognition when a citizen applies for additional services. When Sarah Johnson applies for FamilyAssist having previously established a high-confidence identity cluster through her BasicSupport application, the system would immediately correlate her application to existing verified evidence. Rather than starting from zero, the FamilyAssist application would pre-populate with verified information and require only benefit-specific evidence like the child's birth certificate.</p><p>This evidence reuse capability would reduce application processing time from weeks to hours for returning citizens while maintaining rigorous verification standards. The semantic translation service would ensure that evidence verified for BasicSupport purposes is appropriately interpreted for FamilyAssist requirements, respecting legitimate policy differences while eliminating duplicate verification effort.</p><h2 id="ServiceDesign-ProactiveServiceDeliveryThroughEvidencePatternRecognition">Proactive Service Delivery Through Evidence Pattern Recognition</h2><p>The platform would enable a fundamental shift from reactive, application-based services to proactive support that anticipates citizen needs based on evidence patterns accumulated across the DCS federation. When evidence indicates significant changes in citizen circumstances, the platform could automatically assess implications across all relevant benefit areas and initiate supportive contact.</p><p>The award calculation service would continuously monitor evidence confidence levels and trigger recalculation when new information emerges. If HMRC's Real Time Information feed indicates that a BasicSupport recipient's employment has ended, the platform would automatically assess potential entitlement adjustments and identify additional benefits they may now qualify for. Rather than waiting for citizens to discover and apply for enhanced support, the system would initiate proactive outreach explaining their options.</p><p>This proactive approach would be particularly valuable for citizens experiencing rapid circumstance changes. When someone loses employment, becomes disabled, or experiences family breakdown, they may not immediately understand the full range of support available. The platform's comprehensive evidence view would enable identification of potential entitlements that citizens might otherwise miss during stressful periods.</p><p>The investigation queue service would ensure that proactive contact occurs only when evidence confidence supports reliable recommendations. High-confidence evidence patterns would trigger direct support offers, while lower-confidence situations would prompt informational contact that empowers citizens to pursue support if relevant to their circumstances. This would prevent intrusive or inappropriate contact while ensuring citizens receive timely information about available assistance.</p><h2 id="ServiceDesign-Evidence-DrivenDigitalServiceOptimization">Evidence-Driven Digital Service Optimization</h2><p>Digital services would become significantly more sophisticated through the platform's unified evidence model, providing consistent information across all touchpoints while enabling intelligent form completion and verification shortcuts. Citizens accessing their DCS account would see a comprehensive dashboard showing their complete relationship with the department, including all benefits, evidence submitted, decisions made, and upcoming requirements.</p><p>The semantic translation capabilities would enable natural language interaction where citizens can describe circumstances in their own terms rather than navigating complex forms designed around internal system categories. When a citizen reports &quot;I started a new job at ACME Corp earning £28,000 per year,&quot; the platform would automatically translate this into appropriate evidence assertions for different benefit calculations: monthly income for BasicSupport, annual income for tax credit interactions, and weekly income for any relevant legacy benefits.</p><p>Document processing through the evidence ingestion service would dramatically improve the citizen experience of providing supporting evidence. Citizens could upload documents once, and the platform's OCR and semantic extraction capabilities would automatically identify relevant assertions for multiple benefit contexts. A single payslip upload could simultaneously update employment evidence for BasicSupport, provide income verification for FamilyAssist means testing, and satisfy verification requirements for any housing-related benefits.</p><p>The platform's confidence scoring would provide citizens with real-time feedback about evidence quality and completeness. Rather than submitting applications and waiting weeks to discover missing information, citizens would receive immediate guidance about evidence strength and suggestions for additional verification that would accelerate processing or unlock higher benefit amounts.</p><h2 id="ServiceDesign-EnhancedCaseworkerCapabilitiesandCitizenAdvocacy">Enhanced Caseworker Capabilities and Citizen Advocacy</h2><p>The platform would transform caseworker roles from administrative processing toward citizen advocacy and complex case resolution. The unified evidence view would provide caseworkers with comprehensive citizen context previously impossible to achieve, showing not just current circumstances but historical patterns, evidence confidence levels, and potential areas of concern or opportunity.</p><p>When supporting citizens with complex situations involving multiple benefits, employment issues, and health conditions, caseworkers could see the complete evidence picture and understand how different factors interact. This would enable more informed decision-making and better outcomes for citizens with circumstances that don't fit standard processing patterns.</p><p>The investigation queue service would intelligently route complex cases to caseworkers with appropriate skills and experience. Identity fraud cases would go to specialists trained in verification techniques, while complex disability assessments would route to caseworkers with health condition expertise. This skill matching would improve case resolution times while ensuring citizens receive support from staff best equipped to understand their circumstances.</p><p>Caseworkers would benefit from the platform's audit capabilities when supporting citizen appeals or resolving disputes. Complete evidence trails would show exactly how decisions were made, which evidence was considered, and what confidence levels applied. This transparency would enable more effective case resolution and help caseworkers advocate for citizens when evidence suggests different conclusions than initial automated assessments.</p><p>The notification service would ensure caseworkers can provide consistent, accurate information to citizens about their cases. Real-time updates about evidence processing, confidence changes, and award calculations would enable caseworkers to answer citizen queries definitively rather than promising to &quot;look into it&quot; and call back later.</p><h2 id="ServiceDesign-IntegratedMulti-ChannelServiceDelivery">Integrated Multi-Channel Service Delivery</h2><p>The platform's architecture would support seamless integration across all service channels while maintaining consistent citizen experience and evidence management. Whether citizens interact through digital self-service, telephone support, face-to-face appointments, or third-party advocacy services, their information and progress would remain consistent and up-to-date.</p><p>The external integration gateway would enable secure evidence sharing with partner organizations like local authorities, healthcare providers, and voluntary sector organizations. Citizens could authorize specific organizations to access relevant evidence, enabling coordinated service delivery without requiring repeated information gathering. A citizen applying for social care support could authorize the local authority to access verified income and health information from their DCS evidence cluster, streamlining assessment processes.</p><p>Multi-channel integration would extend to evidence submission, allowing citizens to provide information through their preferred channel without creating disconnected records. Documents submitted at a face-to-face appointment would be processed through the same evidence ingestion pipeline as online uploads, ensuring consistent quality assessment and evidence availability across all future interactions.</p><p>The platform's event-driven architecture would ensure that service interactions across channels are coordinated and consistent. When a citizen makes a change through one channel, all relevant services and touchpoints would update appropriately, preventing conflicting information or duplicated effort. A citizen who reports an address change via telephone would see their new address immediately reflected in their online account and any pending applications.</p><h2 id="ServiceDesign-Outcome-FocusedServiceInnovation">Outcome-Focused Service Innovation</h2><p>Service design principles would prioritize citizen outcomes rather than internal administrative efficiency, measuring success by how effectively citizens receive appropriate support for their circumstances rather than how efficiently individual benefits are processed. The platform's evidence-based approach would enable sophisticated outcome measurement by tracking how citizen circumstances change over time and how effectively DCS support contributes to positive outcomes.</p><p>The award calculation service's simulation capabilities would enable &quot;what-if&quot; scenario modeling that helps citizens understand how different choices might affect their benefit entitlement. Citizens considering whether to accept part-time employment could see projected impact on their BasicSupport award, housing benefit, and council tax support before making decisions that affect their financial security.</p><p>Evidence pattern analysis would identify intervention opportunities that can prevent crisis situations. When evidence indicates gradual income decline or increasing debt obligations, the platform could trigger early intervention contact offering budgeting support, debt advice, or information about additional available benefits before citizens reach crisis points.</p><p>The platform would enable continuous service improvement through evidence-based analysis of which interventions prove most effective for different citizen circumstances. Longitudinal analysis of evidence patterns could identify which support approaches lead to better outcomes, enabling data-driven service design decisions that improve effectiveness over time.</p><p>Cross-product evidence correlation would provide insights into citizen journey patterns that inform service design improvements. Understanding which citizens typically progress from one benefit to another would enable proactive service design that anticipates needs and reduces friction at transition points. Citizens moving from unemployment benefits to disability support would receive coordinated assistance that recognizes their complete circumstances rather than treating each benefit as an isolated interaction.</p><h2 id="ServiceDesign-Privacy-PreservingPersonalization">Privacy-Preserving Personalization</h2><p>The platform would deliver personalized service experiences while maintaining strong privacy protections through its decentralized DID architecture and granular consent management. Citizens would control which services can access their evidence and can maintain separation between different aspects of their government interactions when desired for privacy reasons.</p><p>The confidence-based decision making would ensure that personalization enhances rather than compromises service quality. High-confidence evidence would enable faster processing and reduced verification requirements, while lower-confidence situations would receive additional human attention to ensure appropriate outcomes. This approach would prevent algorithmic bias from disadvantaging citizens while enabling efficient processing for straightforward cases.</p><p>Evidence sharing with partner organizations would operate under citizen control with clear audit trails showing exactly what information was shared, with whom, and for what purpose. Citizens could review and revoke sharing permissions while understanding how evidence sharing supports coordinated service delivery across government and voluntary sector organizations.</p><p>The platform's semantic reasoning capabilities would enable sophisticated fraud detection without requiring invasive surveillance or predictive profiling. Evidence correlation would focus on factual verification rather than behavioral prediction, supporting effective fraud prevention while respecting citizen privacy and autonomy. Citizens would benefit from fraud prevention that protects the integrity of benefit systems without creating intrusive monitoring or stigmatizing verification processes.</p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/69185/103371">Citizen Journey Value Stream Map</a> (text/plain)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Sept 27, 2025 09:18</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DCS Evidence-Based Identity Platform : Sequence Diagrams</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DCS Evidence-Based Identity Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Building-Evidence-Based-Services-for-a-Unified-Citizen-Experience_68910.html">Building Evidence-Based Services for a Unified Citizen Experience</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Process-Flows_69151.html">Process Flows</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DCS Evidence-Based Identity Platform : Sequence Diagrams
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Christian Hughes</span>, last modified on Sept 15, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="SequenceDiagrams-SequenceDiagrams">Sequence Diagrams</h1><h2 id="SequenceDiagrams-CoreEvidenceProcessingWorkflows">Core Evidence Processing Workflows</h2><p>The evidence-based identity platform orchestrates complex interactions between multiple services to transform citizen evidence into confident benefit decisions. The sequence diagrams illustrate how the platform's microservices coordinate to handle different scenarios while maintaining audit trails and managing uncertainty through confidence-based processing.</p><p>Each sequence represents a complete end-to-end workflow showing how evidence flows from initial submission through identity resolution, semantic translation, award calculation, and citizen notification. The diagrams demonstrate the platform's event-driven architecture where services communicate through well-defined APIs and message queues rather than tight coupling.</p><h3 id="SequenceDiagrams-NewBasicSupportApplicationApplication">New BasicSupport Application Application</h3><p>This fundamental workflow demonstrates how the platform processes a citizen's first interaction with DCS services, establishing an identity cluster and calculating entitlements based on available evidence confidence levels.</p><p /><div class="ap-container" id="ap-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud3554757404208979104">
+
+  <div class="ap-content " id="embedded-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud3554757404208979104"></div>
+  <script nonce="68d79dbbd0103abe35ea29aaae309458" class="ap-iframe-body-script">
+  (function(){
+    var data = {
+    "addon_key":"com.stratusaddons.confluence.plugins.mermaid",
+    "uniqueKey":"com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud3554757404208979104",
+    "key":"mermaid-cloud",
+     "moduleType":"dynamicContentMacros",      "moduleLocation":"content",         "cp":"/wiki",
+            "general":"",
+    "w":"100%",
+    "h":"1px",
+    "url":"https://mermaid.stratus-addons.com/viewer.html?pageId=103010&filename=Submit+UC+Application&revision=3&zoom=fit&toolbar=bottom&repository=&xdm_e=https%3A%2F%2Fmrcnhughes.atlassian.net&xdm_c=channel-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud3554757404208979104&cp=%2Fwiki&xdm_deprecated_addon_key_do_not_use=com.stratusaddons.confluence.plugins.mermaid&lic=active&cv=1000.0.0-f1c99b2191e8&traceId=61196b5aca0b0be1dc16b0815a104112&spanId=1c2cf4054f18a4ec&traceSampled=0&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiZmM3M2IwNTlhNWZkMWFkMDQyNzdlYWIwMTEwY2M1NzU0NDA5NDZhZGZjYTNjYzZkNTZmMTBjNWI3ODdkNjZiNCIsImlzcyI6IjIxOGQwY2QyLWUxZmQtMzlkYy04ZDI2LTk2MzZlMTQ4NDc0NSIsImNvbnRleHQiOnt9LCJleHAiOjE3NTg5NjEyNzEsImlhdCI6MTc1ODk2MTA5MX0.mFr4_pmLHhKVptSPOsC0_IPQJeRlztXrerkCQTRgWf4",
+     "contextJwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiY29udGV4dC1xc2giLCJpc3MiOiIyMThkMGNkMi1lMWZkLTM5ZGMtOGQyNi05NjM2ZTE0ODQ3NDUiLCJjb250ZXh0Ijp7ImxpY2Vuc2UiOnsiYWN0aXZlIjp0cnVlfSwiY29uZmx1ZW5jZSI6eyJlZGl0b3IiOnsidmVyc2lvbiI6InYyIn0sIm1hY3JvIjp7Im91dHB1dFR5cGUiOiJodG1sX2V4cG9ydCIsImhhc2giOiJiNGI2ZjY4NC1hZGFjLTRjNTYtYThmMS00ZGIzMDA4OWUyMzciLCJpZCI6ImI0YjZmNjg0LWFkYWMtNGM1Ni1hOGYxLTRkYjMwMDg5ZTIzNyJ9LCJ0cmFjaW5nIjp7InRyYWNlSWQiOiI2MTE5NmI1YWNhMGIwYmUxZGMxNmIwODE1YTEwNDExMiIsInNwYW5JZCI6IjFjMmNmNDA1NGYxOGE0ZWMiLCJzYW1wbGVkIjoiMCJ9LCJjb250ZW50Ijp7InR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjQiLCJpZCI6IjEwMzAxMCJ9LCJzcGFjZSI6eyJrZXkiOiJEV1BFVklEIiwiaWQiOiI2ODczOCJ9fSwidXJsIjp7ImRpc3BsYXlVcmwiOiJodHRwczpcL1wvbXJjbmh1Z2hlcy5hdGxhc3NpYW4ubmV0XC93aWtpIn19LCJleHAiOjE3NTg5NjE5OTEsImlhdCI6MTc1ODk2MTA5MX0.c9s2gZBIYFXI6caYGA6L5FOcC-1eXsO-6stgxHjiwOE",    "structuredContext": "{\"license\":{\"active\":true},\"confluence\":{\"editor\":{\"version\":\"v2\"},\"macro\":{\"outputType\":\"html_export\",\"hash\":\"b4b6f684-adac-4c56-a8f1-4db30089e237\",\"id\":\"b4b6f684-adac-4c56-a8f1-4db30089e237\"},\"tracing\":{\"traceId\":\"61196b5aca0b0be1dc16b0815a104112\",\"spanId\":\"1c2cf4054f18a4ec\",\"sampled\":\"0\"},\"content\":{\"type\":\"page\",\"version\":\"4\",\"id\":\"103010\"},\"space\":{\"key\":\"DWPEVID\",\"id\":\"68738\"}},\"url\":{\"displayUrl\":\"https://mrcnhughes.atlassian.net/wiki\"}}",
+    "contentClassifier":"content",
+    "productCtx":"{\"page.id\":\"103010\",\"macro.hash\":\"b4b6f684-adac-4c56-a8f1-4db30089e237\",\"tracing.sampled\":\"0\",\"page.type\":\"page\",\"macro.localId\":\"0371bd4f-b28c-41f7-8df4-669daa306876\",\": = | RAW | = :\":\"toolbar=bottom|filename=Submit UC Application|zoom=fit|revision=3\",\"space.id\":\"68738\",\"tracing.traceId\":\"61196b5aca0b0be1dc16b0815a104112\",\"tracing.spanId\":\"1c2cf4054f18a4ec\",\"user.isExternalCollaborator\":\"false\",\"space.key\":\"DWPEVID\",\"content.version\":\"4\",\"page.title\":\"Sequence Diagrams\",\"zoom\":\"fit\",\"macro.body\":\"\",\"macro.truncated\":\"false\",\"content.type\":\"page\",\"output.type\":\"html_export\",\"page.version\":\"4\",\"revision\":\"3\",\"toolbar\":\"bottom\",\"filename\":\"Submit UC Application\",\"macro.fragmentLocalId\":\"\",\"content.id\":\"103010\",\"macro.id\":\"b4b6f684-adac-4c56-a8f1-4db30089e237\",\"editor.version\":\"v2\"}",
+    "timeZone":"Europe/London",
+    "origin":"https://mermaid.stratus-addons.com",
+    "hostOrigin":"https://mrcnhughes.atlassian.net",
+    "sandbox":"allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-storage-access-by-user-activation",            "apiMigrations": {
+        "gdpr": true
+    }
+}
+;
+    if(window.AP && window.AP.subCreate) {
+      window._AP.appendConnectAddon(data);
+    } else {
+      require(['ac/create'], function(create){
+        create.appendConnectAddon(data);
+      });
+    }
+
+    // For Confluence App Analytics. This code works in conjunction with CFE's ConnectSupport.js.
+    // Here, we add a listener to the initial HTML page that stores events if the ConnectSupport component
+    // has not mounted yet. In CFE, we process the missed event data and disable this initial listener.
+    const __MAX_EVENT_ARRAY_SIZE__ = 20;
+    const connectAppAnalytics = "ecosystem.confluence.connect.analytics";
+    window.connectHost && window.connectHost.onIframeEstablished((eventData) => {
+      if (!window.__CONFLUENCE_CONNECT_SUPPORT_LOADED__) {
+        let events = JSON.parse(window.localStorage.getItem(connectAppAnalytics)) || [];
+        if (events.length >= __MAX_EVENT_ARRAY_SIZE__) {
+          events.shift();
+        }
+        events.push(eventData);
+        window.localStorage.setItem(connectAppAnalytics, JSON.stringify(events));
+      }
+    });
+
+  }());
+</script>
+
+</div>
+<p>This sequence illustrates the platform's confidence-based processing where insufficient initial evidence triggers additional verification rather than automatic rejection. The workflow demonstrates how multiple evidence sources combine to build identity confidence while maintaining complete audit trails.</p><p /><h3 id="SequenceDiagrams-Cross-ProductEvidenceReuse">Cross-Product Evidence Reuse</h3><p>The evidence reuse workflow shows the platform's core value proposition where citizens applying for additional benefits leverage previously verified evidence to streamline processing dramatically.</p><div class="ap-container" id="ap-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud5584090604394102691">
+
+  <div class="ap-content " id="embedded-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud5584090604394102691"></div>
+  <script nonce="68d79dbbd0103abe35ea29aaae309458" class="ap-iframe-body-script">
+  (function(){
+    var data = {
+    "addon_key":"com.stratusaddons.confluence.plugins.mermaid",
+    "uniqueKey":"com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud5584090604394102691",
+    "key":"mermaid-cloud",
+     "moduleType":"dynamicContentMacros",      "moduleLocation":"content",         "cp":"/wiki",
+            "general":"",
+    "w":"100%",
+    "h":"1px",
+    "url":"https://mermaid.stratus-addons.com/viewer.html?pageId=103010&filename=Cross+Product+Benefit+Re-Use&revision=2&zoom=fit&toolbar=bottom&repository=&xdm_e=https%3A%2F%2Fmrcnhughes.atlassian.net&xdm_c=channel-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud5584090604394102691&cp=%2Fwiki&xdm_deprecated_addon_key_do_not_use=com.stratusaddons.confluence.plugins.mermaid&lic=active&cv=1000.0.0-f1c99b2191e8&traceId=18e82cfbb1f1d8bb4c098cdd99a5e1d0&spanId=6f6b5fe9c62fbebd&traceSampled=0&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiODkwZTRhMzNlMDc5ODViYjc4NzY3ZTlhYjg3MjhmNDcwYTAxZGQxMDE3N2QzMjI2NDI0YTYxYTcwNTg0NjJmZSIsImlzcyI6IjIxOGQwY2QyLWUxZmQtMzlkYy04ZDI2LTk2MzZlMTQ4NDc0NSIsImNvbnRleHQiOnt9LCJleHAiOjE3NTg5NjEyNzEsImlhdCI6MTc1ODk2MTA5MX0.gp1Hm8ynvPHVkwVDNaBXScTVHcS1MhWNvtHhVOkCKrc",
+     "contextJwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiY29udGV4dC1xc2giLCJpc3MiOiIyMThkMGNkMi1lMWZkLTM5ZGMtOGQyNi05NjM2ZTE0ODQ3NDUiLCJjb250ZXh0Ijp7ImxpY2Vuc2UiOnsiYWN0aXZlIjp0cnVlfSwiY29uZmx1ZW5jZSI6eyJlZGl0b3IiOnsidmVyc2lvbiI6InYyIn0sIm1hY3JvIjp7Im91dHB1dFR5cGUiOiJodG1sX2V4cG9ydCIsImhhc2giOiJjYTQ2ODFhYi1iMjMwLTRjNjYtYjBhZC01YjAzNDBhODU0YmEiLCJpZCI6ImNhNDY4MWFiLWIyMzAtNGM2Ni1iMGFkLTViMDM0MGE4NTRiYSJ9LCJ0cmFjaW5nIjp7InRyYWNlSWQiOiIxOGU4MmNmYmIxZjFkOGJiNGMwOThjZGQ5OWE1ZTFkMCIsInNwYW5JZCI6IjZmNmI1ZmU5YzYyZmJlYmQiLCJzYW1wbGVkIjoiMCJ9LCJjb250ZW50Ijp7InR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjQiLCJpZCI6IjEwMzAxMCJ9LCJzcGFjZSI6eyJrZXkiOiJEV1BFVklEIiwiaWQiOiI2ODczOCJ9fSwidXJsIjp7ImRpc3BsYXlVcmwiOiJodHRwczpcL1wvbXJjbmh1Z2hlcy5hdGxhc3NpYW4ubmV0XC93aWtpIn19LCJleHAiOjE3NTg5NjE5OTEsImlhdCI6MTc1ODk2MTA5MX0.pRxBdVoQEKX9mCnVBrW8yxRpFNRkXOzEevqGvkDINU0",    "structuredContext": "{\"license\":{\"active\":true},\"confluence\":{\"editor\":{\"version\":\"v2\"},\"macro\":{\"outputType\":\"html_export\",\"hash\":\"ca4681ab-b230-4c66-b0ad-5b0340a854ba\",\"id\":\"ca4681ab-b230-4c66-b0ad-5b0340a854ba\"},\"tracing\":{\"traceId\":\"18e82cfbb1f1d8bb4c098cdd99a5e1d0\",\"spanId\":\"6f6b5fe9c62fbebd\",\"sampled\":\"0\"},\"content\":{\"type\":\"page\",\"version\":\"4\",\"id\":\"103010\"},\"space\":{\"key\":\"DWPEVID\",\"id\":\"68738\"}},\"url\":{\"displayUrl\":\"https://mrcnhughes.atlassian.net/wiki\"}}",
+    "contentClassifier":"content",
+    "productCtx":"{\"page.id\":\"103010\",\"macro.hash\":\"ca4681ab-b230-4c66-b0ad-5b0340a854ba\",\"tracing.sampled\":\"0\",\"page.type\":\"page\",\"macro.localId\":\"c8b7b344-d5e3-4d4d-a338-6f60b9aa79c3\",\": = | RAW | = :\":\"toolbar=bottom|filename=Cross Product Benefit Re-Use|zoom=fit|revision=2\",\"space.id\":\"68738\",\"tracing.traceId\":\"18e82cfbb1f1d8bb4c098cdd99a5e1d0\",\"tracing.spanId\":\"6f6b5fe9c62fbebd\",\"user.isExternalCollaborator\":\"false\",\"space.key\":\"DWPEVID\",\"content.version\":\"4\",\"page.title\":\"Sequence Diagrams\",\"zoom\":\"fit\",\"macro.body\":\"\",\"macro.truncated\":\"false\",\"content.type\":\"page\",\"output.type\":\"html_export\",\"page.version\":\"4\",\"revision\":\"2\",\"toolbar\":\"bottom\",\"filename\":\"Cross Product Benefit Re-Use\",\"macro.fragmentLocalId\":\"\",\"content.id\":\"103010\",\"macro.id\":\"ca4681ab-b230-4c66-b0ad-5b0340a854ba\",\"editor.version\":\"v2\"}",
+    "timeZone":"Europe/London",
+    "origin":"https://mermaid.stratus-addons.com",
+    "hostOrigin":"https://mrcnhughes.atlassian.net",
+    "sandbox":"allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-storage-access-by-user-activation",            "apiMigrations": {
+        "gdpr": true
+    }
+}
+;
+    if(window.AP && window.AP.subCreate) {
+      window._AP.appendConnectAddon(data);
+    } else {
+      require(['ac/create'], function(create){
+        create.appendConnectAddon(data);
+      });
+    }
+
+    // For Confluence App Analytics. This code works in conjunction with CFE's ConnectSupport.js.
+    // Here, we add a listener to the initial HTML page that stores events if the ConnectSupport component
+    // has not mounted yet. In CFE, we process the missed event data and disable this initial listener.
+    const __MAX_EVENT_ARRAY_SIZE__ = 20;
+    const connectAppAnalytics = "ecosystem.confluence.connect.analytics";
+    window.connectHost && window.connectHost.onIframeEstablished((eventData) => {
+      if (!window.__CONFLUENCE_CONNECT_SUPPORT_LOADED__) {
+        let events = JSON.parse(window.localStorage.getItem(connectAppAnalytics)) || [];
+        if (events.length >= __MAX_EVENT_ARRAY_SIZE__) {
+          events.shift();
+        }
+        events.push(eventData);
+        window.localStorage.setItem(connectAppAnalytics, JSON.stringify(events));
+      }
+    });
+
+  }());
+</script>
+
+</div>
+<p>This workflow demonstrates how semantic translation enables evidence verified for BasicSupport to be appropriately interpreted for FamilyAssist assessment, reducing citizen burden while maintaining policy-specific calculation accuracy.</p><p /><h3 id="SequenceDiagrams-RetrospectiveChangeofCircumstances">Retrospective Change of Circumstances</h3><p>External evidence updates trigger automatic recalculation workflows that handle historical changes without requiring citizen action, demonstrating the platform's proactive approach to maintaining award accuracy.</p><div class="ap-container" id="ap-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud6139920294115758411">
+
+  <div class="ap-content " id="embedded-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud6139920294115758411"></div>
+  <script nonce="68d79dbbd0103abe35ea29aaae309458" class="ap-iframe-body-script">
+  (function(){
+    var data = {
+    "addon_key":"com.stratusaddons.confluence.plugins.mermaid",
+    "uniqueKey":"com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud6139920294115758411",
+    "key":"mermaid-cloud",
+     "moduleType":"dynamicContentMacros",      "moduleLocation":"content",         "cp":"/wiki",
+            "general":"",
+    "w":"100%",
+    "h":"1px",
+    "url":"https://mermaid.stratus-addons.com/viewer.html?pageId=103010&filename=Retrospective+CoC&revision=2&zoom=fit&toolbar=bottom&repository=&xdm_e=https%3A%2F%2Fmrcnhughes.atlassian.net&xdm_c=channel-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud6139920294115758411&cp=%2Fwiki&xdm_deprecated_addon_key_do_not_use=com.stratusaddons.confluence.plugins.mermaid&lic=active&cv=1000.0.0-f1c99b2191e8&traceId=4838da04f85ed78a8210c9c943eb519d&spanId=53b60b76ee7a0178&traceSampled=0&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiNjUwMGE2YWE5ZDIxM2M4NWM1NDkxOGY1NDAxZTc0OTkzMDAxNzJmYWRlYjM2NWE1NDQ5YTI3ZWU1MTNiOWE0ZCIsImlzcyI6IjIxOGQwY2QyLWUxZmQtMzlkYy04ZDI2LTk2MzZlMTQ4NDc0NSIsImNvbnRleHQiOnt9LCJleHAiOjE3NTg5NjEyNzEsImlhdCI6MTc1ODk2MTA5MX0.fkEWtVVWkn0WyQsqaPiFnW7nGAF8DKsrd40x3UBIQMw",
+     "contextJwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiY29udGV4dC1xc2giLCJpc3MiOiIyMThkMGNkMi1lMWZkLTM5ZGMtOGQyNi05NjM2ZTE0ODQ3NDUiLCJjb250ZXh0Ijp7ImxpY2Vuc2UiOnsiYWN0aXZlIjp0cnVlfSwiY29uZmx1ZW5jZSI6eyJlZGl0b3IiOnsidmVyc2lvbiI6InYyIn0sIm1hY3JvIjp7Im91dHB1dFR5cGUiOiJodG1sX2V4cG9ydCIsImhhc2giOiIxZjgxMTRjZC1iNTdjLTRkZjYtYjMxMC1kMGM4NGJhZDU1YjgiLCJpZCI6IjFmODExNGNkLWI1N2MtNGRmNi1iMzEwLWQwYzg0YmFkNTViOCJ9LCJ0cmFjaW5nIjp7InRyYWNlSWQiOiI0ODM4ZGEwNGY4NWVkNzhhODIxMGM5Yzk0M2ViNTE5ZCIsInNwYW5JZCI6IjUzYjYwYjc2ZWU3YTAxNzgiLCJzYW1wbGVkIjoiMCJ9LCJjb250ZW50Ijp7InR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjQiLCJpZCI6IjEwMzAxMCJ9LCJzcGFjZSI6eyJrZXkiOiJEV1BFVklEIiwiaWQiOiI2ODczOCJ9fSwidXJsIjp7ImRpc3BsYXlVcmwiOiJodHRwczpcL1wvbXJjbmh1Z2hlcy5hdGxhc3NpYW4ubmV0XC93aWtpIn19LCJleHAiOjE3NTg5NjE5OTEsImlhdCI6MTc1ODk2MTA5MX0.51adVBYS7JR-5198iyQvQDLl8sokfMxEMdEBQ-kgq50",    "structuredContext": "{\"license\":{\"active\":true},\"confluence\":{\"editor\":{\"version\":\"v2\"},\"macro\":{\"outputType\":\"html_export\",\"hash\":\"1f8114cd-b57c-4df6-b310-d0c84bad55b8\",\"id\":\"1f8114cd-b57c-4df6-b310-d0c84bad55b8\"},\"tracing\":{\"traceId\":\"4838da04f85ed78a8210c9c943eb519d\",\"spanId\":\"53b60b76ee7a0178\",\"sampled\":\"0\"},\"content\":{\"type\":\"page\",\"version\":\"4\",\"id\":\"103010\"},\"space\":{\"key\":\"DWPEVID\",\"id\":\"68738\"}},\"url\":{\"displayUrl\":\"https://mrcnhughes.atlassian.net/wiki\"}}",
+    "contentClassifier":"content",
+    "productCtx":"{\"page.id\":\"103010\",\"macro.hash\":\"1f8114cd-b57c-4df6-b310-d0c84bad55b8\",\"tracing.sampled\":\"0\",\"page.type\":\"page\",\"macro.localId\":\"2825586e-afdc-4d32-9694-9a02571e4a18\",\": = | RAW | = :\":\"toolbar=bottom|filename=Retrospective CoC|zoom=fit|revision=2\",\"space.id\":\"68738\",\"tracing.traceId\":\"4838da04f85ed78a8210c9c943eb519d\",\"tracing.spanId\":\"53b60b76ee7a0178\",\"user.isExternalCollaborator\":\"false\",\"space.key\":\"DWPEVID\",\"content.version\":\"4\",\"page.title\":\"Sequence Diagrams\",\"zoom\":\"fit\",\"macro.body\":\"\",\"macro.truncated\":\"false\",\"content.type\":\"page\",\"output.type\":\"html_export\",\"page.version\":\"4\",\"revision\":\"2\",\"toolbar\":\"bottom\",\"filename\":\"Retrospective CoC\",\"macro.fragmentLocalId\":\"\",\"content.id\":\"103010\",\"macro.id\":\"1f8114cd-b57c-4df6-b310-d0c84bad55b8\",\"editor.version\":\"v2\"}",
+    "timeZone":"Europe/London",
+    "origin":"https://mermaid.stratus-addons.com",
+    "hostOrigin":"https://mrcnhughes.atlassian.net",
+    "sandbox":"allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-storage-access-by-user-activation",            "apiMigrations": {
+        "gdpr": true
+    }
+}
+;
+    if(window.AP && window.AP.subCreate) {
+      window._AP.appendConnectAddon(data);
+    } else {
+      require(['ac/create'], function(create){
+        create.appendConnectAddon(data);
+      });
+    }
+
+    // For Confluence App Analytics. This code works in conjunction with CFE's ConnectSupport.js.
+    // Here, we add a listener to the initial HTML page that stores events if the ConnectSupport component
+    // has not mounted yet. In CFE, we process the missed event data and disable this initial listener.
+    const __MAX_EVENT_ARRAY_SIZE__ = 20;
+    const connectAppAnalytics = "ecosystem.confluence.connect.analytics";
+    window.connectHost && window.connectHost.onIframeEstablished((eventData) => {
+      if (!window.__CONFLUENCE_CONNECT_SUPPORT_LOADED__) {
+        let events = JSON.parse(window.localStorage.getItem(connectAppAnalytics)) || [];
+        if (events.length >= __MAX_EVENT_ARRAY_SIZE__) {
+          events.shift();
+        }
+        events.push(eventData);
+        window.localStorage.setItem(connectAppAnalytics, JSON.stringify(events));
+      }
+    });
+
+  }());
+</script>
+
+</div>
+<p>This sequence shows how external evidence automatically triggers historical recalculation while routing significant discrepancies through human review to ensure appropriate handling of complex financial impacts.</p><p /><h2 id="SequenceDiagrams-AdvancedIntegrationScenarios">Advanced Integration Scenarios</h2><h3 id="SequenceDiagrams-DigitalIdentityCorrelationAcrossServices">Digital Identity Correlation Across Services</h3><p>This workflow demonstrates how the platform handles citizens who use multiple digital identities while preserving their privacy choices about service correlation.</p><div class="ap-container" id="ap-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud88733335931340536">
+
+  <div class="ap-content " id="embedded-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud88733335931340536"></div>
+  <script nonce="68d79dbbd0103abe35ea29aaae309458" class="ap-iframe-body-script">
+  (function(){
+    var data = {
+    "addon_key":"com.stratusaddons.confluence.plugins.mermaid",
+    "uniqueKey":"com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud88733335931340536",
+    "key":"mermaid-cloud",
+     "moduleType":"dynamicContentMacros",      "moduleLocation":"content",         "cp":"/wiki",
+            "general":"",
+    "w":"100%",
+    "h":"1px",
+    "url":"https://mermaid.stratus-addons.com/viewer.html?pageId=103010&filename=Digital+Identity+Correlation+Across+Services&revision=2&zoom=fit&toolbar=bottom&repository=&xdm_e=https%3A%2F%2Fmrcnhughes.atlassian.net&xdm_c=channel-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud88733335931340536&cp=%2Fwiki&xdm_deprecated_addon_key_do_not_use=com.stratusaddons.confluence.plugins.mermaid&lic=active&cv=1000.0.0-f1c99b2191e8&traceId=136d0111080893d144d1b9577dbd7cc7&spanId=b94fedb8f7617cb0&traceSampled=0&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiMTU0ODY4NTY5ZjhlZTM5NTZiMDBmNjVmMzBiODFhOTkyOTUzZTg4MDljODBmMmIxNTRhZWQ4ZmU1ZmE1NWIwMyIsImlzcyI6IjIxOGQwY2QyLWUxZmQtMzlkYy04ZDI2LTk2MzZlMTQ4NDc0NSIsImNvbnRleHQiOnt9LCJleHAiOjE3NTg5NjEyNzEsImlhdCI6MTc1ODk2MTA5MX0.qUDkNAoZWfqQ6icucrtIIhnnExBbfP_OIy2a6X4QsyE",
+     "contextJwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiY29udGV4dC1xc2giLCJpc3MiOiIyMThkMGNkMi1lMWZkLTM5ZGMtOGQyNi05NjM2ZTE0ODQ3NDUiLCJjb250ZXh0Ijp7ImxpY2Vuc2UiOnsiYWN0aXZlIjp0cnVlfSwiY29uZmx1ZW5jZSI6eyJlZGl0b3IiOnsidmVyc2lvbiI6InYyIn0sIm1hY3JvIjp7Im91dHB1dFR5cGUiOiJodG1sX2V4cG9ydCIsImhhc2giOiJjNTBjZjFmMS00MWNiLTQwYWYtOTczOC1mNDFkYTc0MDg2YTciLCJpZCI6ImM1MGNmMWYxLTQxY2ItNDBhZi05NzM4LWY0MWRhNzQwODZhNyJ9LCJ0cmFjaW5nIjp7InRyYWNlSWQiOiIxMzZkMDExMTA4MDg5M2QxNDRkMWI5NTc3ZGJkN2NjNyIsInNwYW5JZCI6ImI5NGZlZGI4Zjc2MTdjYjAiLCJzYW1wbGVkIjoiMCJ9LCJjb250ZW50Ijp7InR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjQiLCJpZCI6IjEwMzAxMCJ9LCJzcGFjZSI6eyJrZXkiOiJEV1BFVklEIiwiaWQiOiI2ODczOCJ9fSwidXJsIjp7ImRpc3BsYXlVcmwiOiJodHRwczpcL1wvbXJjbmh1Z2hlcy5hdGxhc3NpYW4ubmV0XC93aWtpIn19LCJleHAiOjE3NTg5NjE5OTEsImlhdCI6MTc1ODk2MTA5MX0.k6QKmayq03WtLrKViKInQTjAoVBJiv6rl2gfKYKzkLc",    "structuredContext": "{\"license\":{\"active\":true},\"confluence\":{\"editor\":{\"version\":\"v2\"},\"macro\":{\"outputType\":\"html_export\",\"hash\":\"c50cf1f1-41cb-40af-9738-f41da74086a7\",\"id\":\"c50cf1f1-41cb-40af-9738-f41da74086a7\"},\"tracing\":{\"traceId\":\"136d0111080893d144d1b9577dbd7cc7\",\"spanId\":\"b94fedb8f7617cb0\",\"sampled\":\"0\"},\"content\":{\"type\":\"page\",\"version\":\"4\",\"id\":\"103010\"},\"space\":{\"key\":\"DWPEVID\",\"id\":\"68738\"}},\"url\":{\"displayUrl\":\"https://mrcnhughes.atlassian.net/wiki\"}}",
+    "contentClassifier":"content",
+    "productCtx":"{\"page.id\":\"103010\",\"macro.hash\":\"c50cf1f1-41cb-40af-9738-f41da74086a7\",\"tracing.sampled\":\"0\",\"page.type\":\"page\",\"macro.localId\":\"d0ca3adb-6c0c-4757-b671-d0cb538bee9a\",\": = | RAW | = :\":\"toolbar=bottom|filename=Digital Identity Correlation Across Services|zoom=fit|revision=2\",\"space.id\":\"68738\",\"tracing.traceId\":\"136d0111080893d144d1b9577dbd7cc7\",\"tracing.spanId\":\"b94fedb8f7617cb0\",\"user.isExternalCollaborator\":\"false\",\"space.key\":\"DWPEVID\",\"content.version\":\"4\",\"page.title\":\"Sequence Diagrams\",\"zoom\":\"fit\",\"macro.body\":\"\",\"macro.truncated\":\"false\",\"content.type\":\"page\",\"output.type\":\"html_export\",\"page.version\":\"4\",\"revision\":\"2\",\"toolbar\":\"bottom\",\"filename\":\"Digital Identity Correlation Across Services\",\"macro.fragmentLocalId\":\"\",\"content.id\":\"103010\",\"macro.id\":\"c50cf1f1-41cb-40af-9738-f41da74086a7\",\"editor.version\":\"v2\"}",
+    "timeZone":"Europe/London",
+    "origin":"https://mermaid.stratus-addons.com",
+    "hostOrigin":"https://mrcnhughes.atlassian.net",
+    "sandbox":"allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-storage-access-by-user-activation",            "apiMigrations": {
+        "gdpr": true
+    }
+}
+;
+    if(window.AP && window.AP.subCreate) {
+      window._AP.appendConnectAddon(data);
+    } else {
+      require(['ac/create'], function(create){
+        create.appendConnectAddon(data);
+      });
+    }
+
+    // For Confluence App Analytics. This code works in conjunction with CFE's ConnectSupport.js.
+    // Here, we add a listener to the initial HTML page that stores events if the ConnectSupport component
+    // has not mounted yet. In CFE, we process the missed event data and disable this initial listener.
+    const __MAX_EVENT_ARRAY_SIZE__ = 20;
+    const connectAppAnalytics = "ecosystem.confluence.connect.analytics";
+    window.connectHost && window.connectHost.onIframeEstablished((eventData) => {
+      if (!window.__CONFLUENCE_CONNECT_SUPPORT_LOADED__) {
+        let events = JSON.parse(window.localStorage.getItem(connectAppAnalytics)) || [];
+        if (events.length >= __MAX_EVENT_ARRAY_SIZE__) {
+          events.shift();
+        }
+        events.push(eventData);
+        window.localStorage.setItem(connectAppAnalytics, JSON.stringify(events));
+      }
+    });
+
+  }());
+</script>
+
+</div>
+<h3 id="SequenceDiagrams-ExternalPartnerEvidenceSubmission">External Partner Evidence Submission</h3><p>High-volume partner integration demonstrates how the platform handles bulk evidence feeds while maintaining quality assessment and correlation accuracy.</p><div class="ap-container" id="ap-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud3590295312565793028">
+
+  <div class="ap-content " id="embedded-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud3590295312565793028"></div>
+  <script nonce="68d79dbbd0103abe35ea29aaae309458" class="ap-iframe-body-script">
+  (function(){
+    var data = {
+    "addon_key":"com.stratusaddons.confluence.plugins.mermaid",
+    "uniqueKey":"com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud3590295312565793028",
+    "key":"mermaid-cloud",
+     "moduleType":"dynamicContentMacros",      "moduleLocation":"content",         "cp":"/wiki",
+            "general":"",
+    "w":"100%",
+    "h":"1px",
+    "url":"https://mermaid.stratus-addons.com/viewer.html?pageId=103010&filename=External+Partner+Evidence+Submission&revision=1&zoom=fit&toolbar=bottom&repository=&xdm_e=https%3A%2F%2Fmrcnhughes.atlassian.net&xdm_c=channel-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud3590295312565793028&cp=%2Fwiki&xdm_deprecated_addon_key_do_not_use=com.stratusaddons.confluence.plugins.mermaid&lic=active&cv=1000.0.0-f1c99b2191e8&traceId=26842e6433943fb5d603e05d84726305&spanId=b40494537134ed7e&traceSampled=0&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiMmNlMTVhNDk1YjJmOWMwOTVkMTcxZDlmY2YyOGJmNjFkYjRhMjAxMDE3MThmYTVlY2UzZDhiODAyMmMzYmNkZiIsImlzcyI6IjIxOGQwY2QyLWUxZmQtMzlkYy04ZDI2LTk2MzZlMTQ4NDc0NSIsImNvbnRleHQiOnt9LCJleHAiOjE3NTg5NjEyNzEsImlhdCI6MTc1ODk2MTA5MX0.jHmRPrBYdizmVKODM-6QV09xEBO4Iz-CDnfUDcWtUok",
+     "contextJwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiY29udGV4dC1xc2giLCJpc3MiOiIyMThkMGNkMi1lMWZkLTM5ZGMtOGQyNi05NjM2ZTE0ODQ3NDUiLCJjb250ZXh0Ijp7ImxpY2Vuc2UiOnsiYWN0aXZlIjp0cnVlfSwiY29uZmx1ZW5jZSI6eyJlZGl0b3IiOnsidmVyc2lvbiI6InYyIn0sIm1hY3JvIjp7Im91dHB1dFR5cGUiOiJodG1sX2V4cG9ydCIsImhhc2giOiI3YWEzOWRiMC00ZjVmLTRhYWQtYjc5Mi1lYTZiNDQ4ZDMwZDgiLCJpZCI6IjdhYTM5ZGIwLTRmNWYtNGFhZC1iNzkyLWVhNmI0NDhkMzBkOCJ9LCJ0cmFjaW5nIjp7InRyYWNlSWQiOiIyNjg0MmU2NDMzOTQzZmI1ZDYwM2UwNWQ4NDcyNjMwNSIsInNwYW5JZCI6ImI0MDQ5NDUzNzEzNGVkN2UiLCJzYW1wbGVkIjoiMCJ9LCJjb250ZW50Ijp7InR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjQiLCJpZCI6IjEwMzAxMCJ9LCJzcGFjZSI6eyJrZXkiOiJEV1BFVklEIiwiaWQiOiI2ODczOCJ9fSwidXJsIjp7ImRpc3BsYXlVcmwiOiJodHRwczpcL1wvbXJjbmh1Z2hlcy5hdGxhc3NpYW4ubmV0XC93aWtpIn19LCJleHAiOjE3NTg5NjE5OTEsImlhdCI6MTc1ODk2MTA5MX0.W1XQA3z-Z_LHqYhV3OSQTX4aF4Ap_a6pA2laFKF49NI",    "structuredContext": "{\"license\":{\"active\":true},\"confluence\":{\"editor\":{\"version\":\"v2\"},\"macro\":{\"outputType\":\"html_export\",\"hash\":\"7aa39db0-4f5f-4aad-b792-ea6b448d30d8\",\"id\":\"7aa39db0-4f5f-4aad-b792-ea6b448d30d8\"},\"tracing\":{\"traceId\":\"26842e6433943fb5d603e05d84726305\",\"spanId\":\"b40494537134ed7e\",\"sampled\":\"0\"},\"content\":{\"type\":\"page\",\"version\":\"4\",\"id\":\"103010\"},\"space\":{\"key\":\"DWPEVID\",\"id\":\"68738\"}},\"url\":{\"displayUrl\":\"https://mrcnhughes.atlassian.net/wiki\"}}",
+    "contentClassifier":"content",
+    "productCtx":"{\"page.id\":\"103010\",\"macro.hash\":\"7aa39db0-4f5f-4aad-b792-ea6b448d30d8\",\"tracing.sampled\":\"0\",\"page.type\":\"page\",\"macro.localId\":\"ba299ced-30d7-46b5-bcb4-b107c0f3bdb9\",\": = | RAW | = :\":\"toolbar=bottom|filename=External Partner Evidence Submission|zoom=fit|revision=1\",\"space.id\":\"68738\",\"tracing.traceId\":\"26842e6433943fb5d603e05d84726305\",\"tracing.spanId\":\"b40494537134ed7e\",\"user.isExternalCollaborator\":\"false\",\"space.key\":\"DWPEVID\",\"content.version\":\"4\",\"page.title\":\"Sequence Diagrams\",\"zoom\":\"fit\",\"macro.body\":\"\",\"macro.truncated\":\"false\",\"content.type\":\"page\",\"output.type\":\"html_export\",\"page.version\":\"4\",\"revision\":\"1\",\"toolbar\":\"bottom\",\"filename\":\"External Partner Evidence Submission\",\"macro.fragmentLocalId\":\"\",\"content.id\":\"103010\",\"macro.id\":\"7aa39db0-4f5f-4aad-b792-ea6b448d30d8\",\"editor.version\":\"v2\"}",
+    "timeZone":"Europe/London",
+    "origin":"https://mermaid.stratus-addons.com",
+    "hostOrigin":"https://mrcnhughes.atlassian.net",
+    "sandbox":"allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-storage-access-by-user-activation",            "apiMigrations": {
+        "gdpr": true
+    }
+}
+;
+    if(window.AP && window.AP.subCreate) {
+      window._AP.appendConnectAddon(data);
+    } else {
+      require(['ac/create'], function(create){
+        create.appendConnectAddon(data);
+      });
+    }
+
+    // For Confluence App Analytics. This code works in conjunction with CFE's ConnectSupport.js.
+    // Here, we add a listener to the initial HTML page that stores events if the ConnectSupport component
+    // has not mounted yet. In CFE, we process the missed event data and disable this initial listener.
+    const __MAX_EVENT_ARRAY_SIZE__ = 20;
+    const connectAppAnalytics = "ecosystem.confluence.connect.analytics";
+    window.connectHost && window.connectHost.onIframeEstablished((eventData) => {
+      if (!window.__CONFLUENCE_CONNECT_SUPPORT_LOADED__) {
+        let events = JSON.parse(window.localStorage.getItem(connectAppAnalytics)) || [];
+        if (events.length >= __MAX_EVENT_ARRAY_SIZE__) {
+          events.shift();
+        }
+        events.push(eventData);
+        window.localStorage.setItem(connectAppAnalytics, JSON.stringify(events));
+      }
+    });
+
+  }());
+</script>
+
+</div>
+<h2 id="SequenceDiagrams-ExceptionHandlingWorkflows">Exception Handling Workflows</h2><h3 id="SequenceDiagrams-FraudInvestigationProcess">Fraud Investigation Process</h3><p>The fraud investigation workflow shows how suspicious patterns trigger coordinated investigation across multiple services while maintaining evidence integrity.</p><div class="ap-container" id="ap-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud6277197679127980498">
+
+  <div class="ap-content " id="embedded-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud6277197679127980498"></div>
+  <script nonce="68d79dbbd0103abe35ea29aaae309458" class="ap-iframe-body-script">
+  (function(){
+    var data = {
+    "addon_key":"com.stratusaddons.confluence.plugins.mermaid",
+    "uniqueKey":"com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud6277197679127980498",
+    "key":"mermaid-cloud",
+     "moduleType":"dynamicContentMacros",      "moduleLocation":"content",         "cp":"/wiki",
+            "general":"",
+    "w":"100%",
+    "h":"1px",
+    "url":"https://mermaid.stratus-addons.com/viewer.html?pageId=103010&filename=Fraud+Investigation+Process&revision=2&zoom=fit&toolbar=bottom&repository=&xdm_e=https%3A%2F%2Fmrcnhughes.atlassian.net&xdm_c=channel-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud6277197679127980498&cp=%2Fwiki&xdm_deprecated_addon_key_do_not_use=com.stratusaddons.confluence.plugins.mermaid&lic=active&cv=1000.0.0-f1c99b2191e8&traceId=193c55081cda6bf3ade9a925bad9b67e&spanId=cfce24158465b308&traceSampled=0&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiNTdkODZmNjljZjM0MjFlYWI1MzYzY2RhMjU4YjczMjZmZTI4NGYxMjBhNzMwZWE5MjMyMzk1NDg5MGI4ZjE0YyIsImlzcyI6IjIxOGQwY2QyLWUxZmQtMzlkYy04ZDI2LTk2MzZlMTQ4NDc0NSIsImNvbnRleHQiOnt9LCJleHAiOjE3NTg5NjEyNzEsImlhdCI6MTc1ODk2MTA5MX0.EUwfP6wbDFQH4Gc3n8VxbXhBFjREUcBNI2h_XtwvUXc",
+     "contextJwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiY29udGV4dC1xc2giLCJpc3MiOiIyMThkMGNkMi1lMWZkLTM5ZGMtOGQyNi05NjM2ZTE0ODQ3NDUiLCJjb250ZXh0Ijp7ImxpY2Vuc2UiOnsiYWN0aXZlIjp0cnVlfSwiY29uZmx1ZW5jZSI6eyJlZGl0b3IiOnsidmVyc2lvbiI6InYyIn0sIm1hY3JvIjp7Im91dHB1dFR5cGUiOiJodG1sX2V4cG9ydCIsImhhc2giOiI2YjEzOWM3My0xMzFjLTQxYzMtYjBhOC00OGIzYmVlNzVhZTMiLCJpZCI6IjZiMTM5YzczLTEzMWMtNDFjMy1iMGE4LTQ4YjNiZWU3NWFlMyJ9LCJ0cmFjaW5nIjp7InRyYWNlSWQiOiIxOTNjNTUwODFjZGE2YmYzYWRlOWE5MjViYWQ5YjY3ZSIsInNwYW5JZCI6ImNmY2UyNDE1ODQ2NWIzMDgiLCJzYW1wbGVkIjoiMCJ9LCJjb250ZW50Ijp7InR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjQiLCJpZCI6IjEwMzAxMCJ9LCJzcGFjZSI6eyJrZXkiOiJEV1BFVklEIiwiaWQiOiI2ODczOCJ9fSwidXJsIjp7ImRpc3BsYXlVcmwiOiJodHRwczpcL1wvbXJjbmh1Z2hlcy5hdGxhc3NpYW4ubmV0XC93aWtpIn19LCJleHAiOjE3NTg5NjE5OTEsImlhdCI6MTc1ODk2MTA5MX0.MJRibt1kLmg8wh1yrqI7lvgWIvwgiJX4-xsoE3Lk3_Y",    "structuredContext": "{\"license\":{\"active\":true},\"confluence\":{\"editor\":{\"version\":\"v2\"},\"macro\":{\"outputType\":\"html_export\",\"hash\":\"6b139c73-131c-41c3-b0a8-48b3bee75ae3\",\"id\":\"6b139c73-131c-41c3-b0a8-48b3bee75ae3\"},\"tracing\":{\"traceId\":\"193c55081cda6bf3ade9a925bad9b67e\",\"spanId\":\"cfce24158465b308\",\"sampled\":\"0\"},\"content\":{\"type\":\"page\",\"version\":\"4\",\"id\":\"103010\"},\"space\":{\"key\":\"DWPEVID\",\"id\":\"68738\"}},\"url\":{\"displayUrl\":\"https://mrcnhughes.atlassian.net/wiki\"}}",
+    "contentClassifier":"content",
+    "productCtx":"{\"page.id\":\"103010\",\"macro.hash\":\"6b139c73-131c-41c3-b0a8-48b3bee75ae3\",\"tracing.sampled\":\"0\",\"page.type\":\"page\",\"macro.localId\":\"2d7f38c4-0c44-4bc2-b0ad-4c4cabb328f0\",\": = | RAW | = :\":\"toolbar=bottom|filename=Fraud Investigation Process|zoom=fit|revision=2\",\"space.id\":\"68738\",\"tracing.traceId\":\"193c55081cda6bf3ade9a925bad9b67e\",\"tracing.spanId\":\"cfce24158465b308\",\"user.isExternalCollaborator\":\"false\",\"space.key\":\"DWPEVID\",\"content.version\":\"4\",\"page.title\":\"Sequence Diagrams\",\"zoom\":\"fit\",\"macro.body\":\"\",\"macro.truncated\":\"false\",\"content.type\":\"page\",\"output.type\":\"html_export\",\"page.version\":\"4\",\"revision\":\"2\",\"toolbar\":\"bottom\",\"filename\":\"Fraud Investigation Process\",\"macro.fragmentLocalId\":\"\",\"content.id\":\"103010\",\"macro.id\":\"6b139c73-131c-41c3-b0a8-48b3bee75ae3\",\"editor.version\":\"v2\"}",
+    "timeZone":"Europe/London",
+    "origin":"https://mermaid.stratus-addons.com",
+    "hostOrigin":"https://mrcnhughes.atlassian.net",
+    "sandbox":"allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-storage-access-by-user-activation",            "apiMigrations": {
+        "gdpr": true
+    }
+}
+;
+    if(window.AP && window.AP.subCreate) {
+      window._AP.appendConnectAddon(data);
+    } else {
+      require(['ac/create'], function(create){
+        create.appendConnectAddon(data);
+      });
+    }
+
+    // For Confluence App Analytics. This code works in conjunction with CFE's ConnectSupport.js.
+    // Here, we add a listener to the initial HTML page that stores events if the ConnectSupport component
+    // has not mounted yet. In CFE, we process the missed event data and disable this initial listener.
+    const __MAX_EVENT_ARRAY_SIZE__ = 20;
+    const connectAppAnalytics = "ecosystem.confluence.connect.analytics";
+    window.connectHost && window.connectHost.onIframeEstablished((eventData) => {
+      if (!window.__CONFLUENCE_CONNECT_SUPPORT_LOADED__) {
+        let events = JSON.parse(window.localStorage.getItem(connectAppAnalytics)) || [];
+        if (events.length >= __MAX_EVENT_ARRAY_SIZE__) {
+          events.shift();
+        }
+        events.push(eventData);
+        window.localStorage.setItem(connectAppAnalytics, JSON.stringify(events));
+      }
+    });
+
+  }());
+</script>
+
+</div>
+<h3 id="SequenceDiagrams-EvidenceConflictResolution">Evidence Conflict Resolution</h3><p>When trusted sources provide conflicting information, the platform routes conflicts through structured resolution processes while preserving all evidence for audit purposes.</p><div class="ap-container" id="ap-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud5536287093682628403">
+
+  <div class="ap-content " id="embedded-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud5536287093682628403"></div>
+  <script nonce="68d79dbbd0103abe35ea29aaae309458" class="ap-iframe-body-script">
+  (function(){
+    var data = {
+    "addon_key":"com.stratusaddons.confluence.plugins.mermaid",
+    "uniqueKey":"com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud5536287093682628403",
+    "key":"mermaid-cloud",
+     "moduleType":"dynamicContentMacros",      "moduleLocation":"content",         "cp":"/wiki",
+            "general":"",
+    "w":"100%",
+    "h":"1px",
+    "url":"https://mermaid.stratus-addons.com/viewer.html?pageId=103010&filename=Evidence+Conflict+Resolution&revision=1&zoom=fit&toolbar=bottom&repository=&xdm_e=https%3A%2F%2Fmrcnhughes.atlassian.net&xdm_c=channel-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud5536287093682628403&cp=%2Fwiki&xdm_deprecated_addon_key_do_not_use=com.stratusaddons.confluence.plugins.mermaid&lic=active&cv=1000.0.0-f1c99b2191e8&traceId=0556505a21f84627a0a21b2f1e1c373e&spanId=ec0499e495a6a0a0&traceSampled=0&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiYzMxNzA0Mzc5YjAwYTE2M2M0ZDY3NjA4YzRjOGE4NmQxODE1M2Q5OTg3NTg1YTVlMGQyYmYyMGY3MmE5NGExMiIsImlzcyI6IjIxOGQwY2QyLWUxZmQtMzlkYy04ZDI2LTk2MzZlMTQ4NDc0NSIsImNvbnRleHQiOnt9LCJleHAiOjE3NTg5NjEyNzEsImlhdCI6MTc1ODk2MTA5MX0.Yj_CkeIN0DBaysYsQt1pvFJawKV4M6-0OdjXrzZU37Y",
+     "contextJwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiY29udGV4dC1xc2giLCJpc3MiOiIyMThkMGNkMi1lMWZkLTM5ZGMtOGQyNi05NjM2ZTE0ODQ3NDUiLCJjb250ZXh0Ijp7ImxpY2Vuc2UiOnsiYWN0aXZlIjp0cnVlfSwiY29uZmx1ZW5jZSI6eyJlZGl0b3IiOnsidmVyc2lvbiI6InYyIn0sIm1hY3JvIjp7Im91dHB1dFR5cGUiOiJodG1sX2V4cG9ydCIsImhhc2giOiI0YmJhNWU1MS05NGMxLTQxOWEtYjNmYi00OGJkNDhiMjY2MWYiLCJpZCI6IjRiYmE1ZTUxLTk0YzEtNDE5YS1iM2ZiLTQ4YmQ0OGIyNjYxZiJ9LCJ0cmFjaW5nIjp7InRyYWNlSWQiOiIwNTU2NTA1YTIxZjg0NjI3YTBhMjFiMmYxZTFjMzczZSIsInNwYW5JZCI6ImVjMDQ5OWU0OTVhNmEwYTAiLCJzYW1wbGVkIjoiMCJ9LCJjb250ZW50Ijp7InR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjQiLCJpZCI6IjEwMzAxMCJ9LCJzcGFjZSI6eyJrZXkiOiJEV1BFVklEIiwiaWQiOiI2ODczOCJ9fSwidXJsIjp7ImRpc3BsYXlVcmwiOiJodHRwczpcL1wvbXJjbmh1Z2hlcy5hdGxhc3NpYW4ubmV0XC93aWtpIn19LCJleHAiOjE3NTg5NjE5OTEsImlhdCI6MTc1ODk2MTA5MX0.YlPMfSFdvBX9hUT1c6no4IlyYgpOVN8Vbyy5ua-Lj58",    "structuredContext": "{\"license\":{\"active\":true},\"confluence\":{\"editor\":{\"version\":\"v2\"},\"macro\":{\"outputType\":\"html_export\",\"hash\":\"4bba5e51-94c1-419a-b3fb-48bd48b2661f\",\"id\":\"4bba5e51-94c1-419a-b3fb-48bd48b2661f\"},\"tracing\":{\"traceId\":\"0556505a21f84627a0a21b2f1e1c373e\",\"spanId\":\"ec0499e495a6a0a0\",\"sampled\":\"0\"},\"content\":{\"type\":\"page\",\"version\":\"4\",\"id\":\"103010\"},\"space\":{\"key\":\"DWPEVID\",\"id\":\"68738\"}},\"url\":{\"displayUrl\":\"https://mrcnhughes.atlassian.net/wiki\"}}",
+    "contentClassifier":"content",
+    "productCtx":"{\"page.id\":\"103010\",\"macro.hash\":\"4bba5e51-94c1-419a-b3fb-48bd48b2661f\",\"tracing.sampled\":\"0\",\"page.type\":\"page\",\"macro.localId\":\"758183b4-c718-4eee-8408-2da72e87a252\",\": = | RAW | = :\":\"toolbar=bottom|filename=Evidence Conflict Resolution|zoom=fit|revision=1\",\"space.id\":\"68738\",\"tracing.traceId\":\"0556505a21f84627a0a21b2f1e1c373e\",\"tracing.spanId\":\"ec0499e495a6a0a0\",\"user.isExternalCollaborator\":\"false\",\"space.key\":\"DWPEVID\",\"content.version\":\"4\",\"page.title\":\"Sequence Diagrams\",\"zoom\":\"fit\",\"macro.body\":\"\",\"macro.truncated\":\"false\",\"content.type\":\"page\",\"output.type\":\"html_export\",\"page.version\":\"4\",\"revision\":\"1\",\"toolbar\":\"bottom\",\"filename\":\"Evidence Conflict Resolution\",\"macro.fragmentLocalId\":\"\",\"content.id\":\"103010\",\"macro.id\":\"4bba5e51-94c1-419a-b3fb-48bd48b2661f\",\"editor.version\":\"v2\"}",
+    "timeZone":"Europe/London",
+    "origin":"https://mermaid.stratus-addons.com",
+    "hostOrigin":"https://mrcnhughes.atlassian.net",
+    "sandbox":"allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-storage-access-by-user-activation",            "apiMigrations": {
+        "gdpr": true
+    }
+}
+;
+    if(window.AP && window.AP.subCreate) {
+      window._AP.appendConnectAddon(data);
+    } else {
+      require(['ac/create'], function(create){
+        create.appendConnectAddon(data);
+      });
+    }
+
+    // For Confluence App Analytics. This code works in conjunction with CFE's ConnectSupport.js.
+    // Here, we add a listener to the initial HTML page that stores events if the ConnectSupport component
+    // has not mounted yet. In CFE, we process the missed event data and disable this initial listener.
+    const __MAX_EVENT_ARRAY_SIZE__ = 20;
+    const connectAppAnalytics = "ecosystem.confluence.connect.analytics";
+    window.connectHost && window.connectHost.onIframeEstablished((eventData) => {
+      if (!window.__CONFLUENCE_CONNECT_SUPPORT_LOADED__) {
+        let events = JSON.parse(window.localStorage.getItem(connectAppAnalytics)) || [];
+        if (events.length >= __MAX_EVENT_ARRAY_SIZE__) {
+          events.shift();
+        }
+        events.push(eventData);
+        window.localStorage.setItem(connectAppAnalytics, JSON.stringify(events));
+      }
+    });
+
+  }());
+</script>
+
+</div>
+<h2 id="SequenceDiagrams-Multi-ChannelServiceIntegration">Multi-Channel Service Integration</h2><h3 id="SequenceDiagrams-Phone-BasedChangeReporting">Phone-Based Change Reporting</h3><p>The platform supports multiple service channels while maintaining consistent evidence processing and audit trails across different interaction methods.</p><div class="ap-container" id="ap-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud806515509805452698">
+
+  <div class="ap-content " id="embedded-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud806515509805452698"></div>
+  <script nonce="68d79dbbd0103abe35ea29aaae309458" class="ap-iframe-body-script">
+  (function(){
+    var data = {
+    "addon_key":"com.stratusaddons.confluence.plugins.mermaid",
+    "uniqueKey":"com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud806515509805452698",
+    "key":"mermaid-cloud",
+     "moduleType":"dynamicContentMacros",      "moduleLocation":"content",         "cp":"/wiki",
+            "general":"",
+    "w":"100%",
+    "h":"1px",
+    "url":"https://mermaid.stratus-addons.com/viewer.html?pageId=103010&filename=CoC&revision=1&zoom=fit&toolbar=bottom&repository=&xdm_e=https%3A%2F%2Fmrcnhughes.atlassian.net&xdm_c=channel-com.stratusaddons.confluence.plugins.mermaid__mermaid-cloud806515509805452698&cp=%2Fwiki&xdm_deprecated_addon_key_do_not_use=com.stratusaddons.confluence.plugins.mermaid&lic=active&cv=1000.0.0-f1c99b2191e8&traceId=f2039c6f19e7cda472cce8064554f858&spanId=4d131df355d8f6d0&traceSampled=0&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiMzk1MWM4NGMwODc2OGUwN2I3NDBkZDBmZGVjYTA4YzRkMDg2MGQzYzhmMzZiNmM0NGE4MzczODhkZmIyMTc1MCIsImlzcyI6IjIxOGQwY2QyLWUxZmQtMzlkYy04ZDI2LTk2MzZlMTQ4NDc0NSIsImNvbnRleHQiOnt9LCJleHAiOjE3NTg5NjEyNzEsImlhdCI6MTc1ODk2MTA5MX0.xrm70-SuqNsVOrIK7kA_mstazJSY88QhTPJHhPCL7FQ",
+     "contextJwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI3MTIwMjA6NjFkZDk5YjYtNjFhNy00YjRmLTk3NDItNjc3YzFiZWY4N2VkIiwicXNoIjoiY29udGV4dC1xc2giLCJpc3MiOiIyMThkMGNkMi1lMWZkLTM5ZGMtOGQyNi05NjM2ZTE0ODQ3NDUiLCJjb250ZXh0Ijp7ImxpY2Vuc2UiOnsiYWN0aXZlIjp0cnVlfSwiY29uZmx1ZW5jZSI6eyJlZGl0b3IiOnsidmVyc2lvbiI6InYyIn0sIm1hY3JvIjp7Im91dHB1dFR5cGUiOiJodG1sX2V4cG9ydCIsImhhc2giOiJjNWUxNmFmOC1iOGM4LTQyMTQtYmIxZC1hZmM3MmJlYzRlN2YiLCJpZCI6ImM1ZTE2YWY4LWI4YzgtNDIxNC1iYjFkLWFmYzcyYmVjNGU3ZiJ9LCJ0cmFjaW5nIjp7InRyYWNlSWQiOiJmMjAzOWM2ZjE5ZTdjZGE0NzJjY2U4MDY0NTU0Zjg1OCIsInNwYW5JZCI6IjRkMTMxZGYzNTVkOGY2ZDAiLCJzYW1wbGVkIjoiMCJ9LCJjb250ZW50Ijp7InR5cGUiOiJwYWdlIiwidmVyc2lvbiI6IjQiLCJpZCI6IjEwMzAxMCJ9LCJzcGFjZSI6eyJrZXkiOiJEV1BFVklEIiwiaWQiOiI2ODczOCJ9fSwidXJsIjp7ImRpc3BsYXlVcmwiOiJodHRwczpcL1wvbXJjbmh1Z2hlcy5hdGxhc3NpYW4ubmV0XC93aWtpIn19LCJleHAiOjE3NTg5NjE5OTEsImlhdCI6MTc1ODk2MTA5MX0.Rm2KL-_T6xhii7JKksSRR3KkRgA7R5GGjf3ZxGxLtuA",    "structuredContext": "{\"license\":{\"active\":true},\"confluence\":{\"editor\":{\"version\":\"v2\"},\"macro\":{\"outputType\":\"html_export\",\"hash\":\"c5e16af8-b8c8-4214-bb1d-afc72bec4e7f\",\"id\":\"c5e16af8-b8c8-4214-bb1d-afc72bec4e7f\"},\"tracing\":{\"traceId\":\"f2039c6f19e7cda472cce8064554f858\",\"spanId\":\"4d131df355d8f6d0\",\"sampled\":\"0\"},\"content\":{\"type\":\"page\",\"version\":\"4\",\"id\":\"103010\"},\"space\":{\"key\":\"DWPEVID\",\"id\":\"68738\"}},\"url\":{\"displayUrl\":\"https://mrcnhughes.atlassian.net/wiki\"}}",
+    "contentClassifier":"content",
+    "productCtx":"{\"page.id\":\"103010\",\"macro.hash\":\"c5e16af8-b8c8-4214-bb1d-afc72bec4e7f\",\"tracing.sampled\":\"0\",\"page.type\":\"page\",\"macro.localId\":\"3df8d969-7b1f-4157-8ca0-1228ced246dc\",\": = | RAW | = :\":\"toolbar=bottom|filename=CoC|zoom=fit|revision=1\",\"space.id\":\"68738\",\"tracing.traceId\":\"f2039c6f19e7cda472cce8064554f858\",\"tracing.spanId\":\"4d131df355d8f6d0\",\"user.isExternalCollaborator\":\"false\",\"space.key\":\"DWPEVID\",\"content.version\":\"4\",\"page.title\":\"Sequence Diagrams\",\"zoom\":\"fit\",\"macro.body\":\"\",\"macro.truncated\":\"false\",\"content.type\":\"page\",\"output.type\":\"html_export\",\"page.version\":\"4\",\"revision\":\"1\",\"toolbar\":\"bottom\",\"filename\":\"CoC\",\"macro.fragmentLocalId\":\"\",\"content.id\":\"103010\",\"macro.id\":\"c5e16af8-b8c8-4214-bb1d-afc72bec4e7f\",\"editor.version\":\"v2\"}",
+    "timeZone":"Europe/London",
+    "origin":"https://mermaid.stratus-addons.com",
+    "hostOrigin":"https://mrcnhughes.atlassian.net",
+    "sandbox":"allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-storage-access-by-user-activation",            "apiMigrations": {
+        "gdpr": true
+    }
+}
+;
+    if(window.AP && window.AP.subCreate) {
+      window._AP.appendConnectAddon(data);
+    } else {
+      require(['ac/create'], function(create){
+        create.appendConnectAddon(data);
+      });
+    }
+
+    // For Confluence App Analytics. This code works in conjunction with CFE's ConnectSupport.js.
+    // Here, we add a listener to the initial HTML page that stores events if the ConnectSupport component
+    // has not mounted yet. In CFE, we process the missed event data and disable this initial listener.
+    const __MAX_EVENT_ARRAY_SIZE__ = 20;
+    const connectAppAnalytics = "ecosystem.confluence.connect.analytics";
+    window.connectHost && window.connectHost.onIframeEstablished((eventData) => {
+      if (!window.__CONFLUENCE_CONNECT_SUPPORT_LOADED__) {
+        let events = JSON.parse(window.localStorage.getItem(connectAppAnalytics)) || [];
+        if (events.length >= __MAX_EVENT_ARRAY_SIZE__) {
+          events.shift();
+        }
+        events.push(eventData);
+        window.localStorage.setItem(connectAppAnalytics, JSON.stringify(events));
+      }
+    });
+
+  }());
+</script>
+
+</div>
+<p>These sequence diagrams demonstrate the platform's sophisticated orchestration capabilities that enable complex government service delivery while maintaining transparency, accountability, and citizen-centric design principles. Each workflow preserves complete audit trails while managing uncertainty through confidence-based processing and appropriate human oversight.</p><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/1114268">Submit UC Application</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/983311.png">Submit UC Application.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/1081474">Cross Product Benefit Re-Use</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/1081486.png">Cross Product Benefit Re-Use.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/103330">Retrospective CoC</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/983323.png">Retrospective CoC.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/1114306">Digital Identity Correlation Across Services</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/983334.png">Digital Identity Correlation Across Services.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/950404">External Partner Evidence Submission</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/363376.png">External Partner Evidence Submission.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/1081501">Fraud Investigation Process</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/103342.png">Fraud Investigation Process.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/103168">Evidence Conflict Resolution</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/983135.png">Evidence Conflict Resolution.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/103174">CoC</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/69335.png">CoC.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/1114281">Submit UC Application</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/1114294.png">Submit UC Application.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/363368">Submit UC Application</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/950378.png">Submit UC Application.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/103152">Cross Product Benefit Re-Use</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/950384.png">Cross Product Benefit Re-Use.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/950390">Retrospective CoC</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/103160.png">Retrospective CoC.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/950397">Digital Identity Correlation Across Services</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/69326.png">Digital Identity Correlation Across Services.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/983123">Fraud Investigation Process</a> (text/plain)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/103010/983129.png">Fraud Investigation Process.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Sept 27, 2025 09:18</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

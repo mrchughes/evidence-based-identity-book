@@ -1,0 +1,17 @@
+quadrantChart
+    title Risk Assessment Matrix
+    x-axis Low Impact --> High Impact
+    y-axis Low Probability --> High Probability
+    
+    Technical Complexity: [0.7, 0.6]
+    Staff Training: [0.5, 0.7]
+    Data Migration: [0.8, 0.4]
+    Partner Integration: [0.6, 0.5]
+    Political Support: [0.9, 0.3]
+    Security Breach: [0.95, 0.2]
+    Performance Issues: [0.4, 0.6]
+    Citizen Adoption: [0.3, 0.4]
+    Budget Overrun: [0.7, 0.4]
+    GDPR Compliance: [0.8, 0.2]
+    Fraud Detection: [0.5, 0.3]
+    System Availability: [0.6, 0.3]

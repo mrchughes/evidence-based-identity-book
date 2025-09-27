@@ -1,0 +1,38 @@
+sequenceDiagram
+    participant Citizen
+    participant CallCenter as DWP Call Center
+    participant Agent as DWP Agent
+    participant AgentWorkstation as Agent Workstation
+    participant EvidenceIngestion
+    participant IdentityResolution
+    participant AwardCalculation
+    participant InvestigationQueue
+    participant Notification
+
+    Citizen->>CallCenter: Phone to report change of circumstances
+    CallCenter->>Agent: Route call to available agent
+    Agent->>Citizen: Verify caller identity using security questions
+    Citizen->>Agent: Provide DOB, NINO, address for verification
+    
+    Agent->>AgentWorkstation: Search existing records
+    AgentWorkstation->>IdentityResolution: GET /identity/cluster (search by NINO)
+    IdentityResolution-->>AgentWorkstation: Found existing UC claim for Sarah Johnson
+    Agent->>Citizen: Identity confirmed, what changes to report?
+    
+    Citizen->>Agent: "I started new job at ABC Company on 1st September, £28,000 salary"
+    Agent->>AgentWorkstation: Record change of circumstances
+    AgentWorkstation->>EvidenceIngestion: POST /evidence/assertion (agent-facilitated)
+    Note over EvidenceIngestion: "DWP Agent ID 456 recorded: Sarah Johnson reports employment at ABC Company, £28,000 salary, start date 1st Sept"
+    
+    EvidenceIngestion->>IdentityResolution: Correlate to existing identity cluster
+    IdentityResolution-->>EvidenceIngestion: Matched to existing high-confidence cluster
+    EvidenceIngestion->>AwardCalculation: POST /awards/recalculate (with self-declared evidence)
+    
+    Note over AwardCalculation: Self-declared employment evidence has low confidence
+    AwardCalculation->>InvestigationQueue: POST /investigations/create (verify employment)
+    InvestigationQueue->>Agent: Investigation task created - request employment verification
+    
+    Agent->>Citizen: "We've recorded your new job. Please send payslip or employer letter within 14 days"
+    Agent->>AgentWorkstation: Schedule follow-up reminder
+    AgentWorkstation->>Notification: POST /notifications/send (evidence request letter)
+    Notification->>Citizen: Letter requesting employment verification documents

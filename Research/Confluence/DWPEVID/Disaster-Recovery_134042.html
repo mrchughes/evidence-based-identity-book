@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DCS Evidence-Based Identity Platform : Disaster Recovery</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DCS Evidence-Based Identity Platform</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Building-Evidence-Based-Services-for-a-Unified-Citizen-Experience_68910.html">Building Evidence-Based Services for a Unified Citizen Experience</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Infrastructure-Architecture_133957.html">Infrastructure Architecture</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DCS Evidence-Based Identity Platform : Disaster Recovery
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Christian Hughes</span>, last modified on Sept 15, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="DisasterRecovery-BusinessContinuityFramework">Business Continuity Framework</h2><p>The evidence-based identity platform implements comprehensive disaster recovery capabilities that ensure citizen services remain available during various failure scenarios while maintaining data integrity and audit compliance. The business continuity framework balances recovery time objectives with operational costs while meeting government service availability requirements.</p><p>Business impact analysis identifies critical functions that must remain available during disasters including emergency benefit processing, existing award payments, essential evidence ingestion, and citizen communication systems. Less critical functions like comprehensive reporting and historical analysis can be temporarily suspended during major incidents while focusing resources on essential services.</p><p><strong>Recovery Time Objectives (RTO):</strong></p><ul><li><p><strong>Emergency Services</strong>: 15 minutes for crisis benefit processing and emergency payments</p></li><li><p><strong>Core Citizen Services</strong>: 1 hour for benefit applications and status checking</p></li><li><p><strong>Evidence Processing</strong>: 4 hours for evidence ingestion and identity resolution</p></li><li><p><strong>Full System Restoration</strong>: 24 hours for complete platform functionality including reporting and analytics</p></li></ul><p><strong>Recovery Point Objectives (RPO):</strong></p><ul><li><p><strong>Evidence Data</strong>: 5 minutes maximum data loss for citizen evidence and applications</p></li><li><p><strong>Identity Clusters</strong>: 15 minutes for identity correlation and confidence updates</p></li><li><p><strong>Award Calculations</strong>: 1 hour for benefit calculations and payment schedules</p></li><li><p><strong>Audit Logs</strong>: No data loss acceptable for compliance and accountability records</p></li></ul><p>The framework implements tiered recovery strategies where critical services receive priority restoration resources while non-essential functions wait for full infrastructure recovery. This approach ensures that citizens continue receiving essential services even during extended recovery periods.</p><h2 id="DisasterRecovery-Multi-RegionArchitecture">Multi-Region Architecture</h2><p>Geographic distribution across multiple regions provides resilience against localized disasters while maintaining data sovereignty and compliance requirements. The multi-region architecture implements active-passive configuration with real-time data replication and automated failover capabilities.</p><p><strong>Primary Region (Active):</strong></p><ul><li><p>Full platform deployment with all services and complete data stores</p></li><li><p>Real-time citizen service delivery and evidence processing</p></li><li><p>Primary database operations with synchronous replication to secondary regions</p></li><li><p>Complete monitoring and operational management capabilities</p></li></ul><p><strong>Secondary Region (Warm Standby):</strong></p><ul><li><p>Standby deployment with scaled-down resource allocation</p></li><li><p>Asynchronous data replication with continuous synchronization</p></li><li><p>Automated failover triggers based on health monitoring and connectivity testing</p></li><li><p>Capability to serve essential services within recovery time objectives</p></li></ul><p><strong>Disaster Recovery Region (Cold Standby):</strong></p><ul><li><p>Infrastructure provisioning templates with automated deployment capabilities</p></li><li><p>Encrypted backup storage with regular restoration testing</p></li><li><p>Geographic separation from primary and secondary regions</p></li><li><p>Manual activation for catastrophic scenarios affecting multiple regions</p></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Example multi-region deployment configuration
+regions:
+  primary:
+    location: &quot;uk-south&quot;
+    deployment_type: &quot;active&quot;
+    services:
+      evidence_ingestion:
+        replicas: 10
+        resources:
+          cpu: &quot;2000m&quot;
+          memory: &quot;4Gi&quot;
+      identity_resolution:
+        replicas: 8
+        resources:
+          cpu: &quot;4000m&quot;
+          memory: &quot;8Gi&quot;
+    databases:
+      triple_store:
+        instances: 3
+        replication: &quot;synchronous&quot;
+        backup_frequency: &quot;15min&quot;
+      
+  secondary:
+    location: &quot;uk-west&quot;
+    deployment_type: &quot;warm_standby&quot;
+    services:
+      evidence_ingestion:
+        replicas: 3
+        resources:
+          cpu: &quot;1000m&quot;
+          memory: &quot;2Gi&quot;
+      identity_resolution:
+        replicas: 2
+        resources:
+          cpu: &quot;2000m&quot;
+          memory: &quot;4Gi&quot;
+    databases:
+      triple_store:
+        instances: 2
+        replication: &quot;asynchronous&quot;
+        sync_lag_threshold: &quot;30s&quot;
+
+failover_configuration:
+  automatic_triggers:
+    - primary_region_connectivity_loss: &quot;&gt; 5min&quot;
+    - database_replication_lag: &quot;&gt; 2min&quot;
+    - service_availability: &quot;&lt; 95%&quot;
+  manual_triggers:
+    - regional_disaster_declaration
+    - scheduled_maintenance_failover
+    - security_incident_isolation
+</pre>
+</div></div><p>Data replication operates through multiple mechanisms including database-level replication for structured data, object storage synchronization for documents and evidence files, and event log replication for audit trails and system state recovery.</p><h2 id="DisasterRecovery-BackupandRestorationStrategies">Backup and Restoration Strategies</h2><p>Comprehensive backup strategies ensure data protection across all platform components with different backup frequencies and retention periods appropriate for various data types and compliance requirements. Backup architecture implements automated scheduling, verification testing, and secure off-site storage.</p><p><strong>Backup Classifications:</strong></p><ul><li><p><strong>Critical Data (Evidence, Identity)</strong>: Continuous backup with 5-minute intervals and immediate off-site replication</p></li><li><p><strong>Operational Data (Awards, Cases)</strong>: Hourly incremental backups with daily full backups</p></li><li><p><strong>Configuration Data (Policies, Rules)</strong>: Daily backups with version control and change tracking</p></li><li><p><strong>Audit Logs</strong>: Real-time backup with immutable storage and legal hold capabilities</p></li></ul><p>Backup verification includes automated restoration testing where backup files are regularly restored to isolated environments and validated for completeness and integrity. Testing procedures verify both data restoration and application functionality to ensure backups provide complete recovery capability.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">#!/bin/bash
+# Automated backup verification script
+
+BACKUP_DATE=$(date -d &quot;yesterday&quot; +%Y%m%d)
+TEST_ENVIRONMENT=&quot;dr-test-env&quot;
+
+# Function to verify triple store backup
+verify_triple_store_backup() {
+    echo &quot;Verifying triple store backup for $BACKUP_DATE&quot;
+    
+    # Restore backup to test environment
+    tdbloader --loc=/test/tdb2 /backups/triple-store/$BACKUP_DATE/evidence.nt
+    
+    # Verify data integrity
+    RECORD_COUNT=$(tdbquery --loc=/test/tdb2 --query=&quot;SELECT (COUNT(*) as ?count) WHERE { ?s ?p ?o }&quot; | grep -o &#39;[0-9]*&#39;)
+    EXPECTED_COUNT=$(cat /backups/triple-store/$BACKUP_DATE/record_count.txt)
+    
+    if [ &quot;$RECORD_COUNT&quot; -eq &quot;$EXPECTED_COUNT&quot; ]; then
+        echo &quot;Triple store backup verification: PASSED&quot;
+        return 0
+    else
+        echo &quot;Triple store backup verification: FAILED&quot;
+        echo &quot;Expected: $EXPECTED_COUNT, Found: $RECORD_COUNT&quot;
+        return 1
+    fi
+}
+
+# Function to verify application functionality
+verify_application_functionality() {
+    echo &quot;Testing application functionality on restored data&quot;
+    
+    # Start minimal service stack
+    docker-compose -f dr-test-compose.yml up -d
+    
+    # Wait for services to be ready
+    sleep 60
+    
+    # Run functionality tests
+    python3 /tests/dr_functionality_tests.py --environment=$TEST_ENVIRONMENT
+    
+    # Capture test results
+    TEST_RESULT=$?
+    
+    # Cleanup test environment
+    docker-compose -f dr-test-compose.yml down
+    
+    return $TEST_RESULT
+}
+
+# Execute verification procedures
+VERIFICATION_PASSED=true
+
+if ! verify_triple_store_backup; then
+    VERIFICATION_PASSED=false
+fi
+
+if ! verify_application_functionality; then
+    VERIFICATION_PASSED=false
+fi
+
+# Report results
+if [ &quot;$VERIFICATION_PASSED&quot; = true ]; then
+    echo &quot;Backup verification completed successfully&quot;
+    exit 0
+else
+    echo &quot;Backup verification failed - alerting operations team&quot;
+    curl -X POST &quot;https://alerts.dcs.gov.uk/api/incidents&quot; \
+         -H &quot;Content-Type: application/json&quot; \
+         -d &quot;{\&quot;severity\&quot;: \&quot;high\&quot;, \&quot;message\&quot;: \&quot;DR backup verification failed for $BACKUP_DATE\&quot;}&quot;
+    exit 1
+fi
+</pre>
+</div></div><p>Backup retention policies balance storage costs with compliance requirements and operational needs. Different data types have different retention schedules with automated lifecycle management that transitions older backups to cost-effective storage while maintaining accessibility for compliance and audit requirements.</p><h2 id="DisasterRecovery-AutomatedFailoverProcedures">Automated Failover Procedures</h2><p>Automated failover capabilities enable rapid response to system failures without requiring manual intervention for common failure scenarios. Failover automation includes health monitoring, decision-making algorithms, and coordinated service migration between regions or availability zones.</p><p><strong>Failover Triggers:</strong></p><ul><li><p><strong>Database Failures</strong>: Primary database unavailability triggers automatic promotion of replica databases</p></li><li><p><strong>Service Failures</strong>: Application service failures trigger pod restart and traffic rerouting</p></li><li><p><strong>Network Partitions</strong>: Regional connectivity loss triggers failover to secondary region</p></li><li><p><strong>Security Incidents</strong>: Detected compromises trigger automatic isolation and service migration</p></li></ul><p>Health monitoring operates through multiple layers including infrastructure monitoring, application health checks, and end-to-end synthetic transaction testing. Monitoring aggregates multiple signals to make failover decisions while avoiding false positives that could cause unnecessary service disruption.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"># Example automated failover configuration
+failover_controller:
+  monitoring_interval: &quot;30s&quot;
+  decision_threshold: &quot;3_consecutive_failures&quot;
+  
+  health_checks:
+    - name: &quot;database_connectivity&quot;
+      type: &quot;tcp_check&quot;
+      target: &quot;triple-store-primary:3030&quot;
+      timeout: &quot;5s&quot;
+      
+    - name: &quot;api_responsiveness&quot;
+      type: &quot;http_check&quot;
+      url: &quot;https://api.evidence-platform.gov.uk/health&quot;
+      expected_status: 200
+      timeout: &quot;10s&quot;
+      
+    - name: &quot;end_to_end_workflow&quot;
+      type: &quot;synthetic_transaction&quot;
+      script: &quot;/tests/synthetic_evidence_submission.py&quot;
+      timeout: &quot;60s&quot;
+
+  failover_procedures:
+    database_failover:
+      trigger: &quot;database_connectivity_failure&quot;
+      steps:
+        - name: &quot;promote_replica&quot;
+          action: &quot;postgresql_promote&quot;
+          target: &quot;database-replica-1&quot;
+        - name: &quot;update_dns&quot;
+          action: &quot;route53_update&quot;
+          record: &quot;db.evidence-platform.gov.uk&quot;
+          target: &quot;database-replica-1.uk-west.rds.amazonaws.com&quot;
+        - name: &quot;restart_dependent_services&quot;
+          action: &quot;kubernetes_rollout&quot;
+          deployments: [&quot;evidence-ingestion&quot;, &quot;identity-resolution&quot;]
+          
+    regional_failover:
+      trigger: &quot;primary_region_unavailable&quot;
+      steps:
+        - name: &quot;scale_secondary_region&quot;
+          action: &quot;kubernetes_scale&quot;
+          region: &quot;uk-west&quot;
+          target_replicas: &quot;production_capacity&quot;
+        - name: &quot;activate_secondary_databases&quot;
+          action: &quot;database_activation&quot;
+          promote_replicas: true
+        - name: &quot;update_load_balancer&quot;
+          action: &quot;traffic_routing&quot;
+          source: &quot;uk-south&quot;
+          destination: &quot;uk-west&quot;
+        - name: &quot;notify_operations&quot;
+          action: &quot;alert_escalation&quot;
+          severity: &quot;critical&quot;
+</pre>
+</div></div><p>Failover coordination ensures that related services fail over together to maintain data consistency and application functionality. Coordination includes dependency management, state synchronization, and rollback capabilities when failover procedures encounter errors.</p><h2 id="DisasterRecovery-RecoveryTestingandValidation">Recovery Testing and Validation</h2><p>Regular disaster recovery testing validates recovery procedures while identifying areas for improvement and ensuring staff familiarity with emergency procedures. Testing includes both scheduled exercises and surprise drills that simulate realistic failure scenarios.</p><p><strong>Testing Scenarios:</strong></p><ul><li><p><strong>Component Failures</strong>: Individual service failures including databases, application services, and infrastructure components</p></li><li><p><strong>Regional Disasters</strong>: Complete region unavailability requiring failover to secondary regions</p></li><li><p><strong>Data Corruption</strong>: Backup restoration scenarios with integrity verification and functionality testing</p></li><li><p><strong>Security Incidents</strong>: Compromise scenarios requiring service isolation and clean environment restoration</p></li></ul><p>Testing methodology includes automated testing for routine scenarios and manual testing for complex disaster scenarios requiring human decision-making. Test results are documented with lessons learned and improvement recommendations that feed into procedure updates and staff training.</p><p>Recovery time measurement validates whether actual recovery performance meets established objectives while identifying bottlenecks and optimization opportunities. Performance analysis includes both technical recovery time and operational readiness time to provide complete recovery capability assessment.</p><h2 id="DisasterRecovery-CommunicationandCoordination">Communication and Coordination</h2><p>Disaster recovery communication ensures that all stakeholders receive appropriate information during incidents while maintaining security and avoiding confusion. Communication plans include both internal coordination and external citizen communication during service disruptions.</p><p><strong>Internal Communication:</strong></p><ul><li><p><strong>Incident Command</strong>: Centralized decision-making with clear authority and escalation procedures</p></li><li><p><strong>Technical Teams</strong>: Detailed technical communication with status updates and coordination requirements</p></li><li><p><strong>Management</strong>: Executive briefings with business impact assessment and recovery progress reporting</p></li><li><p><strong>External Partners</strong>: Partner notification for evidence sharing disruption and coordination requirements</p></li></ul><p><strong>Citizen Communication:</strong></p><ul><li><p><strong>Service Status</strong>: Public status page with real-time service availability and estimated restoration times</p></li><li><p><strong>Alternative Channels</strong>: Phone and physical service options during digital service disruption</p></li><li><p><strong>Emergency Procedures</strong>: Special procedures for urgent benefit processing during extended outages</p></li><li><p><strong>Recovery Updates</strong>: Regular updates about service restoration progress and capability recovery</p></li></ul><p>Communication templates are pre-prepared for different incident types with variable content that can be quickly customized for specific scenarios. Templates include both technical content for operations teams and citizen-friendly language for public communication.</p><p>The disaster recovery framework supports continuous improvement through post-incident reviews, regular procedure updates, and staff training that maintains organizational readiness for various disaster scenarios while minimizing impact on citizen services during recovery operations.</p><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/134042/983381">Multi-Region Deployment Topology</a> (text/plain)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Sept 27, 2025 09:18</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>
