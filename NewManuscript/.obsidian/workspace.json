@@ -1,24 +1,24 @@
 {
   "main": {
-    "id": "0358448fc2c44e21",
+    "id": "e436ce831145acee",
     "type": "split",
     "children": [
       {
-        "id": "3007bd7efc93a761",
+        "id": "a99dc1b774f3bd2a",
         "type": "tabs",
         "children": [
           {
-            "id": "de3f7debee9e814f",
+            "id": "47dc880731c1e766",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "04_evidence_paradigm.md",
+                "file": "06_international_proof_points.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "04_evidence_paradigm"
+              "title": "06_international_proof_points"
             }
           }
         ]
@@ -27,15 +27,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "0829c8aa981a1dd4",
+    "id": "370b36965848b2fc",
     "type": "split",
     "children": [
       {
-        "id": "0a0ac9a5c7621e9c",
+        "id": "471376f30de25349",
         "type": "tabs",
         "children": [
           {
-            "id": "f57c1bc1fa742dc1",
+            "id": "2a193a9fca21730c",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -48,7 +48,7 @@
             }
           },
           {
-            "id": "8c7f383d3d349825",
+            "id": "0f6ea466e6c38819",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -65,7 +65,7 @@
             }
           },
           {
-            "id": "321d6cdc085f1329",
+            "id": "bf88da379e0d673b",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -81,20 +81,20 @@
     "width": 300
   },
   "right": {
-    "id": "118229a6bd3f32ed",
+    "id": "257996302746683a",
     "type": "split",
     "children": [
       {
-        "id": "9bcfc2ec0faecb2b",
+        "id": "7d2fd4bec38fc180",
         "type": "tabs",
         "children": [
           {
-            "id": "79ca7215e692449f",
+            "id": "0ca0708ca09142a3",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "02_failed_approaches.md",
+                "file": "06_international_proof_points.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,25 +104,25 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 02_failed_approaches"
+              "title": "Backlinks for 06_international_proof_points"
             }
           },
           {
-            "id": "ff7430c45e656c60",
+            "id": "684b653b07991b11",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "02_failed_approaches.md",
+                "file": "06_international_proof_points.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 02_failed_approaches"
+              "title": "Outgoing links from 06_international_proof_points"
             }
           },
           {
-            "id": "3df73e80619a787b",
+            "id": "d0249b74819ce60e",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -137,18 +137,18 @@
             }
           },
           {
-            "id": "ba21b4d81aab44e2",
+            "id": "5ba3f2f440944724",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "02_failed_approaches.md",
+                "file": "06_international_proof_points.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 02_failed_approaches"
+              "title": "Outline of 06_international_proof_points"
             }
           }
         ]
@@ -169,18 +169,12 @@
       "bases:Create new base": false
     }
   },
-  "active": "de3f7debee9e814f",
+  "active": "47dc880731c1e766",
   "lastOpenFiles": [
-    "09_future_vision.md",
-    "08_implementation_roadmap.md",
-    "07_technical_architecture.md",
-    "06_international_examples.md",
-    "05_citizen_sovereignty.md",
-    "03_ai_transformation.md",
-    "04_evidence_paradigm.md",
-    "02_failed_approaches.md",
-    "01_the_problem.md",
-    "appendix_implementation.md",
-    "appendix_case_studies.md"
+    "05_ai_pressure_multiplier.md",
+    "04_evidence_based_paradigm.md",
+    "03_centralized_standardization_fails.md",
+    "02_evidence_fragmentation.md",
+    "01_the_problem.md"
   ]
 }
