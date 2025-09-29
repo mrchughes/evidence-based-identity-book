@@ -1,0 +1,184 @@
+{
+  "main": {
+    "id": "0358448fc2c44e21",
+    "type": "split",
+    "children": [
+      {
+        "id": "9fdddff19d117def",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8b74e3ddbdbfac3d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "03_ai_transformation.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "03_ai_transformation"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "0829c8aa981a1dd4",
+    "type": "split",
+    "children": [
+      {
+        "id": "0a0ac9a5c7621e9c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f57c1bc1fa742dc1",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "8c7f383d3d349825",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "321d6cdc085f1329",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "118229a6bd3f32ed",
+    "type": "split",
+    "children": [
+      {
+        "id": "9bcfc2ec0faecb2b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "79ca7215e692449f",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "03_ai_transformation.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for 03_ai_transformation"
+            }
+          },
+          {
+            "id": "ff7430c45e656c60",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "03_ai_transformation.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from 03_ai_transformation"
+            }
+          },
+          {
+            "id": "3df73e80619a787b",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "ba21b4d81aab44e2",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "03_ai_transformation.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of 03_ai_transformation"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "8b74e3ddbdbfac3d",
+  "lastOpenFiles": [
+    "02_failed_approaches.md",
+    "01_the_problem.md",
+    "05_citizen_sovereignty.md",
+    "04_evidence_paradigm.md",
+    "03_ai_transformation.md",
+    "appendix_implementation.md",
+    "appendix_case_studies.md",
+    "09_future_vision.md",
+    "07_technical_architecture.md"
+  ]
+}
