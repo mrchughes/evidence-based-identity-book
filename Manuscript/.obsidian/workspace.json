@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "9fdddff19d117def",
+        "id": "3007bd7efc93a761",
         "type": "tabs",
         "children": [
           {
-            "id": "8b74e3ddbdbfac3d",
+            "id": "de3f7debee9e814f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "03_ai_transformation.md",
+                "file": "09_future_vision.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "03_ai_transformation"
+              "title": "09_future_vision"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "03_ai_transformation.md",
+                "file": "02_failed_approaches.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 03_ai_transformation"
+              "title": "Backlinks for 02_failed_approaches"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "03_ai_transformation.md",
+                "file": "02_failed_approaches.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 03_ai_transformation"
+              "title": "Outgoing links from 02_failed_approaches"
             }
           },
           {
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "03_ai_transformation.md",
+                "file": "02_failed_approaches.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 03_ai_transformation"
+              "title": "Outline of 02_failed_approaches"
             }
           }
         ]
@@ -169,16 +169,18 @@
       "bases:Create new base": false
     }
   },
-  "active": "8b74e3ddbdbfac3d",
+  "active": "de3f7debee9e814f",
   "lastOpenFiles": [
+    "08_implementation_roadmap.md",
+    "07_technical_architecture.md",
+    "06_international_examples.md",
+    "05_citizen_sovereignty.md",
+    "03_ai_transformation.md",
+    "04_evidence_paradigm.md",
     "02_failed_approaches.md",
     "01_the_problem.md",
-    "05_citizen_sovereignty.md",
-    "04_evidence_paradigm.md",
-    "03_ai_transformation.md",
     "appendix_implementation.md",
     "appendix_case_studies.md",
-    "09_future_vision.md",
-    "07_technical_architecture.md"
+    "09_future_vision.md"
   ]
 }
