@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "06_international_proof_points.md",
+                "file": "10_future_vision.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "06_international_proof_points"
+              "title": "10_future_vision"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "06_international_proof_points.md",
+                "file": "10_future_vision.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 06_international_proof_points"
+              "title": "Backlinks for 10_future_vision"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "06_international_proof_points.md",
+                "file": "10_future_vision.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 06_international_proof_points"
+              "title": "Outgoing links from 10_future_vision"
             }
           },
           {
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "06_international_proof_points.md",
+                "file": "10_future_vision.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 06_international_proof_points"
+              "title": "Outline of 10_future_vision"
             }
           }
         ]
@@ -171,6 +171,8 @@
   },
   "active": "47dc880731c1e766",
   "lastOpenFiles": [
+    "03.5_uber_graph_social_trust.md",
+    "06_international_proof_points.md",
     "05_ai_pressure_multiplier.md",
     "04_evidence_based_paradigm.md",
     "03_centralized_standardization_fails.md",

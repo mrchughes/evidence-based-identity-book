@@ -51,6 +51,22 @@ Government digital transformation has failed because it attempts to force centra
 
 ---
 
+## Chapter 3.5: The Uber Graph - Identity as Social Trust Networks
+**Status**: NEW - Foundational epistemological framework
+**Core Message**: Identity verification is knowledge graph reasoning over social trust networks - this explains why evidence-based approaches are inevitable
+
+**Content Flow**:
+- The infinite recursion problem: every assertion depends on other assertions
+- RDF triples as modeling social reality: "someone says something about something"
+- Social consensus as digital bedrock: how communities create shared truth
+- Trust propagation mathematics: confidence calculation through knowledge networks
+- Government as trust graph coordinator, not information controller
+- Why current approaches fail the epistemological test
+
+**Integration**: Establishes theoretical foundation that explains why everything that follows is necessary rather than optional
+
+---
+
 ## Chapter 4: The Evidence-Based Identity Paradigm
 **Status**: New chapter - the conceptual heart of the book
 **Core Message**: Evidence-based identity with semantic translation solves the core problems
