@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "10_future_vision.md",
+                "file": "conclusion.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "10_future_vision"
+              "title": "conclusion"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "10_future_vision.md",
+                "file": "01_the_problem.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 10_future_vision"
+              "title": "Backlinks for 01_the_problem"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "10_future_vision.md",
+                "file": "01_the_problem.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 10_future_vision"
+              "title": "Outgoing links from 01_the_problem"
             }
           },
           {
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "10_future_vision.md",
+                "file": "01_the_problem.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 10_future_vision"
+              "title": "Outline of 01_the_problem"
             }
           }
         ]
@@ -169,14 +169,16 @@
       "bases:Create new base": false
     }
   },
-  "active": "47dc880731c1e766",
+  "active": "2a193a9fca21730c",
   "lastOpenFiles": [
+    "Images",
     "03.5_uber_graph_social_trust.md",
+    "01_the_problem.md",
+    "02_evidence_fragmentation.md",
     "06_international_proof_points.md",
     "05_ai_pressure_multiplier.md",
     "04_evidence_based_paradigm.md",
-    "03_centralized_standardization_fails.md",
-    "02_evidence_fragmentation.md",
-    "01_the_problem.md"
+    "10_future_vision.md",
+    "03_centralized_standardization_fails.md"
   ]
 }
